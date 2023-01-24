@@ -5,7 +5,7 @@ function Login({ navigation })  {
     return (
         <View>
             <Button
-                title="User Login"
+                title="User Home"
                 onPress={() => navigation.navigate('UserHome')}
             />
         </View>
