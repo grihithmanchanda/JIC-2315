@@ -6,7 +6,7 @@ import EquipmentService from "../services/equipment_service";
 import { Modal } from "../components/Modal";
 import { CheckBox } from 'react-native-elements'
 
-const EquipmentList = (props) => {
+const FullEquipmentList = (props) => {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']])
     const [modalVisible, setModalVisible] = useState(false)
     const tableHead = ['Name', 'Quantity', 'Muscle Groups']
@@ -222,4 +222,4 @@ const handleAddEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, le
     EquipmentService.addEquipment(eqName, eqQuantity, muscleGroups)
 }
 
-export default EquipmentList;
+export default FullEquipmentList;

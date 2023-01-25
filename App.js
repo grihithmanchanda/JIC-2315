@@ -1,32 +1,20 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View } from 'react-native';
-// import { Container, Row, Col } from "react-bootstrap";
-// import { StatusBar } from 'expo-status-bar';
-import EquipmentList from './src/screens/EquipmentList'
-// import { getDocs } from 'firebase/firestore/lite';
-// import { auth, firestoredb } from './firebase-config'
+import React from "react";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './src/screens/Login';
+import UserHome from './src/screens/UserHome';
 
-class NextGymApp extends Component {
+const navigationStack = createNativeStackNavigator();
 
-  render() {
-    return (
-      <>
-        {/* <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-        </View> */}
-        <EquipmentList/>
-      </>
-    )
-  }
+function App() {
+  return (
+    <NavigationContainer>
+      <navigationStack.Navigator initialRouteName="Login">
+        <navigationStack.Screen name="Login" component={Login} />
+        <navigationStack.Screen name="UserHome" component={UserHome} />
+      </navigationStack.Navigator>
+    </NavigationContainer>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-export default NextGymApp;
+export default App;
