@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
         height: 150,
         backgroundColor: '#D9D9D9',
         width: '45%',
-        paddingVertical: 20,
-        paddingHorizontal: 20,
         justifyContent: 'center',
         marginTop: 100,
         marginLeft: 15
@@ -55,8 +53,6 @@ const styles = StyleSheet.create({
         height: 150,
         backgroundColor: '#D9D9D9',
         width: '45%',
-        paddingVertical: 20,
-        paddingHorizontal: 20,
         justifyContent: 'center',
         marginTop: -150,
         marginLeft: 215
@@ -65,8 +61,6 @@ const styles = StyleSheet.create({
         height: 100,
         backgroundColor: '#D9D9D9',
         width: '80%',
-        paddingVertical: 20,
-        paddingHorizontal: 20,
         justifyContent: 'center',
         marginTop: 40,
         marginLeft: 43,
