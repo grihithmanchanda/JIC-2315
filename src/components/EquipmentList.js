@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, ScrollView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
-import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
-// import { Table } from "react-bootstrap"; // no longer using react-bootstrap
+import { ScrollView, StyleSheet } from 'react-native';
+import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
-import { Modal } from "../components/Modal";
-import { CheckBox } from 'react-native-elements'
 
 const EquipmentList = (props) => {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']])
@@ -12,7 +9,6 @@ const EquipmentList = (props) => {
 
     useEffect(() => {
         getEquipmentList();
-        // addEquipmentTest();
     }, []);
 
     const getEquipmentList = async () => {
@@ -21,9 +17,6 @@ const EquipmentList = (props) => {
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
         }
-        console.log('---------')
-        console.log(tableRows)
-        console.log('---------')
     }
 
     return (

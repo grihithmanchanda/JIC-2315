@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import EquipmentList from "../components/EquipmentList";
 
+// Essentially entire user home page, including welcome,
+//   streak, equipment, and buttons for working out and settings
 function UserHome() {
     return (
         <View style={styles.container}>
