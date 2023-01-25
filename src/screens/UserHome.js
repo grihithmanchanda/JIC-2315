@@ -24,23 +24,23 @@ function UserHome() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ffebeb',
+      backgroundColor: '#ebeeff',
       alignItems: 'center',
       paddingBottom: 40,
       height: '80%'
     },
     header: {
-        fontSize: '50px',
+        fontSize: 50,
         textAlign: 'center',
         paddingTop: 20,
     },
     streak: {
-        fontSize: '30px',
+        fontSize: 30,
         textAlign: 'center',
         paddingTop: 20,
     },
     eaag: {
-        fontSize: '40px',
+        fontSize: 40,
         textAlign: 'center',
         paddingTop: 20,
         paddingBottom: 20,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     start: {
         height: 100,
-        backgroundColor: '#912626',
+        backgroundColor: '#051739',
         width: '90%',
         borderWidth: 1,
         paddingVertical: 20,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     text: {
-        color: '#ffebeb',
+        color: '#ebeeff',
         textAlign: 'center',
         fontSize: 35,
     }
