@@ -2,25 +2,20 @@ import React from "react";
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Button } from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
+import { getAuth, signOut } from "firebase/auth";
+
+
 
 // Essentially entire user home page, including welcome,
 //   streak, equipment, and buttons for working out and settings
 function UserHome({navigation}) {
     return (
-        /*/
-        <View style={styles.container}>
-            <View style={styles.container}>
-                <Button
-                    title="User Home"
-                    onPress={() => console.log("test")}
-                />
-            </View>
-            */
-
         <View style = {styles.outer}>
             <Button
-                    title="Logout"
-                    onPress={() => navigation.navigate('Login')}
+                title="User Home"
+                onPress={() => 
+                    signOut1({navigation})
+                }
             />
             <View style={styles.container}>
                 
@@ -38,6 +33,16 @@ function UserHome({navigation}) {
             </View>
         </View>
     );
+}
+
+function signOut1( {navigation} ) {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        console.log("LOGOUT");
+        navigation.navigate('Login');
+    }).catch((error) => {
+        console.log("ERROR");
+    });
 }
 
 const styles = StyleSheet.create({
