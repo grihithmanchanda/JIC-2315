@@ -4,66 +4,80 @@ import { Button, Text, View, StyleSheet, Pressable, TextInput } from 'react-nati
 function Login({ navigation })  {
     return (
         <View>
-            <Text style={styles.headerText}>NextGym</Text>
-            <Button
-                title="User Home"
-                onPress={() => navigation.navigate('UserHome')}
-            />
-            <Text style={styles.text}>Username:</Text>
-            <TextInput style={styles.input}/>
-            <Text style={styles.text}>Password:</Text>
-            <TextInput style={styles.input}/>
-            <Pressable style={styles.userLogin} textStyle={styles.text}>
-                <Text style={styles.text}>Login as{'\n'}User</Text>
-            </Pressable>
-            <Pressable style={styles.managerLogin} textStyle={styles.text}>
-                <Text style={styles.text}>Login as{'\n'}Manager</Text>
-            </Pressable>
-            <Pressable style={styles.forgotPassword} textStyle={styles.text}>
-                <Text style={styles.text}>Forgot Password?</Text>
-            </Pressable>
+            <View style={styles.Container}>
+                <Text style={styles.headerText}>NextGym</Text>
+                <Button
+                    title="User Home"
+                    onPress={() => navigation.navigate('UserHome')}
+                />
+                <Text style={styles.text}>Username:</Text>
+                <TextInput style={styles.input}/>
+                <Text style={styles.text}>Password:</Text>
+                <TextInput style={styles.input}/>
+            </View>
+            <View style={styles.loginButtonContainer}>
+                <Pressable style={styles.userLogin} textStyle={styles.text}>
+                    <Text style={styles.text}>Login as{'\n'}User</Text>
+                </Pressable>
+                <Text style={styles.blank}></Text>
+                <Pressable style={styles.managerLogin} textStyle={styles.text}>
+                    <Text style={styles.text}>Login as{'\n'}Manager</Text>
+                </Pressable>
+            </View>
+            <View style={styles.Container}>
+                <Pressable style={styles.forgotPassword} textStyle={styles.text}>
+                    <Text style={styles.text}>Forgot Password?</Text>
+                </Pressable>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    Container: {
+        flexDirection: 'column',
+        justfiyContent: 'center',
+        alignItems: 'center',
+    },
+    loginButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 15,
+    },
     headerText: {
         fontSize: 50,
         textAlign: 'center',
         paddingTop: 20,
     },
     input: {
-        height: 60,
+        height: 40,
         backgroundColor: '#D9D9D9',
         width: '90%',
-        paddingVertical: 20,
-        paddingHorizontal: 20,
-        justifyContent: 'center',
-        marginLeft: 23
+        textAlign: 'center',
     },
     userLogin: {
         height: 150,
         backgroundColor: '#D9D9D9',
-        width: '45%',
+        width: '43%',
         justifyContent: 'center',
-        marginTop: 100,
-        marginLeft: 15
+    },
+    blank: {
+        height: 150,
+        backgroundColor: 'FFFFFF',
+        width: '4%',
     },
     managerLogin: {
         height: 150,
         backgroundColor: '#D9D9D9',
-        width: '45%',
+        width: '43%',
         justifyContent: 'center',
-        marginTop: -150,
-        marginLeft: 215
     },
     forgotPassword: {
-        height: 100,
+        height: 80,
         backgroundColor: '#D9D9D9',
-        width: '80%',
+        width: '90%',
         justifyContent: 'center',
-        marginTop: 40,
-        marginLeft: 43,
+        marginTop: 15,
     },
     text: {
         color: '#000000',
