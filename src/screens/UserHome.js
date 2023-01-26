@@ -1,22 +1,41 @@
 import React from "react";
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Button } from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
 
 // Essentially entire user home page, including welcome,
 //   streak, equipment, and buttons for working out and settings
-function UserHome() {
+function UserHome({navigation}) {
     return (
+        /*/
         <View style={styles.container}>
-            <Text style={styles.header}>Welcome,{'\n'}User</Text>
-            <Text style={styles.streak}>5 Day Streak!!</Text>
-            <Text style={styles.eaag}>Equipment at a Glance</Text>
-            <EquipmentList style={styles.el}/>
-            <Pressable style={styles.start} textStyle={styles.text}>
-                <Text style={styles.text}>Select/Start Workout</Text>
-            </Pressable>
-            <Pressable style={styles.start} textStyle={styles.text}>
-                <Text style={styles.text}>User Settings</Text>
-            </Pressable>
+            <View style={styles.container}>
+                <Button
+                    title="User Home"
+                    onPress={() => console.log("test")}
+                />
+            </View>
+            */
+
+        <View style = {styles.outer}>
+            <Button
+                    title="Logout"
+                    onPress={() => navigation.navigate('Login')}
+            />
+            <View style={styles.container}>
+                
+
+                <Text style={styles.header}>Welcome,{'\n'}User</Text>
+                <Text style={styles.streak}>5 Day Streak!!</Text>
+                <Text style={styles.eaag}>Equipment at a Glance</Text>
+                <EquipmentList style={styles.el}/>
+                <Pressable style={styles.start} textStyle={styles.text}>
+                    <Text style={styles.text}>Select/Start Workout</Text>
+                </Pressable>
+                <Pressable style={styles.start} textStyle={styles.text}>
+                    <Text style={styles.text}>User Settings</Text>
+                </Pressable>
+            </View>
         </View>
     );
 }
@@ -63,6 +82,11 @@ const styles = StyleSheet.create({
         color: '#ebeeff',
         textAlign: 'center',
         fontSize: 35,
+    },
+    outer: {
+         flex: 1,
+
+
     }
   });
 
