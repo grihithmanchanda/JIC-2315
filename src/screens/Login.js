@@ -13,7 +13,7 @@ function Login({ navigation })  {
                 <Text style={styles.text}>Username:</Text>
                 <TextInput style={styles.input}/>
                 <Text style={styles.text}>Password:</Text>
-                <TextInput style={styles.input}/>
+                <TextInput style={styles.input} secureTextEntry />
             </View>
             <View style={styles.loginButtonContainer}>
                 <Pressable style={styles.userLogin} textStyle={styles.text}>
