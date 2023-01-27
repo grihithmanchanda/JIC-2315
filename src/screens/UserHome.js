@@ -10,7 +10,7 @@ function UserHome({navigation}) {
     return (
         <View style = {styles.outer}>
             <Button //Logout button. TODO: format button style
-                title="User Home"
+                title="Logout"
                 onPress={() => //call method to log out user
                     logout({navigation})
                 }
@@ -36,10 +36,10 @@ function logout( {navigation} ) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        console.log("LOGOUT"); //Debugging
+    //    console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
     }).catch((error) => {
-        console.log("ERROR");
+    //    console.log("ERROR");
     });
 }
 
