@@ -61,6 +61,45 @@ function Login({ navigation })  {
                     <Text style={styles.text}>Forgot Password?</Text>
                 </Pressable>
             </View>
+            <Text style={styles.headerText}>NextGym</Text>
+            <Text style={styles.text}>Username:</Text>
+            <TextInput //Username/Email field
+                placeholder="Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
+                style={styles.input}
+            />
+            <Text style={styles.text}>Password:</Text> 
+            <TextInput //Password field
+                placeholder="Password"
+                value={password}
+                onChangeText={text => setPassword(text)}
+                style={styles.input}
+                secureTextEntry //automatically turn characters into asterisks
+            />
+
+            <Pressable //User login button
+                style={styles.userLogin} 
+                textStyle={styles.text} 
+                onPress={loginUser}
+            >
+                <Text style={styles.text}>Login as{'\n'}User</Text>
+            </Pressable>
+            <Pressable //Manager login button
+                style={styles.managerLogin} 
+                textStyle={styles.text} 
+                onPress={registerNewUser} //TODO: issue with register user button being cut off screen, temporarily adding register functionality to "Login as Manager" button. replace when manager home is implemented
+            >
+                <Text style={styles.text}>Login as{'\n'}Manager</Text>
+            </Pressable>
+
+            <Pressable //Register user button. TODO: Create separate button for creating manager account? or separate screen
+                style={styles.registerUserButton} 
+                textStyle={styles.text} 
+                onPress={registerNewUser} //call method to send a register user request to firebase
+            >
+                <Text style={styles.text}>Register User</Text>
+            </Pressable>
         </View>
     );
 }
