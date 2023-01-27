@@ -1,7 +1,5 @@
-import React from "react";
 import { Button, Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login({ navigation })  {
@@ -38,61 +36,49 @@ function Login({ navigation })  {
         <View>
             <View style={styles.Container}>
                 <Text style={styles.headerText}>NextGym</Text>
-                <Button
-                    title="User Home"
-                    onPress={() => navigation.navigate('UserHome')}
-                />
                 <Text style={styles.text}>Username:</Text>
-                <TextInput style={styles.input}/>
+                    <TextInput //Username/Email field
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        style={styles.input}
+                    />
                 <Text style={styles.text}>Password:</Text>
-                <TextInput style={styles.input} secureTextEntry />
+                    <TextInput //Password field
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        style={styles.input}
+                        secureTextEntry //automatically turn characters into asterisks
+                    />
             </View>
-            <View style={styles.loginButtonContainer}>
-                <Pressable style={styles.userLogin} textStyle={styles.text}>
+                <View style={styles.loginButtonContainer}>
+                </Pressable>
+                    <Pressable //User login button
+                    style={styles.userLogin} 
+                    textStyle={styles.text} 
+                    onPress={loginUser}
+                >
                     <Text style={styles.text}>Login as{'\n'}User</Text>
                 </Pressable>
+                
                 <Text style={styles.blank}></Text>
-                <Pressable style={styles.managerLogin} textStyle={styles.text}>
+                <Pressable //Manager login button
+                    style={styles.managerLogin} 
+                    textStyle={styles.text} 
+                    onPress={registerNewUser} //TODO: issue with register user button being cut off screen, temporarily adding register functionality to "Login as Manager" button. replace when manager home is implemented
+                >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
-            <View style={styles.Container}>
+                <View style={styles.Container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </Pressable>
             </View>
-            <Text style={styles.headerText}>NextGym</Text>
-            <Text style={styles.text}>Username:</Text>
-            <TextInput //Username/Email field
-                placeholder="Email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-                style={styles.input}
-            />
-            <Text style={styles.text}>Password:</Text> 
-            <TextInput //Password field
-                placeholder="Password"
-                value={password}
-                onChangeText={text => setPassword(text)}
-                style={styles.input}
-                secureTextEntry //automatically turn characters into asterisks
-            />
-
-            <Pressable //User login button
-                style={styles.userLogin} 
-                textStyle={styles.text} 
-                onPress={loginUser}
-            >
-                <Text style={styles.text}>Login as{'\n'}User</Text>
-            </Pressable>
-            <Pressable //Manager login button
-                style={styles.managerLogin} 
-                textStyle={styles.text} 
-                onPress={registerNewUser} //TODO: issue with register user button being cut off screen, temporarily adding register functionality to "Login as Manager" button. replace when manager home is implemented
-            >
-                <Text style={styles.text}>Login as{'\n'}Manager</Text>
-            </Pressable>
-
+            
+            
+            /* TODO: USE WITH ACTUAL REGISTER BUTTON
             <Pressable //Register user button. TODO: Create separate button for creating manager account? or separate screen
                 style={styles.registerUserButton} 
                 textStyle={styles.text} 
@@ -100,6 +86,7 @@ function Login({ navigation })  {
             >
                 <Text style={styles.text}>Register User</Text>
             </Pressable>
+            */
         </View>
     );
 }
