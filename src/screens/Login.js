@@ -1,7 +1,39 @@
 import React from "react";
 import { Button, Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
+import React, { useState } from "react";
+import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login({ navigation })  {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const auth = getAuth();
+
+    //Method to register new user in firebase
+    const registerNewUser = () => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                console.log('Successfully registered new user: ', user.email); //Debugging
+                navigation.navigate('UserHome')
+            })
+            .catch(error => alert(error.message))
+    }
+
+    //Method to log in using an existing user
+    //MAYBE: create custom error messages when receiving error from firebase?
+    //Duplicate method for managers, change screen that it navigates to manager home
+    const loginUser = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                console.log('Successfully logged in with user: ', user.email); //Debugging
+                navigation.navigate('UserHome')
+            })
+            .catch(error => alert(error.message))
+    }
+
     return (
         <View>
             <View style={styles.Container}>

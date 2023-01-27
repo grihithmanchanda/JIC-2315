@@ -4,22 +4,18 @@ import { Button } from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
 import { getAuth, signOut } from "firebase/auth";
 
-
-
 // Essentially entire user home page, including welcome,
 //   streak, equipment, and buttons for working out and settings
 function UserHome({navigation}) {
     return (
         <View style = {styles.outer}>
-            <Button
+            <Button //Logout button. TODO: format button style
                 title="User Home"
-                onPress={() => 
+                onPress={() => //call method to log out user
                     signOut1({navigation})
                 }
             />
             <View style={styles.container}>
-                
-
                 <Text style={styles.header}>Welcome,{'\n'}User</Text>
                 <Text style={styles.streak}>5 Day Streak!!</Text>
                 <Text style={styles.eaag}>Equipment at a Glance</Text>
@@ -35,10 +31,11 @@ function UserHome({navigation}) {
     );
 }
 
+//Method to sign out of firebase, returns user to login screen
 function signOut1( {navigation} ) {
     const auth = getAuth();
     signOut(auth).then(() => {
-        console.log("LOGOUT");
+        console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
     }).catch((error) => {
         console.log("ERROR");
