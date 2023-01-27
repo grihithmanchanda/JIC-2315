@@ -13,7 +13,7 @@ function Login({ navigation })  {
         createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                console.log('Successfully registered new user: ', user.email); //Debugging
+                // console.log('Successfully registered new user: ', user.email); //Debugging
                 navigation.navigate('UserHome')
             })
             .catch(error => alert(error.message))
@@ -26,7 +26,7 @@ function Login({ navigation })  {
         signInWithEmailAndPassword(auth, email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                console.log('Successfully logged in with user: ', user.email); //Debugging
+                // console.log('Successfully logged in with user: ', user.email); //Debugging
                 navigation.navigate('UserHome')
             })
             .catch(error => alert(error.message))
@@ -64,7 +64,7 @@ function Login({ navigation })  {
                 <Pressable //Manager login button
                     style={styles.managerLogin} 
                     textStyle={styles.text} 
-                    onPress={registerNewUser} //TODO: issue with register user button being cut off screen, temporarily adding register functionality to "Login as Manager" button. replace when manager home is implemented
+                    onPress={registerNewUser} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
