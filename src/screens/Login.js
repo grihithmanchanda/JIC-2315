@@ -37,31 +37,29 @@ function Login({ navigation })  {
             <View style={styles.Container}>
                 <Text style={styles.headerText}>NextGym</Text>
                 <Text style={styles.text}>Username:</Text>
-                    <TextInput //Username/Email field
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={text => setEmail(text)}
-                        style={styles.input}
-                    />
+                <TextInput //Username/Email field
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                    style={styles.input}
+                />
                 <Text style={styles.text}>Password:</Text>
-                    <TextInput //Password field
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={text => setPassword(text)}
-                        style={styles.input}
-                        secureTextEntry //automatically turn characters into asterisks
-                    />
+                <TextInput //Password field
+                    placeholder="Password"
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    style={styles.input}
+                    secureTextEntry //automatically turn characters into asterisks
+                />
             </View>
-                <View style={styles.loginButtonContainer}>
-                </Pressable>
-                    <Pressable //User login button
+            <View style={styles.loginButtonContainer}>
+                <Pressable //User login button
                     style={styles.userLogin} 
                     textStyle={styles.text} 
                     onPress={loginUser}
                 >
                     <Text style={styles.text}>Login as{'\n'}User</Text>
                 </Pressable>
-                
                 <Text style={styles.blank}></Text>
                 <Pressable //Manager login button
                     style={styles.managerLogin} 
@@ -71,22 +69,11 @@ function Login({ navigation })  {
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
-                <View style={styles.Container}>
+            <View style={styles.Container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </Pressable>
             </View>
-            
-            
-            /* TODO: USE WITH ACTUAL REGISTER BUTTON
-            <Pressable //Register user button. TODO: Create separate button for creating manager account? or separate screen
-                style={styles.registerUserButton} 
-                textStyle={styles.text} 
-                onPress={registerNewUser} //call method to send a register user request to firebase
-            >
-                <Text style={styles.text}>Register User</Text>
-            </Pressable>
-            */
         </View>
     );
 }
