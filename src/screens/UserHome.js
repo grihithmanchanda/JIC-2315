@@ -12,7 +12,7 @@ function UserHome({navigation}) {
             <Button //Logout button. TODO: format button style
                 title="User Home"
                 onPress={() => //call method to log out user
-                    signOut1({navigation})
+                    logout({navigation})
                 }
             />
             <View style={styles.container}>
@@ -32,8 +32,9 @@ function UserHome({navigation}) {
 }
 
 //Method to sign out of firebase, returns user to login screen
-function signOut1( {navigation} ) {
+function logout( {navigation} ) {
     const auth = getAuth();
+    // Signs out user
     signOut(auth).then(() => {
         console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
