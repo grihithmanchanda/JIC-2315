@@ -9,7 +9,7 @@ class LoginService {
     registerNewUser = async (email, password, accountType) => {
         return await createUserWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                console.log('user created!', userCredential.user.email)
+                // console.log('user created!', userCredential.user.email)
                 let userData = {
                     'username': email,
                     'accountType': accountType

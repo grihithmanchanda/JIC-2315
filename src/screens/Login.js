@@ -24,7 +24,7 @@ function Login({navigation}) {
     const handleUserLogin = () => {
         LoginService.loginUser(email, password)
             .then((user) => {
-                console.log('Successfully logged in with user: ', user.email); //Debugging
+                // console.log('Successfully logged in with user: ', user.email); //Debugging
                 navigation.navigate('UserHome')
             })
             .catch(error => alert(error.message))
