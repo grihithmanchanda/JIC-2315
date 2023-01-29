@@ -17,7 +17,7 @@ export default RegisterUser = ({ navigation }) => {
         }
         await LoginService.registerNewUser(email, password, isUser ? "User" : "Manager")
             .then((user) => {
-                alert('User registered!' + user.email);
+                alert(`User ${user.email} registered!`);
                 navigation.navigate('UserHome');
             })
             .catch(error => alert(error.message))
