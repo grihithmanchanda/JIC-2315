@@ -4,7 +4,7 @@ import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
 
 
-// renders equipment list for user home page
+// renders equipment list for home pages
 const EquipmentList = (props) => {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']])
     const tableHead = ['Name', 'Quantity', 'Muscle Groups']
