@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CheckBox } from 'react-native-elements'
 import LoginService from '../services/login_service';
 
-export default RegisterUser = ({ navigation }) => {
+function RegisterUser({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -142,3 +142,5 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
     },
 })
+
+export default RegisterUser;

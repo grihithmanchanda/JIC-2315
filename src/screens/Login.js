@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import LoginService from '../services/login_service';
 
 function Login({navigation}) {
     const [email, setEmail] = useState('')
@@ -8,11 +9,12 @@ function Login({navigation}) {
 
     //Method to handle user registration button press
     const handleUserRegistration = () => {
-        LoginService.registerNewUser(email, password, "User")
-            .then((user) => {
-                alert('User registered!' + user.email)
-            })
-            .catch(error => alert(error.message))
+        // LoginService.registerNewUser(email, password, "User")
+        //     .then((user) => {
+        //         alert('User registered!' + user.email)
+        //     })
+        //     .catch(error => alert(error.message))
+        navigation.navigate('RegisterUser')
     }
 
     //Method to handle user login button press
@@ -24,11 +26,9 @@ function Login({navigation}) {
             .catch(error => alert(error.message))
     }
 
-    const loginManager = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                // console.log('Successfully logged in with user: ', user.email); //Debugging
+    const handleManagerLogin = () => {
+        LoginService.loginUser(email, password)
+            .then(() => {
                 navigation.navigate('ManagerHome')
             })
             .catch(error => alert(error.message))
@@ -66,7 +66,7 @@ function Login({navigation}) {
                 <Pressable //Manager login button
                     style={styles.managerLogin} 
                     textStyle={styles.text} 
-                    onPress={loginManager} 
+                    onPress={handleManagerLogin}
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
@@ -75,7 +75,7 @@ function Login({navigation}) {
                 <Pressable //Manager login button
                         style={styles.register} 
                         textStyle={styles.text} 
-                        onPress={registerNewUser}
+                        onPress={handleUserRegistration}
                     >
                         <Text style={styles.text}>Register User</Text>
                 </Pressable>
