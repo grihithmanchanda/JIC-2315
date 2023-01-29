@@ -1,4 +1,4 @@
-import { auth, firestoredb } from "../../firebase-config"
+import { firestoredb } from "../../firebase-config"
 import { collection, doc, getDocs, setDoc } from "firebase/firestore"
 
 const equipmentCollectionRef = collection(firestoredb, "equipment");

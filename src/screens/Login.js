@@ -70,6 +70,11 @@ function Login({ navigation })  {
                 </Pressable>
             </View>
             <View style={styles.Container}>
+                <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={navigation.navigate('RegisterUser')}>
+                    <Text style={styles.text}>Create account</Text>
+                </Pressable>
+            </View>
+            <View style={styles.Container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </Pressable>

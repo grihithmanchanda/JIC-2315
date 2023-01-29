@@ -26,14 +26,14 @@ const FullEquipmentList = (props) => {
     }, []);
 
     const getEquipmentList = async () => {
-        console.log('getting equipment...');
+        //console.log('getting equipment...');
         const equipmentQuery = await EquipmentService.getAllEquipment();
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
         }
-        console.log('---------')
-        console.log(tableRows)
-        console.log('---------')
+        // console.log('---------')
+        // console.log(tableRows)
+        // console.log('---------')
     }
 
     const addEquipmentTest = async() => {
