@@ -18,7 +18,6 @@ class LoginService {
                 await setDoc(userDoc, userData);
                 return userCredential.user;
             })
-            .catch(error => alert(error.message));
     }
 
     //Method to log in as an existing user
@@ -28,7 +27,6 @@ class LoginService {
                 let user = await userCredential.user;
                 return user;
             })
-            .catch(error => alert(error.message));
     }
 }
 
