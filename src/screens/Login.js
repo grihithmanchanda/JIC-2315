@@ -74,7 +74,7 @@ function Login({ navigation })  {
                 <Pressable //Manager login button
                     style={styles.managerLogin} 
                     textStyle={styles.text} 
-                    onPress={loginManager} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
+                    onPress={loginManager} 
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
@@ -83,7 +83,7 @@ function Login({ navigation })  {
                 <Pressable //Manager login button
                         style={styles.register} 
                         textStyle={styles.text} 
-                        onPress={registerNewUser} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
+                        onPress={registerNewUser}
                     >
                         <Text style={styles.text}>Register User</Text>
                 </Pressable>

@@ -4,8 +4,8 @@ import { Button } from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
 import { getAuth, signOut } from "firebase/auth";
 
-// Essentially entire user home page, including welcome,
-//   streak, equipment, and buttons for working out and settings
+// Essentially entire manager home page, including welcome,
+//   user num, equipment, and buttons for settings
 function ManagerHome({navigation}) {
     return (
         <View style = {styles.outer}>
