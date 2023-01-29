@@ -1,24 +1,37 @@
-import { firestoredb } from "../../firebase-config"
-import { doc, setDoc } from "firebase/firestore"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
+import {firestoredb} from "../../firebase-config"
+import {doc, setDoc} from "firebase/firestore"
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth"
 
 const auth = getAuth();
 
 class LoginService {
     //Method to register new user in firebase
     registerNewUser = async (email, password, accountType) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then()
-            .catch(error => alert(error.message))
-            
-        userData = {
-            'username': email,
-            'accountType': accountType,
-        };
-        userDoc = doc(firestoredb, 'users', email);
-        console.log(userDoc)
-        return await setDoc(userDoc, userData);
+        return await createUserWithEmailAndPassword(auth, email, password)
+            .then(async (userCredential) => {
+                // console.log('user created!', userCredential.user.email)
+                let userData = {
+                    'username': email,
+                    'accountType': accountType
+                }
+
+                let userDoc = doc(firestoredb, 'users', email);
+                await setDoc(userDoc, userData);
+                // console.log('created userDoc:' + userDoc);
+                return userCredential.user;
+            })
+            // .catch(error => alert(error.message));
+    }
+
+    //Method to log in as an existing user
+    loginUser = async (email, password) => {
+        return await signInWithEmailAndPassword(auth, email, password)
+            .then(async (userCredential) => {
+                let user = await userCredential.user;
+                console.log('user cred in loginUser:' + user.email)
+                return user;
+            })
+            // .catch(error => alert(error.message));
     }
 }
 
