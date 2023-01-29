@@ -7,8 +7,8 @@ function RegisterUser({route, navigation}) {
     const [email, setEmail] = useState(route.params['email'])
     const [password, setPassword] = useState(route.params['password'])
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [isUser, setisUser] = useState(false)
-    const [isManager, setisManager] = useState(false)
+    const [isUser, setIsUser] = useState(false)
+    const [isManager, setIsManager] = useState(false)
 
     const registerUser = async () => {
         if (password !== confirmPassword) {
@@ -18,7 +18,7 @@ function RegisterUser({route, navigation}) {
         await LoginService.registerNewUser(email, password, isUser ? "User" : "Manager")
             .then((user) => {
                 alert(`User ${user.email} registered!`);
-                navigation.navigate('UserHome');
+                navigation.navigate(isUser ? 'UserHome' : 'ManagerHome');
             })
             .catch(error => alert(error.message))
 
@@ -27,7 +27,7 @@ function RegisterUser({route, navigation}) {
 
     return (
         <View>
-            <View style={styles.Container}>
+            <View style={styles.container}>
                 <Text style={styles.headerText}>Create account</Text>
                 <Text style={styles.text}>Username:</Text>
                 <TextInput //Username/Email field
@@ -58,21 +58,21 @@ function RegisterUser({route, navigation}) {
                 <CheckBox
                     checked={isUser}
                     title="Gym User"
-                    onPress={() => setisUser(!isUser)}
+                    onPress={() => setIsUser(!isUser)}
                 />
                 <CheckBox
                     checked={isManager}
                     title="Gym Manager"
-                    onPress={() => setisManager(!isManager)}
+                    onPress={() => setIsManager(!isManager)}
                 />
             </View>
 
-            <View style={styles.Container}>
+            <View style={styles.container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={registerUser}>
                     <Text style={styles.text}>Register</Text>
                 </Pressable>
             </View>
-            <View style={styles.Container}>
+            <View style={styles.container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.text}>Go back</Text>
                 </Pressable>
@@ -82,9 +82,9 @@ function RegisterUser({route, navigation}) {
 }
 
 const styles = StyleSheet.create({
-    Container: {
+    container: {
         flexDirection: 'column',
-        justfiyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     loginButtonContainer: {
