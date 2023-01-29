@@ -1,4 +1,4 @@
-import { Button, Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -28,6 +28,16 @@ function Login({ navigation })  {
                 const user = userCredential.user;
                 // console.log('Successfully logged in with user: ', user.email); //Debugging
                 navigation.navigate('UserHome')
+            })
+            .catch(error => alert(error.message))
+    }
+
+    const loginManager = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                // console.log('Successfully logged in with user: ', user.email); //Debugging
+                navigation.navigate('ManagerHome')
             })
             .catch(error => alert(error.message))
     }
@@ -64,12 +74,19 @@ function Login({ navigation })  {
                 <Pressable //Manager login button
                     style={styles.managerLogin} 
                     textStyle={styles.text} 
-                    onPress={registerNewUser} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
+                    onPress={loginManager} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
             <View style={styles.Container}>
+                <Pressable //Manager login button
+                        style={styles.register} 
+                        textStyle={styles.text} 
+                        onPress={registerNewUser} //TODO: No register user button, so the manager button, which is not currently implemented, is temporarily being used to perform this task.
+                    >
+                        <Text style={styles.text}>Register User</Text>
+                </Pressable>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </Pressable>
@@ -116,6 +133,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9',
         width: '43%',
         justifyContent: 'center',
+    },
+    register: {
+        height: 80,
+        backgroundColor: '#D9D9D9',
+        width: '90%',
+        justifyContent: 'center',
+        marginTop: 15,
     },
     forgotPassword: {
         height: 80,
