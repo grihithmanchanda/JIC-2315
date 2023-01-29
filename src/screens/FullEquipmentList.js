@@ -31,18 +31,6 @@ const FullEquipmentList = (props) => {
         }
     }
 
-    const addEquipmentTest = async() => {
-        console.log('testing add equipment...');
-        const equipmentQuery = await EquipmentService.addEquipment('test equipment 1', 0, ['abs', 'wrist'])
-            .catch((error) => {
-                console.log('adding equipment failed!')
-                console.log(error)
-            })
-        if (equipmentQuery !== null) {
-            console.log('added equipment!')
-        }
-    }
-
     return (
         <View style={styles.container}>
             <Table borderStyle={{ borderWidth: 1 }}>

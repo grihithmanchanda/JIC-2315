@@ -12,19 +12,13 @@ function Login({navigation}) {
             .then((user) => {
                 alert('User registered!' + user.email)
             })
-            // .then(userCredential => {
-            //     const user = userCredential.user;
-            //     // console.log('Successfully registered new user: ', user.email); //Debugging
-            //     navigation.navigate('UserHome')
-            // })
             .catch(error => alert(error.message))
     }
 
     //Method to handle user login button press
     const handleUserLogin = () => {
         LoginService.loginUser(email, password)
-            .then((user) => {
-                // console.log('Successfully logged in with user: ', user.email); //Debugging
+            .then(() => {
                 navigation.navigate('UserHome')
             })
             .catch(error => alert(error.message))

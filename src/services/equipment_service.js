@@ -10,7 +10,6 @@ class EquipmentService {
 
     addEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
         equipmentData = {
-            // 'id': equipmentName,
             'count': equipmentCount,
             'muscle groups': equipmentMuscleGroups
         }

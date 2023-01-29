@@ -9,7 +9,6 @@ class LoginService {
     registerNewUser = async (email, password, accountType) => {
         return await createUserWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                // console.log('user created!', userCredential.user.email)
                 let userData = {
                     'username': email,
                     'accountType': accountType
@@ -17,10 +16,9 @@ class LoginService {
 
                 let userDoc = doc(firestoredb, 'users', email);
                 await setDoc(userDoc, userData);
-                // console.log('created userDoc:' + userDoc);
                 return userCredential.user;
             })
-            // .catch(error => alert(error.message));
+            .catch(error => alert(error.message));
     }
 
     //Method to log in as an existing user
@@ -28,10 +26,9 @@ class LoginService {
         return await signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
                 let user = await userCredential.user;
-                console.log('user cred in loginUser:' + user.email)
                 return user;
             })
-            // .catch(error => alert(error.message));
+            .catch(error => alert(error.message));
     }
 }
 
