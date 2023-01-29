@@ -7,15 +7,14 @@ function RegisterUser({route, navigation}) {
     const [email, setEmail] = useState(route.params['email'])
     const [password, setPassword] = useState(route.params['password'])
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [isUser, setIsUser] = useState(false)
-    const [isManager, setIsManager] = useState(false)
+    const [accountType, setAccountType] = useState('User')
 
     const registerUser = async () => {
         if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        await LoginService.registerNewUser(email, password, isUser ? "User" : "Manager")
+        await LoginService.registerNewUser(email, password, accountType)
             .then((user) => {
                 alert(`User ${user.email} registered!`);
                 navigation.navigate(isUser ? 'UserHome' : 'ManagerHome');
@@ -56,14 +55,14 @@ function RegisterUser({route, navigation}) {
             <Text style={styles.text}>Account Type:</Text>
             <View style={styles.checkboxWrapper}>
                 <CheckBox
-                    checked={isUser}
+                    checked={accountType === 'User'}
                     title="Gym User"
-                    onPress={() => setIsUser(!isUser)}
+                    onPress={() => setAccountType('User')}
                 />
                 <CheckBox
-                    checked={isManager}
+                    checked={accountType === 'Manager'}
                     title="Gym Manager"
-                    onPress={() => setIsManager(!isManager)}
+                    onPress={() => setAccountType('Manager')}
                 />
             </View>
 
