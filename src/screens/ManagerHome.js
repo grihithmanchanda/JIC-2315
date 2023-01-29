@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import {StyleSheet, Text, View, Pressable, ScrollView} from 'react-native';
 import { Button } from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
 import { getAuth, signOut } from "firebase/auth";
@@ -8,7 +8,7 @@ import { getAuth, signOut } from "firebase/auth";
 //   user num, equipment, and buttons for settings
 function ManagerHome({navigation}) {
     return (
-        <View style = {styles.outer}>
+        <ScrollView style = {styles.outer}>
             <Button //Logout button. TODO: format button style
                 title="Logout"
                 onPress={() => //call method to log out user
@@ -31,7 +31,7 @@ function ManagerHome({navigation}) {
                     <Text style={styles.text}>Gym Settings</Text>
                 </Pressable>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
