@@ -2,31 +2,23 @@ import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-function Login({ navigation })  {
+function Login({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const auth = getAuth();
-
-    //Method to register new user in firebase
-    const registerNewUser = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                // console.log('Successfully registered new user: ', user.email); //Debugging
-                navigation.navigate('UserHome')
+    //Method to handle user registration button press
+    const handleUserRegistration = () => {
+        LoginService.registerNewUser(email, password, "User")
+            .then((user) => {
+                alert('User registered!' + user.email)
             })
             .catch(error => alert(error.message))
     }
 
-    //Method to log in using an existing user
-    //MAYBE: create custom error messages when receiving error from firebase?
-    //Duplicate method for managers, change screen that it navigates to manager home
-    const loginUser = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                // console.log('Successfully logged in with user: ', user.email); //Debugging
+    //Method to handle user login button press
+    const handleUserLogin = () => {
+        LoginService.loginUser(email, password)
+            .then(() => {
                 navigation.navigate('UserHome')
             })
             .catch(error => alert(error.message))
@@ -64,9 +56,9 @@ function Login({ navigation })  {
             </View>
             <View style={styles.loginButtonContainer}>
                 <Pressable //User login button
-                    style={styles.userLogin} 
-                    textStyle={styles.text} 
-                    onPress={loginUser}
+                    style={styles.userLogin}
+                    textStyle={styles.text}
+                    onPress={handleUserLogin}
                 >
                     <Text style={styles.text}>Login as{'\n'}User</Text>
                 </Pressable>
