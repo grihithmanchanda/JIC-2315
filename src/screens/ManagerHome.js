@@ -1,14 +1,14 @@
 import React from "react";
-import {StyleSheet, Text, View, Pressable, ScrollView} from 'react-native';
-import { Button } from "react-native-elements";
+import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Button} from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
-import { getAuth, signOut } from "firebase/auth";
+import {getAuth, signOut} from "firebase/auth";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function ManagerHome({navigation}) {
     return (
-        <ScrollView style = {styles.outer}>
+        <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
                 title="Logout"
                 onPress={() => //call method to log out user
@@ -17,17 +17,17 @@ function ManagerHome({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Welcome,{'\n'}Manager</Text>
-                <Text style={styles.num}>37</Text>
-                <Text style={styles.reg}>Registered users with your gym</Text>
-                <Pressable style={styles.start} textStyle={styles.text}>
+                <Text style={styles.number}>37</Text>
+                <Text style={styles.regText}>Registered users with your gym</Text>
+                <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Manage Users</Text>
                 </Pressable>
-                <Text style={styles.eaag}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.el}/>
-                <Pressable style={styles.start} textStyle={styles.text}>
+                <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
+                <EquipmentList style={styles.equipmentList}/>
+                <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Manage Equipment</Text>
                 </Pressable>
-                <Pressable style={styles.start} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Gym Settings</Text>
                 </Pressable>
             </View>
@@ -36,50 +36,50 @@ function ManagerHome({navigation}) {
 }
 
 //Method to sign out of firebase, returns user to login screen
-function logout( {navigation} ) {
+function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-    //    console.log("LOGOUT"); //Debugging
+        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
     }).catch((error) => {
-    //    console.log("ERROR");
+        // console.log("ERROR");
     });
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#ebeeff',
-      alignItems: 'center',
-      paddingBottom: 40,
-      height: '80%'
+        flex: 1,
+        backgroundColor: '#ebeeff',
+        alignItems: 'center',
+        paddingBottom: 40,
+        height: '80%'
     },
     header: {
         fontSize: 40,
         textAlign: 'center',
         paddingTop: 15,
     },
-    num: {
+    number: {
         fontSize: 35,
         textAlign: 'center',
         paddingTop: 15,
     },
-    reg: {
+    regText: {
         fontSize: 25,
         textAlign: 'center',
         paddingTop: 10,
     },
-    eaag: {
+    equipmentContainer: {
         fontSize: 40,
         textAlign: 'center',
         paddingTop: 20,
         paddingBottom: 20,
     },
-    el: {
+    equipmentList: {
         height: 'flex'
     },
-    start: {
+    button: {
         height: 70,
         backgroundColor: '#051739',
         width: '90%',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         flex: 1,
 
 
-   }
-  });
+    }
+});
 
 export default ManagerHome;

@@ -9,11 +9,11 @@ class EquipmentService {
     };
 
     addEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
-        equipmentData = {
+        let equipmentData = {
             'count': equipmentCount,
             'muscle groups': equipmentMuscleGroups
         }
-        equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
+        let equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
         return setDoc(equipmentDoc, equipmentData);
     }
 }

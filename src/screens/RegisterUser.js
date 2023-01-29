@@ -1,11 +1,11 @@
-import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from "react";
 import { CheckBox } from 'react-native-elements'
 import LoginService from '../services/login_service';
 
 function RegisterUser({route, navigation}) {
-    const [email, setEmail] = useState(route.params['email'])
-    const [password, setPassword] = useState(route.params['password'])
+    const [email, setEmail] = useState(route?.params['email'] ?? '')
+    const [password, setPassword] = useState(route?.params['password'] ?? '')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [accountType, setAccountType] = useState('User')
 
@@ -17,11 +17,9 @@ function RegisterUser({route, navigation}) {
         await LoginService.registerNewUser(email, password, accountType)
             .then((user) => {
                 alert(`User ${user.email} registered!`);
-                navigation.navigate(isUser ? 'UserHome' : 'ManagerHome');
+                navigation.navigate(accountType === 'User' ? 'UserHome' : 'ManagerHome');
             })
             .catch(error => alert(error.message))
-
-        // TODO: navigate to correct page once manager page is created
     }
 
     return (
@@ -44,7 +42,7 @@ function RegisterUser({route, navigation}) {
                     secureTextEntry //automatically turn characters into asterisks
                 />
                 <Text style={styles.text}>Confirm Password:</Text>
-                <TextInput //Password field
+                <TextInput //Password Confirmation field
                     placeholder="Password"
                     value={confirmPassword}
                     onChangeText={text => setConfirmPassword(text)}
@@ -72,7 +70,8 @@ function RegisterUser({route, navigation}) {
                 </Pressable>
             </View>
             <View style={styles.container}>
-                <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={() => navigation.navigate("Login")}>
+                <Pressable style={styles.forgotPassword} textStyle={styles.text}
+                           onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.text}>Go back</Text>
                 </Pressable>
             </View>
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     },
     blank: {
         height: 150,
-        backgroundColor: 'FFFFFF',
+        backgroundColor: '#FFFFFF',
         width: '4%',
     },
     managerLogin: {

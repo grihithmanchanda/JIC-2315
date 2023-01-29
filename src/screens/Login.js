@@ -1,6 +1,5 @@
-import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
-import React, { useState } from "react";
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from "react";
 import LoginService from '../services/login_service';
 
 function Login({navigation}) {
@@ -62,20 +61,20 @@ function Login({navigation}) {
                 </Pressable>
                 <Text style={styles.blank}></Text>
                 <Pressable //Manager login button
-                    style={styles.managerLogin} 
-                    textStyle={styles.text} 
+                    style={styles.managerLogin}
+                    textStyle={styles.text}
                     onPress={handleManagerLogin}
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
             <View style={styles.Container}>
-                <Pressable //Manager login button
-                        style={styles.register} 
-                        textStyle={styles.text} 
-                        onPress={handleUserRegistration}
-                    >
-                        <Text style={styles.text}>Register User</Text>
+                <Pressable //Registration button
+                    style={styles.register}
+                    textStyle={styles.text}
+                    onPress={handleUserRegistration}
+                >
+                    <Text style={styles.text}>Register User</Text>
                 </Pressable>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     },
     blank: {
         height: 150,
-        backgroundColor: 'FFFFFF',
+        backgroundColor: '#FFFFFF',
         width: '4%',
     },
     managerLogin: {

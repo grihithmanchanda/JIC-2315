@@ -1,6 +1,6 @@
-import {firestoredb} from "../../firebase-config"
-import {doc, setDoc} from "firebase/firestore"
-import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth"
+import { firestoredb } from "../../firebase-config"
+import { doc, setDoc } from "firebase/firestore"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 const auth = getAuth();
 
@@ -24,8 +24,7 @@ class LoginService {
     loginUser = async (email, password) => {
         return await signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                let user = await userCredential.user;
-                return user;
+                return userCredential.user;
             })
     }
 }
