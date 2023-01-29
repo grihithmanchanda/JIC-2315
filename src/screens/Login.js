@@ -88,7 +88,7 @@ function Login({navigation}) {
 const styles = StyleSheet.create({
     Container: {
         flexDirection: 'column',
-        justfiyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     loginButtonContainer: {
