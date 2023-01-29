@@ -15,7 +15,7 @@ export default RegisterUser = ({ navigation }) => {
             alert("Passwords do not match!");
             return;
         }
-        await LoginService.registerNewUser(email, password, isUser ? "User" : "Manager");
+        await LoginService.registerNewUser(email, password);
         // TODO: navigate to correct page once manager page is created
         navigation.navigate('UserHome')
     }

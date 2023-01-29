@@ -11,7 +11,7 @@ class LoginService {
         createUserWithEmailAndPassword(auth, email, password)
             .then()
             .catch(error => alert(error.message))
-
+            
         userData = {
             'username': email,
             'accountType': accountType,
