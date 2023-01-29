@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { CheckBox } from 'react-native-elements'
 import LoginService from '../services/login_service';
 
-function RegisterUser({navigation}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+function RegisterUser({route, navigation}) {
+    const [email, setEmail] = useState(route.params['email'])
+    const [password, setPassword] = useState(route.params['password'])
     const [confirmPassword, setConfirmPassword] = useState('')
     const [isUser, setisUser] = useState(false)
     const [isManager, setisManager] = useState(false)

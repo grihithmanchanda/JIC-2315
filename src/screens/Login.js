@@ -9,12 +9,10 @@ function Login({navigation}) {
 
     //Method to handle user registration button press
     const handleUserRegistration = () => {
-        // LoginService.registerNewUser(email, password, "User")
-        //     .then((user) => {
-        //         alert('User registered!' + user.email)
-        //     })
-        //     .catch(error => alert(error.message))
-        navigation.navigate('RegisterUser')
+        navigation.navigate('RegisterUser', {
+            'email': email,
+            'password': password,
+        })
     }
 
     //Method to handle user login button press
