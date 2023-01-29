@@ -22,29 +22,12 @@ const FullEquipmentList = (props) => {
 
     useEffect(() => {
         getEquipmentList();
-        // addEquipmentTest();
     }, []);
 
     const getEquipmentList = async () => {
-        console.log('getting equipment...');
         const equipmentQuery = await EquipmentService.getAllEquipment();
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
-        }
-        console.log('---------')
-        console.log(tableRows)
-        console.log('---------')
-    }
-
-    const addEquipmentTest = async() => {
-        console.log('testing add equipment...');
-        const equipmentQuery = await EquipmentService.addEquipment('test equipment 1', 0, ['abs', 'wrist'])
-            .catch((error) => {
-                console.log('adding equipment failed!')
-                console.log(error)
-            })
-        if (equipmentQuery !== null) {
-            console.log('added equipment!')
         }
     }
 
