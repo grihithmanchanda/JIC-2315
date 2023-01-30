@@ -15,18 +15,10 @@ function Login({navigation}) {
     }
 
     //Method to handle user login button press
-    const handleUserLogin = () => {
-        LoginService.loginUser(email, password)
-            .then(() => {
-                navigation.navigate('UserHome')
-            })
-            .catch(error => alert(error.message))
-    }
-
-    const handleManagerLogin = () => {
-        LoginService.loginUser(email, password)
-            .then(() => {
-                navigation.navigate('ManagerHome')
+    const handleLogin = (accountType) => {
+        LoginService.loginUser(email, password, accountType)
+            .then(()=> {
+                navigation.navigate(accountType === 'User' ? 'UserHome' : 'ManagerHome');
             })
             .catch(error => alert(error.message))
     }
@@ -55,7 +47,7 @@ function Login({navigation}) {
                 <Pressable //User login button
                     style={styles.userLogin}
                     textStyle={styles.text}
-                    onPress={handleUserLogin}
+                    onPress={() => handleLogin('User')}
                 >
                     <Text style={styles.text}>Login as{'\n'}User</Text>
                 </Pressable>
@@ -63,7 +55,7 @@ function Login({navigation}) {
                 <Pressable //Manager login button
                     style={styles.managerLogin}
                     textStyle={styles.text}
-                    onPress={handleManagerLogin}
+                    onPress={() => handleLogin('Manager')}
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>

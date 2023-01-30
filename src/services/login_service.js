@@ -1,8 +1,9 @@
 import { firestoredb } from "../../firebase-config"
-import { doc, setDoc } from "firebase/firestore"
+import { collection, doc, setDoc, getDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 const auth = getAuth();
+const usersRef = collection(firestoredb, 'users');
 
 class LoginService {
     //Method to register new user in firebase
@@ -21,10 +22,20 @@ class LoginService {
     }
 
     //Method to log in as an existing user
-    loginUser = async (email, password) => {
+    loginUser = async (email, password, accountType) => {
         return await signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                return userCredential.user;
+                let user = userCredential.user;
+
+                let docRef = doc(usersRef, user.email)
+                let docSnap = await getDoc(docRef)
+                
+                let actualAccountType = docSnap.data()['accountType']
+                if (actualAccountType !== accountType){
+                    throw new Error('Error: Incorrect account type!')
+                } else {
+                    return user;
+                }
             })
     }
 }
