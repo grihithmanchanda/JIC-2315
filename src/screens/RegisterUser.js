@@ -1,33 +1,30 @@
-import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState } from "react";
 import { CheckBox } from 'react-native-elements'
 import LoginService from '../services/login_service';
 
-function RegisterUser({navigation}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+function RegisterUser({route, navigation}) {
+    const [email, setEmail] = useState(route?.params['email'] ?? '')
+    const [password, setPassword] = useState(route?.params['password'] ?? '')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [isUser, setisUser] = useState(false)
-    const [isManager, setisManager] = useState(false)
+    const [accountType, setAccountType] = useState('User')
 
     const registerUser = async () => {
         if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        await LoginService.registerNewUser(email, password, isUser ? "User" : "Manager")
+        await LoginService.registerNewUser(email, password, accountType)
             .then((user) => {
                 alert(`User ${user.email} registered!`);
-                navigation.navigate('UserHome');
+                navigation.navigate(accountType === 'User' ? 'UserHome' : 'ManagerHome');
             })
             .catch(error => alert(error.message))
-
-        // TODO: navigate to correct page once manager page is created
     }
 
     return (
         <View>
-            <View style={styles.Container}>
+            <View style={styles.container}>
                 <Text style={styles.headerText}>Create account</Text>
                 <Text style={styles.text}>Username:</Text>
                 <TextInput //Username/Email field
@@ -45,7 +42,7 @@ function RegisterUser({navigation}) {
                     secureTextEntry //automatically turn characters into asterisks
                 />
                 <Text style={styles.text}>Confirm Password:</Text>
-                <TextInput //Password field
+                <TextInput //Password Confirmation field
                     placeholder="Password"
                     value={confirmPassword}
                     onChangeText={text => setConfirmPassword(text)}
@@ -56,24 +53,25 @@ function RegisterUser({navigation}) {
             <Text style={styles.text}>Account Type:</Text>
             <View style={styles.checkboxWrapper}>
                 <CheckBox
-                    checked={isUser}
+                    checked={accountType === 'User'}
                     title="Gym User"
-                    onPress={() => setisUser(!isUser)}
+                    onPress={() => setAccountType('User')}
                 />
                 <CheckBox
-                    checked={isManager}
+                    checked={accountType === 'Manager'}
                     title="Gym Manager"
-                    onPress={() => setisManager(!isManager)}
+                    onPress={() => setAccountType('Manager')}
                 />
             </View>
 
-            <View style={styles.Container}>
+            <View style={styles.container}>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={registerUser}>
                     <Text style={styles.text}>Register</Text>
                 </Pressable>
             </View>
-            <View style={styles.Container}>
-                <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={() => navigation.navigate("Login")}>
+            <View style={styles.container}>
+                <Pressable style={styles.forgotPassword} textStyle={styles.text}
+                           onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.text}>Go back</Text>
                 </Pressable>
             </View>
@@ -82,9 +80,9 @@ function RegisterUser({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    Container: {
+    container: {
         flexDirection: 'column',
-        justfiyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     loginButtonContainer: {
@@ -112,7 +110,7 @@ const styles = StyleSheet.create({
     },
     blank: {
         height: 150,
-        backgroundColor: 'FFFFFF',
+        backgroundColor: '#FFFFFF',
         width: '4%',
     },
     managerLogin: {

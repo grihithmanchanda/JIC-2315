@@ -1,6 +1,5 @@
-import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
-import React, { useState } from "react";
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from "react";
 import LoginService from '../services/login_service';
 
 function Login({navigation}) {
@@ -9,27 +8,17 @@ function Login({navigation}) {
 
     //Method to handle user registration button press
     const handleUserRegistration = () => {
-        // LoginService.registerNewUser(email, password, "User")
-        //     .then((user) => {
-        //         alert('User registered!' + user.email)
-        //     })
-        //     .catch(error => alert(error.message))
-        navigation.navigate('RegisterUser')
+        navigation.navigate('RegisterUser', {
+            'email': email,
+            'password': password,
+        })
     }
 
     //Method to handle user login button press
-    const handleUserLogin = () => {
-        LoginService.loginUser(email, password)
-            .then(() => {
-                navigation.navigate('UserHome')
-            })
-            .catch(error => alert(error.message))
-    }
-
-    const handleManagerLogin = () => {
-        LoginService.loginUser(email, password)
-            .then(() => {
-                navigation.navigate('ManagerHome')
+    const handleLogin = (accountType) => {
+        LoginService.loginUser(email, password, accountType)
+            .then(()=> {
+                navigation.navigate(accountType === 'User' ? 'UserHome' : 'ManagerHome');
             })
             .catch(error => alert(error.message))
     }
@@ -58,26 +47,26 @@ function Login({navigation}) {
                 <Pressable //User login button
                     style={styles.userLogin}
                     textStyle={styles.text}
-                    onPress={handleUserLogin}
+                    onPress={() => handleLogin('User')}
                 >
                     <Text style={styles.text}>Login as{'\n'}User</Text>
                 </Pressable>
                 <Text style={styles.blank}></Text>
                 <Pressable //Manager login button
-                    style={styles.managerLogin} 
-                    textStyle={styles.text} 
-                    onPress={handleManagerLogin}
+                    style={styles.managerLogin}
+                    textStyle={styles.text}
+                    onPress={() => handleLogin('Manager')}
                 >
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
             <View style={styles.Container}>
-                <Pressable //Manager login button
-                        style={styles.register} 
-                        textStyle={styles.text} 
-                        onPress={handleUserRegistration}
-                    >
-                        <Text style={styles.text}>Register User</Text>
+                <Pressable //Registration button
+                    style={styles.register}
+                    textStyle={styles.text}
+                    onPress={handleUserRegistration}
+                >
+                    <Text style={styles.text}>Register User</Text>
                 </Pressable>
                 <Pressable style={styles.forgotPassword} textStyle={styles.text}>
                     <Text style={styles.text}>Forgot Password?</Text>
@@ -90,7 +79,7 @@ function Login({navigation}) {
 const styles = StyleSheet.create({
     Container: {
         flexDirection: 'column',
-        justfiyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     loginButtonContainer: {
@@ -117,7 +106,7 @@ const styles = StyleSheet.create({
     },
     blank: {
         height: 150,
-        backgroundColor: 'FFFFFF',
+        backgroundColor: '#FFFFFF',
         width: '4%',
     },
     managerLogin: {

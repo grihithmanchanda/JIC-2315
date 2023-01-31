@@ -9,16 +9,16 @@ import RegisterUser from "./src/screens/RegisterUser";
 const navigationStack = createNativeStackNavigator();
 
 function App() {
-  return (
-    <NavigationContainer>
-      <navigationStack.Navigator initialRouteName="ManagerHome">
-        <navigationStack.Screen name="Login" component={Login} />
-        <navigationStack.Screen name="UserHome" component={UserHome} />
-        <navigationStack.Screen name="ManagerHome" component={ManagerHome} />
-        <navigationStack.Screen name="RegisterUser" component={RegisterUser} />
-      </navigationStack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <navigationStack.Navigator initialRouteName="Login">
+                <navigationStack.Screen name="Login" component={Login}/>
+                <navigationStack.Screen name="UserHome" component={UserHome}/>
+                <navigationStack.Screen name="ManagerHome" component={ManagerHome}/>
+                <navigationStack.Screen name="RegisterUser" component={RegisterUser}/>
+            </navigationStack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default App;
