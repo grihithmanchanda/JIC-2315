@@ -6,9 +6,8 @@ import WorkoutList from "../components/WorkoutList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function WOTD({navigation}) {
-    const [workouts, setWorkouts] = useState([]);
-
+function ConfirmWorkout({route, navigation}) {
+    const workouts = route.params.workouts;
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -18,12 +17,12 @@ function WOTD({navigation}) {
                 }
             />
             <View style={styles.container}>
-                <Text style={styles.header}>Create Workout of the Day</Text>
-                <Text style={styles.subheader}>Select 4 Workouts</Text>
-                <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Workouts</Text>
-                </Pressable>
+                <Text style={styles.header}>Set Workout</Text>
+                {   
+                    workouts.map((workout, index) => (
+                        <Text key={index} style={styles.subheader}>{workout}</Text>
+                    ))
+                }
             </View>
         </ScrollView>
     );
@@ -93,4 +92,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default WOTD;
+export default ConfirmWorkout;
