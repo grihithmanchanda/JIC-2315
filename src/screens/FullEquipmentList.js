@@ -202,7 +202,7 @@ const handleAddEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, le
         muscleGroups.push('abs')
     }
 
-    EquipmentService.addEquipment(eqName, eqQuantity, muscleGroups)
+    EquipmentService.addEquipment(eqName, eqQuantity, muscleGroups);
 }
 
 const handleDeleteEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, legs, abs) => {
