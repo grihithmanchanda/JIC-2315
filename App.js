@@ -7,6 +7,7 @@ import ManagerHome from "./src/screens/ManagerHome";
 import RegisterUser from "./src/screens/RegisterUser";
 import ManageEquipment from "./src/screens/ManageEquipment";
 import EditEquipment from "./src/screens/EditEquipment";
+import WOTD from "./src/screens/WOTD";
 
 const navigationStack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ function App() {
                 <navigationStack.Screen name="RegisterUser" component={RegisterUser}/>
                 <navigationStack.Screen name="ManageEquipment" component={ManageEquipment}/>
                 <navigationStack.Screen name="EditEquipment" component={EditEquipment}/>
+                <navigationStack.Screen name="WOTD" component={WOTD}/>
             </navigationStack.Navigator>
         </NavigationContainer>
     );
