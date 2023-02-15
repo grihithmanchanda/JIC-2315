@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
@@ -7,6 +7,8 @@ import WorkoutList from "../components/WorkoutList";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function WOTD({navigation}) {
+    const [workouts, setWorkouts] = useState([]);
+
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -18,7 +20,10 @@ function WOTD({navigation}) {
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
                 <Text style={styles.subheader}>Select 4 Workouts</Text>
-                <WorkoutList style={styles.equipmentList}/>
+                <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
+                <Pressable style={styles.button} textStyle={styles.text}>
+                    <Text style={styles.text} onPress={() => console.log(workouts)}>Use These Workouts</Text>
+                </Pressable>
             </View>
         </ScrollView>
     );

@@ -24,6 +24,8 @@ const WorkoutList = (props) => {
         }
     }
 
+    props.getWorkouts(workouts);
+
     return (
         <ScrollView style={styles.container} scrollEnabled={true}>
             <Table style={styles.table} >
@@ -36,10 +38,10 @@ const WorkoutList = (props) => {
                             flexArr={[2, 1, 2]}
                             style={workouts.includes(tableRow[0]) ? styles.rowSel : styles.row}
                             textStyle={workouts.includes(tableRow[0]) ? styles.textWhite : styles.text}
-                            onPress={() => setWorkouts(
+                            onPress={() => (setWorkouts(
                                 workouts.includes(tableRow[0]) ? workouts.filter(i => i !== tableRow[0]) : 
                                 (workouts.length < 4 ? [...workouts, tableRow[0]] : workouts)
-                                )}
+                                ))}
                             />
                         ))
                     }
