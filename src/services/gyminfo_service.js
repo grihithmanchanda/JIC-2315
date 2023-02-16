@@ -20,3 +20,5 @@ class gymInfoService {
         return setDoc(gymInfoDoc, gymInfoData);
     };
 }
+
+export default new gymInfoService();

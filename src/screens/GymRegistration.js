@@ -14,11 +14,11 @@ function GymRegistration({navigation}) {
             alert("Please fill in all fields!");
             return;
         }
-        // console.log(gymName);
-        // console.log(address);
-        // console.log(openingHour);
-        // console.log(closingHour);
-        // console.log(phoneNumber);
+        console.log(gymName);
+        console.log(address);
+        console.log(openingHour);
+        console.log(closingHour);
+        console.log(phoneNumber);
         await gymInfoService.addGymInfo(gymName, address, gymName, openingHour, closingHour, phoneNumber)
             .then(() => {
                 alert(`Gym registered!`);
