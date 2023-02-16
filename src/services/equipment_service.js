@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDocs, setDoc, updateDoc, deleteField } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc, deleteField, deleteDoc } from "firebase/firestore"
 
 const equipmentCollectionRef = collection(firestoredb, "equipment");
 
@@ -17,13 +17,9 @@ class EquipmentService {
         return setDoc(equipmentDoc, equipmentData);
     };
 
-    deleteEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
-        let equipmentData = {
-            'count': equipmentCount,
-            'muscle groups': equipmentMuscleGroups
-        }
+    deleteEquipment = async (equipmentName) => {
         let equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
-        return updateDoc(equipmentDoc, {equipmentData: deleteField()});
+        return deleteDoc(equipmentDoc);
     };
 
     updateEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
