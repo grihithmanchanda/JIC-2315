@@ -39,7 +39,7 @@ function EquipmentList({navigation}) {
                         flexArr={[2, 1, 2]}
                         style={styles.row}
                         textStyle={styles.text}
-                        onPress={() => {handleEditEquipment(tableRow[index])}}
+                        onPress={() => navigation ? handleEditEquipment(tableRow) : void(0)}
                         />
                     ))
                 }

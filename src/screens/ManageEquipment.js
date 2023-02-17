@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import {Button} from "react-native-elements";
-// import { Table } from "react-bootstrap"; // no longer using react-bootstrap
 import EquipmentService from "../services/equipment_service";
 import { Modal } from "../components/Modal";
 import { CheckBox } from 'react-native-elements'
