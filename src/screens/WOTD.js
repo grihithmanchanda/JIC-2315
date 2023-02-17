@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
     },
     outer: {
         flex: 1,
-
-
+        backgroundColor: '#ebeeff',
     }
 });
 

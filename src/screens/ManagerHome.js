@@ -10,8 +10,8 @@ function ManagerHome({navigation}) {
     const handleManageEquipment = () => {
         navigation.navigate('ManageEquipment')
     }
-    const handleWOTD = () => {
-        navigation.navigate('WOTD')
+    const handleSD = () => {
+        navigation.navigate('SelectDifficulty')
     }
 
     return (
@@ -29,7 +29,7 @@ function ManagerHome({navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Manage Users</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleSD}>
                     <Text style={styles.text}>Create Workout of the Day</Text>    
                 </Pressable>
                 <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
@@ -107,8 +107,7 @@ const styles = StyleSheet.create({
     },
     outer: {
         flex: 1,
-
-
+        backgroundColor: '#ebeeff',
     }
 });
 

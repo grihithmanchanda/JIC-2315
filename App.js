@@ -7,6 +7,7 @@ import ManagerHome from "./src/screens/ManagerHome";
 import RegisterUser from "./src/screens/RegisterUser";
 import ManageEquipment from "./src/screens/ManageEquipment";
 import EditEquipment from "./src/screens/EditEquipment";
+import SelectDifficulty from "./src/screens/SelectDifficulty";
 import WOTD from "./src/screens/WOTD";
 import ConfirmWorkout from "./src/screens/ConfirmWorkout";
 
@@ -22,6 +23,7 @@ function App() {
                 <navigationStack.Screen name="RegisterUser" component={RegisterUser}/>
                 <navigationStack.Screen name="ManageEquipment" component={ManageEquipment}/>
                 <navigationStack.Screen name="EditEquipment" component={EditEquipment}/>
+                <navigationStack.Screen name="SelectDifficulty" component={SelectDifficulty}/>
                 <navigationStack.Screen name="WOTD" component={WOTD}/>
                 <navigationStack.Screen name="ConfirmWorkout" component={ConfirmWorkout}/>
             </navigationStack.Navigator>

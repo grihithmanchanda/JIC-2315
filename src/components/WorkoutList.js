@@ -24,7 +24,7 @@ const WorkoutList = (props) => {
         }
     }
 
-    props.getWorkouts(workouts);
+    props.getWorkouts(workouts); // was hacky solution, scared to change
 
     return (
         <ScrollView style={styles.container} scrollEnabled={true}>
