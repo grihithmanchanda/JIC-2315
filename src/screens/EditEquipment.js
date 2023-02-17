@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
@@ -6,7 +6,8 @@ import {getAuth, signOut} from "firebase/auth";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function EditEquipment({props, navigation}) {
+function EditEquipment({route, navigation}) {
+    const [equipmentId, setEquipmentId] = useState(route?.params['equipment'] ?? '')
     const handleManageEquipment = () => {
         navigation.navigate('ManageEquipment')
     }
@@ -20,7 +21,7 @@ function EditEquipment({props, navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Edit</Text>
-                <Text style={styles.header}>{props.equipment}</Text>
+                <Text style={styles.header}>{equipmentId}</Text>
             </View>
         </ScrollView>
     );

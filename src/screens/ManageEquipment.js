@@ -7,8 +7,8 @@ import { Modal } from "../components/Modal";
 import { CheckBox } from 'react-native-elements'
 import EquipmentList from "../components/EquipmentList";
 
-function ManageEquipment({props, navigation}) {
-    const [tableRows, setTableRows] = useState([['a', 'b', 'c']])
+function ManageEquipment({navigation}) {
+    const [tableRows, setTableRows] = useState([['', '', '']])
     const [modalVisible, setModalVisible] = useState(false)
     const tableHead = ['Name', 'Quantity', 'Muscle Groups']
     const [eqName, setEqName] = useState('')
@@ -42,7 +42,7 @@ function ManageEquipment({props, navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.equipmentList} navigation={navigation} props={props}/>
+                <EquipmentList style={styles.equipmentList} navigation={navigation}/>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => setModalVisible(true)}>

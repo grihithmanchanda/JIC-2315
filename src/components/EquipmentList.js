@@ -5,7 +5,7 @@ import EquipmentService from "../services/equipment_service";
 
 
 // renders equipment list for home pages
-function EquipmentList({props, navigation}) {
+function EquipmentList({navigation}) {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
     const tableHead = ['Name', 'Quantity', 'Muscle Groups'];
 
@@ -21,6 +21,12 @@ function EquipmentList({props, navigation}) {
         }
     }
 
+    const handleEditEquipment = (equipmentId) => {
+        navigation.navigate('EditEquipment', {
+            'equipment': equipmentId
+        })
+    }
+
     return (
         <ScrollView style={styles.container} scrollEnabled={true}>
         <Table style={styles.table} >
@@ -33,7 +39,7 @@ function EquipmentList({props, navigation}) {
                         flexArr={[2, 1, 2]}
                         style={styles.row}
                         textStyle={styles.text}
-                        onPress={() => {navigation.navigate('EditEquipment', {'equipment': tableRow})}}
+                        onPress={() => {handleEditEquipment(tableRow[index])}}
                         />
                     ))
                 }
