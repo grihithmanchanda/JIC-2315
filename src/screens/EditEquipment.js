@@ -6,7 +6,7 @@ import {getAuth, signOut} from "firebase/auth";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function ManagerHome({navigation}) {
+function EditEquipment({props, navigation}) {
     const handleManageEquipment = () => {
         navigation.navigate('ManageEquipment')
     }
@@ -19,20 +19,8 @@ function ManagerHome({navigation}) {
                 }
             />
             <View style={styles.container}>
-                <Text style={styles.header}>Welcome,{'\n'}Manager</Text>
-                <Text style={styles.number}>37</Text>
-                <Text style={styles.regText}>Registered users with your gym</Text>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Manage Users</Text>
-                </Pressable>
-                <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.equipmentList}/>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
-                    <Text style={styles.text}>Manage Equipment</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Gym Settings</Text>
-                </Pressable>
+                <Text style={styles.header}>Edit</Text>
+                <Text style={styles.header}>{props.equipment}</Text>
             </View>
         </ScrollView>
     );
@@ -105,4 +93,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ManagerHome;
+export default EditEquipment;
