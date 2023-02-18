@@ -34,10 +34,7 @@ function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
-    }).catch((error) => {
-        // console.log("ERROR");
     });
 }
 
