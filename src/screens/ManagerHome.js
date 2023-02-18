@@ -7,6 +7,9 @@ import {getAuth, signOut} from "firebase/auth";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function ManagerHome({navigation}) {
+    const handleManageEquipment = () => {
+        navigation.navigate('ManageEquipment')
+    }
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -24,7 +27,7 @@ function ManagerHome({navigation}) {
                 </Pressable>
                 <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
                 <EquipmentList style={styles.equipmentList}/>
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Manage Equipment</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}>

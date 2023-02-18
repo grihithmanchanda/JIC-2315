@@ -5,6 +5,8 @@ import Login from './src/screens/Login';
 import UserHome from './src/screens/UserHome';
 import ManagerHome from "./src/screens/ManagerHome";
 import RegisterUser from "./src/screens/RegisterUser";
+import ManageEquipment from "./src/screens/ManageEquipment";
+import EditEquipment from "./src/screens/EditEquipment";
 
 const navigationStack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ function App() {
                 <navigationStack.Screen name="UserHome" component={UserHome}/>
                 <navigationStack.Screen name="ManagerHome" component={ManagerHome}/>
                 <navigationStack.Screen name="RegisterUser" component={RegisterUser}/>
+                <navigationStack.Screen name="ManageEquipment" component={ManageEquipment}/>
+                <navigationStack.Screen name="EditEquipment" component={EditEquipment}/>
             </navigationStack.Navigator>
         </NavigationContainer>
     );

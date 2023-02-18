@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet } from 'react-native';
+import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
 
 
 // renders equipment list for home pages
-const EquipmentList = (props) => {
-    const [tableRows, setTableRows] = useState([['a', 'b', 'c']])
-    const tableHead = ['Name', 'Quantity', 'Muscle Groups']
+function EquipmentList({navigation}) {
+    const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
+    const tableHead = ['Name', 'Quantity', 'Muscle Groups'];
 
     useEffect(() => {
         getEquipmentList();
@@ -21,15 +21,30 @@ const EquipmentList = (props) => {
         }
     }
 
+    const handleEditEquipment = (equipmentId) => {
+        navigation.navigate('EditEquipment', {
+            'equipment': equipmentId
+        })
+    }
+
     return (
         <ScrollView style={styles.container} scrollEnabled={true}>
-            <Table style={styles.table} >
-                <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
-                <TableWrapper style={styles.wrapper}>
-                    <Rows data={tableRows} flexArr={[2, 1, 2]} style={styles.row} textStyle={styles.text} />
-                </TableWrapper>
-            </Table>
-        </ScrollView>
+        <Table style={styles.table} >
+            <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
+                {   
+                    tableRows.map((tableRow, index) => (
+                        <Row
+                        key={index}
+                        data={tableRow}
+                        flexArr={[2, 1, 2]}
+                        style={styles.row}
+                        textStyle={styles.text}
+                        onPress={() => navigation ? handleEditEquipment(tableRow) : void(0)}
+                        />
+                    ))
+                }
+        </Table>
+    </ScrollView>
     )
 }
 
