@@ -73,7 +73,7 @@ function EditEquipment({route, navigation}) {
                     keyboardType="default"
                     onChangeText={(val) => setEqQuantity(val)}
                 />
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Confirm Selection</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}>
@@ -89,10 +89,7 @@ function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
-    }).catch((error) => {
-        // console.log("ERROR");
     });
 }
 
