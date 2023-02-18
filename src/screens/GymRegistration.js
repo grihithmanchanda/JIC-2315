@@ -7,18 +7,13 @@ function GymRegistration({navigation}) {
     const [address, setAddress] = useState('')
     const [openingHour, setOpeningHour] = useState('')
     const [closingHour, setClosingHour] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState(0)
 
     const handleGymRegistration = async () => {
         if (gymName == "" || address == "" || openingHour == "" || closingHour == "" || phoneNumber == "") {
             alert("Please fill in all fields!");
             return;
         }
-        console.log(gymName);
-        console.log(address);
-        console.log(openingHour);
-        console.log(closingHour);
-        console.log(phoneNumber);
         await gymInfoService.addGymInfo(gymName, address, gymName, openingHour, closingHour, phoneNumber)
             .then(() => {
                 alert(`Gym registered!`);
@@ -57,6 +52,8 @@ function GymRegistration({navigation}) {
                 />
                 <Text style={styles.headerText}>Gym Phone Number:</Text>
                 <TextInput //Gym phone number
+                    keyboardType='number-pad'
+                    type='number'
                     value={phoneNumber}
                     onChangeText={text => setPhoneNumber(text)}
                     style={styles.input}
