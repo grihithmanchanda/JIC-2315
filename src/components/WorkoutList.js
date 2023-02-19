@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from 'react-native';
-import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
+import { Table, Row } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
 
 
 // is equipment list for now; will need help switching
 
 // renders equipment list for home pages
-const WorkoutList = (props) => {
+const WorkoutList = ({getWorkouts}) => {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
     const [workouts, setWorkouts] = useState([]);
     const tableHead = ['Name', 'Quantity', 'Muscle Groups'];
@@ -24,7 +24,17 @@ const WorkoutList = (props) => {
         }
     }
 
-    props.getWorkouts(workouts); // was hacky solution, scared to change
+    getWorkouts(workouts);
+
+    function handleWorkouts(row) {
+        var newWorkouts = workouts;
+        if (workouts.includes(row)) {
+            newWorkouts = workouts.filter(i => i != row);
+        } else if (workouts.length < 4) {
+            newWorkouts = [...workouts, row];
+        }
+        setWorkouts(newWorkouts);
+    }
 
     return (
         <ScrollView style={styles.container} scrollEnabled={true}>
@@ -38,10 +48,7 @@ const WorkoutList = (props) => {
                             flexArr={[2, 1, 2]}
                             style={workouts.includes(tableRow[0]) ? styles.rowSel : styles.row}
                             textStyle={workouts.includes(tableRow[0]) ? styles.textWhite : styles.text}
-                            onPress={() => (setWorkouts(
-                                workouts.includes(tableRow[0]) ? workouts.filter(i => i !== tableRow[0]) : 
-                                (workouts.length < 4 ? [...workouts, tableRow[0]] : workouts)
-                                ))}
+                            onPress={() => handleWorkouts(tableRow[0])}
                             />
                         ))
                     }
