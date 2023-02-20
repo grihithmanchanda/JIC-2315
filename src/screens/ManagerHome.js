@@ -3,6 +3,8 @@ import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import EquipmentList from "../components/EquipmentList";
 import {getAuth, signOut} from "firebase/auth";
+import LoginService from '../services/login_service';
+
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
