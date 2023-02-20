@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
-import WorkoutList from "../components/WorkoutList";
+import ExerciseList from "../components/ExerciseList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
@@ -20,10 +20,10 @@ function WOTD({route, navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
-                <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
                 <Text style={styles.subheader}>Select 4 exercises</Text>
+                <ExerciseList style={styles.exerciseList} getWorkouts={setWorkouts}/>
                 <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Workouts</Text>
+                    <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Exercises</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
     },
-    equipmentList: {
+    exerciseList: {
         paddingTop: 10,
         height: 'flex'
     },
