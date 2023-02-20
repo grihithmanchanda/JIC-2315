@@ -26,17 +26,21 @@ function ConfirmWorkout({route, navigation}) {
                 <Text style={styles.header}>Set Workout</Text>
                 {   
                     workouts.map((workout, index) => (
-                        <><Text key={index} style={styles.subheader}>{workout}</Text><Text style={styles.subsubheader}>Number of Sets</Text><TextInput
+                        <>
+                        <Text key={index} style={styles.subheader}>{workout}</Text><Text style={styles.subsubheader}>Number of Sets</Text>
+                        <TextInput
                             style={styles.input}
                             placeholder="e.g. 5"
                             keyboardType="default"
-                            onChangeText={(val) => setSetQuantity(val)} />
-                            <Text style={styles.subsubheader}>Reps per Set</Text><TextInput
+                            onChangeText={(val) => setSetQuantity(val)}
+                        />
+                        <Text style={styles.subsubheader}>Reps per Set</Text>
+                        <TextInput
                             style={styles.input}
                             placeholder="e.g. 5"
                             keyboardType="default"
                             onChangeText={(val) => setRepQuantity(val)} />
-                            </>
+                        </>
                     ))
                 }
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleConfirm}>
