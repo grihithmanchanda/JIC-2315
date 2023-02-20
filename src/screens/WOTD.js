@@ -6,7 +6,8 @@ import WorkoutList from "../components/WorkoutList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function WOTD({navigation}) {
+function WOTD({route, navigation}) {
+    const [workoutDifficulty, setWorkoutDifficulty] = useState(route?.params['workoutDifficulty'] ?? 0)
     const [workouts, setWorkouts] = useState([]);
 
     return (
@@ -19,8 +20,8 @@ function WOTD({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
-                <Text style={styles.subheader}>Select 4 Workouts</Text>
                 <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
+                <Text style={styles.subheader}>Select 4 exercises</Text>
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Workouts</Text>
                 </Pressable>

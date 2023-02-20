@@ -6,8 +6,10 @@ import {getAuth, signOut} from "firebase/auth";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function SelectDifficulty({navigation}) {
-    const handleWOTD = () => {
-        navigation.navigate('WOTD')
+    // const [workoutDifficulty, setWorkoutDifficulty] = useState(0)
+
+    function handleWOTD(difficulty) {
+        navigation.navigate('WOTD', {'workoutDifficulty': difficulty})
     }
 
     return (
@@ -20,13 +22,13 @@ function SelectDifficulty({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Select Difficulty</Text>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {handleWOTD(0)}}>
                     <Text style={styles.text}>Beginner</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {handleWOTD(1)}}>
                     <Text style={styles.text}>Intermediate</Text>    
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {handleWOTD(2)}}>
                     <Text style={styles.text}>Advanced</Text>
                 </Pressable>
             </View>
