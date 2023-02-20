@@ -1,18 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
-import EquipmentList from "../components/EquipmentList";
 import {getAuth, signOut} from "firebase/auth";
+import WorkoutList from "../components/WorkoutList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function ManagerHome({navigation}) {
-    const handleManageEquipment = () => {
-        navigation.navigate('ManageEquipment')
-    }
-    const handleSD = () => {
-        navigation.navigate('SelectDifficulty')
-    }
+function WOTD({navigation}) {
+    const [workouts, setWorkouts] = useState([]);
 
     return (
         <ScrollView style={styles.outer}>
@@ -23,22 +18,11 @@ function ManagerHome({navigation}) {
                 }
             />
             <View style={styles.container}>
-                <Text style={styles.header}>Welcome,{'\n'}Manager</Text>
-                <Text style={styles.number}>37</Text>
-                <Text style={styles.regText}>Registered users with your gym</Text>
+                <Text style={styles.header}>Create Workout of the Day</Text>
+                <Text style={styles.subheader}>Select 4 Workouts</Text>
+                <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
                 <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Manage Users</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleSD}>
-                    <Text style={styles.text}>Create Workout of the Day</Text>    
-                </Pressable>
-                <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.equipmentList}/>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
-                    <Text style={styles.text}>Manage Equipment</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Gym Settings</Text>
+                    <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Workouts</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -50,10 +34,7 @@ function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
-    }).catch((error) => {
-        // console.log("ERROR");
     });
 }
 
@@ -70,15 +51,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 15,
     },
-    number: {
-        fontSize: 35,
-        textAlign: 'center',
-        paddingTop: 15,
-    },
-    regText: {
+    subheader: {
         fontSize: 25,
         textAlign: 'center',
         paddingTop: 10,
+        paddingBottom: 20
     },
     equipmentContainer: {
         fontSize: 40,
@@ -87,6 +64,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     equipmentList: {
+        paddingTop: 10,
         height: 'flex'
     },
     button: {
@@ -111,4 +89,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ManagerHome;
+export default WOTD;

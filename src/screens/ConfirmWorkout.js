@@ -1,17 +1,17 @@
-import React from "react";
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, { useState } from "react";
+import {Pressable, ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
 import {Button} from "react-native-elements";
-import EquipmentList from "../components/EquipmentList";
 import {getAuth, signOut} from "firebase/auth";
+import WorkoutList from "../components/WorkoutList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function ManagerHome({navigation}) {
-    const handleManageEquipment = () => {
-        navigation.navigate('ManageEquipment')
-    }
-    const handleSD = () => {
-        navigation.navigate('SelectDifficulty')
+function ConfirmWorkout({route, navigation}) {
+    const workouts = route.params.workouts;
+    const [setQuantity, setSetQuantity] = useState("0")
+    const [repQuantity, setRepQuantity] = useState("0")
+    const handleConfirm = () => {
+        navigation.navigate('ManagerHome')
     }
 
     return (
@@ -23,22 +23,28 @@ function ManagerHome({navigation}) {
                 }
             />
             <View style={styles.container}>
-                <Text style={styles.header}>Welcome,{'\n'}Manager</Text>
-                <Text style={styles.number}>37</Text>
-                <Text style={styles.regText}>Registered users with your gym</Text>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Manage Users</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleSD}>
-                    <Text style={styles.text}>Create Workout of the Day</Text>    
-                </Pressable>
-                <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.equipmentList}/>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
-                    <Text style={styles.text}>Manage Equipment</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Gym Settings</Text>
+                <Text style={styles.header}>Set Workout</Text>
+                {   
+                    workouts.map((workout, index) => (
+                        <>
+                        <Text key={index} style={styles.subheader}>{workout}</Text><Text style={styles.subsubheader}>Number of Sets</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="e.g. 5"
+                            keyboardType="default"
+                            onChangeText={(val) => setSetQuantity(val)}
+                        />
+                        <Text style={styles.subsubheader}>Reps per Set</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="e.g. 5"
+                            keyboardType="default"
+                            onChangeText={(val) => setRepQuantity(val)} />
+                        </>
+                    ))
+                }
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleConfirm}>
+                    <Text style={styles.text}>Confirm</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -50,10 +56,7 @@ function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
-    }).catch((error) => {
-        // console.log("ERROR");
     });
 }
 
@@ -70,15 +73,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 15,
     },
-    number: {
-        fontSize: 35,
-        textAlign: 'center',
-        paddingTop: 15,
-    },
-    regText: {
-        fontSize: 25,
+    subheader: {
+        fontSize: 30,
         textAlign: 'center',
         paddingTop: 10,
+        paddingBottom: 5
+    },
+    subsubheader: {
+        fontSize: 20,
+        textAlign: 'center',
+        paddingTop: 10
     },
     equipmentContainer: {
         fontSize: 40,
@@ -87,6 +91,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     equipmentList: {
+        paddingTop: 10,
         height: 'flex'
     },
     button: {
@@ -111,4 +116,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ManagerHome;
+export default ConfirmWorkout;

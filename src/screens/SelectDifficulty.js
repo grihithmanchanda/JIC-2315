@@ -1,17 +1,13 @@
 import React from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
-import EquipmentList from "../components/EquipmentList";
 import {getAuth, signOut} from "firebase/auth";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
-function ManagerHome({navigation}) {
-    const handleManageEquipment = () => {
-        navigation.navigate('ManageEquipment')
-    }
-    const handleSD = () => {
-        navigation.navigate('SelectDifficulty')
+function SelectDifficulty({navigation}) {
+    const handleWOTD = () => {
+        navigation.navigate('WOTD')
     }
 
     return (
@@ -23,22 +19,15 @@ function ManagerHome({navigation}) {
                 }
             />
             <View style={styles.container}>
-                <Text style={styles.header}>Welcome,{'\n'}Manager</Text>
-                <Text style={styles.number}>37</Text>
-                <Text style={styles.regText}>Registered users with your gym</Text>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Manage Users</Text>
+                <Text style={styles.header}>Select Difficulty</Text>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                    <Text style={styles.text}>Beginner</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleSD}>
-                    <Text style={styles.text}>Create Workout of the Day</Text>    
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                    <Text style={styles.text}>Intermediate</Text>    
                 </Pressable>
-                <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
-                <EquipmentList style={styles.equipmentList}/>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
-                    <Text style={styles.text}>Manage Equipment</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text}>Gym Settings</Text>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleWOTD}>
+                    <Text style={styles.text}>Advanced</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -50,10 +39,7 @@ function logout({navigation}) {
     const auth = getAuth();
     // Signs out user
     signOut(auth).then(() => {
-        // console.log("LOGOUT"); //Debugging
         navigation.navigate('Login');
-    }).catch((error) => {
-        // console.log("ERROR");
     });
 }
 
@@ -111,4 +97,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ManagerHome;
+export default SelectDifficulty;
