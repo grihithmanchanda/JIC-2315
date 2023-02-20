@@ -6,6 +6,8 @@ import ExerciseList from "../components/ExerciseList";
 import workout_service from "../services/workout_service";
 
 // WOTD page for creating workout routines
+// Essentially entire manager home page, including welcome,
+//   user num, equipment, and buttons for settings
 function WOTD({route, navigation}) {
     const [workoutDifficulty, setWorkoutDifficulty] = useState(route?.params['workoutDifficulty'] ?? 0)
     const [workouts, setWorkouts] = useState([]);

@@ -6,7 +6,6 @@ import {getAuth, signOut} from "firebase/auth";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function SelectDifficulty({navigation}) {
-
     function handleWOTD(difficulty) {
         navigation.navigate('WOTD', {'workoutDifficulty': difficulty})
     }
