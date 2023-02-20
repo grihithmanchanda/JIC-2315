@@ -16,13 +16,13 @@ class EquipmentService {
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
         let equipmentRefs = gymDataSnap.data()['equipment']
 
-        // iterate through all equipment refs, 
+        // get all equipment docs, return to frontend
+        let equipmentDocs = []
         for (let i = 0; i < equipmentRefs.length; i++) {
-            let docSnap = await getDoc(equipmentRefs[i])
-            //console.log(docSnap.data())
+            equipmentDocs.push((await getDoc(equipmentRefs[i])))
         }
 
-        console.log(getDocs(equipmentCollectionRef))
+        return equipmentDocs
     };
 
     addEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {

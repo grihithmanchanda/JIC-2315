@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 const generateTableRows = (equipmentQuery) => {
-    equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+    let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
     return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
 }
 
