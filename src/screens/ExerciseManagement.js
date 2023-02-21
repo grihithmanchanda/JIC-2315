@@ -1,17 +1,20 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
+import EquipmentList from "../components/EquipmentList";
 
 function ExerciseManagement({ route, navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.container}>
-        <Text style={styles.header}>Exercise Management for {route.params.equipID}</Text>
-        <Text style={styles.subheader}>Name of Exercise:</Text>
+    <ScrollView style={styles.outer}>
+      <View style={styles.Container}>
+        <Text style={styles.headerText}>Exercise Management</Text>
+        <Text style={styles.text}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
           placeholderTextColor="#000"
           style={styles.input}
         />
-        <Text style={styles.subheader}>Difficulty Level:</Text>
+        {/* <Text style={styles.text}>Relevant Equipment:</Text>
+        <EquipmentList style={styles.equipmentList} ></EquipmentList> */}
+        <Text style={styles.text}>Difficulty Level:</Text>
         <TextInput //Difficulty level
           keyboardType='number-pad'
           type='number'
@@ -38,10 +41,10 @@ function ExerciseManagement({ route, navigation }) {
         <Pressable //Add button
           style={styles.button}
           textStyle={styles.text}>
-          <Text style={styles.text}>Add</Text>
+          <Text style={styles.textWhite}>Add</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -76,10 +79,15 @@ const styles = StyleSheet.create({
       marginTop: 20,
   },
   text: {
-      color: '#ebeeff',
+      // color: '#ebeeff',
       textAlign: 'center',
       fontSize: 30,
   },
+  textWhite: {
+    color: '#ebeeff',
+    textAlign: 'center',
+    fontSize: 30,
+},
   outer: {
       flex: 1,
       backgroundColor: '#ebeeff',
@@ -96,8 +104,22 @@ const styles = StyleSheet.create({
       paddingTop: 10,
       borderColor: "grey",
       borderBottomWidth: 2,
-      width: '90%'
+      width: '60%',
+      justifyContent: 'center',
   },
+  equipmentContainer: {
+    fontSize: 20,
+    textAlign: "center",
+  },
+  equipmentList: {
+    height: "flex",
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  outer: {
+    flex: 1,
+    backgroundColor: '#ebeeff',
+  }
 });
 
 export default ExerciseManagement;
