@@ -134,6 +134,10 @@ function EditEquipment({route, navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Confirm Selection</Text>
                 </Pressable>
+
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
+                    <Text style={styles.text}>Manage Exercises</Text>
+                </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}
                 onPress = {() => {
                     handleDeleteEquipment(equipmentId[0])
