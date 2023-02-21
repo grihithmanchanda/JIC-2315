@@ -4,8 +4,8 @@ import EquipmentList from "../components/EquipmentList";
 function ExerciseManagement({ route, navigation }) {
   return (
     <ScrollView style={styles.outer}>
-      <View style={styles.Container}>
-        <Text style={styles.headerText}>Exercise Management</Text>
+      <View style={styles.container}>
+        <Text style={styles.header}>Exercise Management</Text>
         <Text style={styles.text}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
@@ -14,7 +14,7 @@ function ExerciseManagement({ route, navigation }) {
         />
         {/* <Text style={styles.text}>Relevant Equipment:</Text>
         <EquipmentList style={styles.equipmentList} ></EquipmentList> */}
-        <Text style={styles.text}>Difficulty Level:</Text>
+        <Text style={styles.subheader}>Difficulty Level:</Text>
         <TextInput //Difficulty level
           keyboardType='number-pad'
           type='number'
@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
       paddingTop: 10,
       borderColor: "grey",
       borderBottomWidth: 2,
-      width: '60%',
-      justifyContent: 'center',
+      // width: '60%',
+      // justifyContent: 'center',
   },
   equipmentContainer: {
     fontSize: 20,
