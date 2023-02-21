@@ -1,11 +1,19 @@
+import React, { useState, useEffect } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
 import EquipmentList from "../components/EquipmentList";
 
 function ExerciseManagement({ route, navigation }) {
+
+  const [eqName, setEqName] = useState(route?.params['equipID'] ?? '')
+
+  const handleExerciseCreation = () => {
+    console.log(eqName)
+  };
+
   return (
     <ScrollView style={styles.outer}>
       <View style={styles.container}>
-        <Text style={styles.header}>Exercise Management</Text>
+        <Text style={styles.header}>{eqName} exercise:</Text>
         <Text style={styles.text}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
@@ -40,7 +48,8 @@ function ExerciseManagement({ route, navigation }) {
         />
         <Pressable //Add button
           style={styles.button}
-          textStyle={styles.text}>
+          textStyle={styles.text}
+          onPress={handleExerciseCreation}>
           <Text style={styles.textWhite}>Add</Text>
         </Pressable>
       </View>
