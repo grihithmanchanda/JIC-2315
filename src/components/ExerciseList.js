@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
+import login_service from "../services/login_service";
 
 
 // renders equipment list for home pages
@@ -16,7 +17,7 @@ function ExerciseList({navigation, getWorkouts}) {
 
     const getExerciseList = async () => {
         console.log('getting exercises...');
-        const exerciseData = await EquipmentService.getAllExercises();
+        const exerciseData = await EquipmentService.getAllExercises(currentLoginEmail);
         if (exerciseData !== null) {
             setTableRows(generateTableRows(exerciseData))
         }
