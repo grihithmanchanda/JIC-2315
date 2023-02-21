@@ -8,16 +8,22 @@ class gymInfoService {
         return getDocs(gymInfoCollectionRef)
     };
 
-    addGymInfo = async (gymID, gymAddress, gymName, hourStart, hourEnd, phoneNumber) => {
+    addGymInfo = async (gymID, gymAddress, gymName, hourStart, hourEnd, phoneNumber, email) => {
         let gymInfoData = {
             'Address' : gymAddress,
             'Name': gymName,
             'hourEnd': hourEnd,
             'hourStart': hourStart,
-            'phoneNumber': phoneNumber
+            'phoneNumber': phoneNumber,
+            'managerEmail': email,
         }
         let gymInfoDoc = doc(firestoredb, 'gym metadata', gymID);
-        return setDoc(gymInfoDoc, gymInfoData);
+        await setDoc(gymInfoDoc, gymInfoData);
+
+        await updateDoc(doc(firestoredb, "managers", email), 
+        {
+            gymID: gymName,
+        });
     };
 }
 

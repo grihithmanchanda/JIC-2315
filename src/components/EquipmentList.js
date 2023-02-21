@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
+import LoginService from '../services/login_service';
 
 
 // renders equipment list for home pages
@@ -10,12 +11,12 @@ function EquipmentList({navigation}) {
     const tableHead = ['Name', 'Quantity', 'Muscle Groups'];
 
     useEffect(() => {
-        getEquipmentList();
+        getEquipmentList(currentLoginEmail);
     }, []);
 
-    const getEquipmentList = async () => {
+    const getEquipmentList = async (currentLoginEmail) => {
         console.log('getting equipment...');
-        const equipmentQuery = await EquipmentService.getAllEquipment();
+        const equipmentQuery = await EquipmentService.getAllEquipment(currentLoginEmail);
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
         }
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 const generateTableRows = (equipmentQuery) => {
-    equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+    let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
     return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
 }
 
