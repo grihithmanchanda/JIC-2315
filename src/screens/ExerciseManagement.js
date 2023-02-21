@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
 import EquipmentList from "../components/EquipmentList";
+import workout_service from "../services/workout_service";
 
 function ExerciseManagement({ route, navigation }) {
-
   const [eqName, setEqName] = useState(route?.params['equipID'] ?? '')
+  const [exerciseName, setExerciseName] = useState('')
+  const [difficultyLevel, setDifficultyLevel] = useState(0)
+  const [numReps, setNumReps] = useState(0)
+  const [amtWeight, setAmtWeight] = useState(0)
 
-  const handleExerciseCreation = () => {
-    console.log(eqName)
+  const handleExerciseCreation = async () => {
+    console.log(eqName, exerciseName, difficultyLevel, numReps, amtWeight)
+    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight).then((exerciseData) => {
+      console.log('Added exercise!', exerciseData);
+      navigation.navigate('EditEquipment', {
+        'equipment': eqName
+      });
+    })
   };
 
   return (
@@ -18,6 +28,7 @@ function ExerciseManagement({ route, navigation }) {
         <TextInput //Name of exercise field
           placeholder="Name"
           style={styles.input}
+          onChangeText={text => setExerciseName(text)}
         />
         {/* <Text style={styles.text}>Relevant Equipment:</Text>
         <EquipmentList style={styles.equipmentList} ></EquipmentList> */}
@@ -27,6 +38,7 @@ function ExerciseManagement({ route, navigation }) {
           type='number'
           placeholder="0 to 2"
           style={styles.input}
+          onChangeText={text => setDifficultyLevel(text)}
         />
         <Text style={styles.subheader}>Number of Repetitions:</Text>
         <TextInput //Number of repetitions
@@ -34,6 +46,7 @@ function ExerciseManagement({ route, navigation }) {
           type='number'
           placeholder="e.g. 5, 6, or 7"
           style={styles.input}
+          onChangeText={text => setNumReps(text)}
         />
         <Text style={styles.subheader}>Weight Amount:</Text>
         <TextInput //Weight amount
@@ -41,6 +54,7 @@ function ExerciseManagement({ route, navigation }) {
           type='number'
           placeholder="in lbs"
           style={styles.input}
+          onChangeText={text => setAmtWeight(text)}
         />
         <Pressable //Add button
           style={styles.button}
@@ -109,6 +123,7 @@ const styles = StyleSheet.create({
       paddingTop: 10,
       borderColor: "grey",
       borderBottomWidth: 2,
+      textAlign: 'center',
       // width: '60%',
       // justifyContent: 'center',
   },
