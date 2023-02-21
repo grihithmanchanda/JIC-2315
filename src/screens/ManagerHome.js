@@ -15,6 +15,9 @@ function ManagerHome({navigation}) {
     const handleSD = () => {
         navigation.navigate('SelectDifficulty')
     }
+    const handleExerciseManagement = () => {
+        navigation.navigate('ExerciseManagement');
+      };
 
     return (
         <ScrollView style={styles.outer}>
@@ -38,6 +41,9 @@ function ManagerHome({navigation}) {
                 <EquipmentList style={styles.equipmentList}/>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Manage Equipment</Text>
+                </Pressable>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
+                    <Text style={styles.text}>Manage Exercises</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Gym Settings</Text>
