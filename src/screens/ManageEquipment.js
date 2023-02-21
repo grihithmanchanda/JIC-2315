@@ -248,4 +248,31 @@ const handleAddEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, le
     EquipmentService.addEquipment(eqName, eqQuantity, muscleGroups)
 }
 
+const handleDeleteEquipment = (eqName) => {
+    EquipmentService.deleteEquipment(eqName);
+}
+
+const handleUpdateEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, legs, abs) => {
+    muscleGroups = []
+    if (biceps) {
+        muscleGroups.push('biceps')
+    }
+    if (triceps) {
+        muscleGroups.push('triceps')
+    }
+    if (back) {
+        muscleGroups.push('back')
+    }
+    if (chest) {
+        muscleGroups.push('chest')
+    }
+    if (legs) {
+        muscleGroups.push('legs')
+    }
+    if (abs) {
+        muscleGroups.push('abs')
+    }
+    EquipmentService.updateEquipment(eqName, eqQuantity, muscleGroups);
+}
+
 export default ManageEquipment;
