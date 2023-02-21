@@ -17,8 +17,6 @@ UI Specific to Gyms!
  - Store gym metadata through Firebase
  - Add workout of the day creation screen
  - Store workout of the day through Firebase
- - Allow filtering the exercise screen by muscle group
- - Add comments to exercises
  - Add additional fields in equipment that allows managers to create specific workouts for each equipment
  - Allow equipment functionality to be modified or deleted
  - Add exercise management screen
