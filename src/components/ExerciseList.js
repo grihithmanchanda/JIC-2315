@@ -25,13 +25,13 @@ function ExerciseList({navigation, getWorkouts}) {
     getWorkouts(selectedExercises);
 
     function handleExerciseSelect(row) {
-        var newWorkouts = selectedExercises;
+        var newExercises = selectedExercises;
         if (selectedExercises.includes(row)) {
-            newWorkouts = selectedExercises.filter(i => i != row);
+            newExercises = selectedExercises.filter(i => i != row);
         } else if (selectedExercises.length < 4) {
-            newWorkouts = [...selectedExercises, row];
+            newExercises = [...selectedExercises, row];
         }
-        setSelectedExercises(newWorkouts);
+        setSelectedExercises(newExercises);
     }
 
     return (
