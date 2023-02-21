@@ -1,6 +1,8 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import gymInfoService from '../services/gyminfo_service';
+import LoginService from '../services/login_service';
+
 
 function GymRegistration({navigation}) {
     const [gymName, setGymName] = useState('')
@@ -14,7 +16,7 @@ function GymRegistration({navigation}) {
             alert("Please fill in all fields!");
             return;
         }
-        await gymInfoService.addGymInfo(gymName, address, gymName, openingHour, closingHour, phoneNumber)
+        await gymInfoService.addGymInfo(gymName, address, gymName, openingHour, closingHour, phoneNumber, currentLoginEmail)
             .then(() => {
                 alert(`Gym registered!`);
                 navigation.navigate('ManagerHome');

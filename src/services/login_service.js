@@ -10,14 +10,25 @@ class LoginService {
     registerNewUser = async (email, password, accountType) => {
         return await createUserWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                let userData = {
-                    'username': email,
-                    'accountType': accountType
+                if (accountType === "User") {
+                    let userData = {
+                        'username': email,
+                    }
+    
+                    let userDoc = doc(firestoredb, 'users', email);
+                    await setDoc(userDoc, userData);
                 }
-
-                let userDoc = doc(firestoredb, 'users', email);
-                await setDoc(userDoc, userData);
-                return userCredential.user;
+                else {
+                    let managerData = {
+                        'username': email,
+                        'gymID': null
+                    }
+                    let managerDoc = doc(firestoredb, 'managers', email);
+                    await setDoc(managerDoc, managerData);
+                }
+                // hacky global variable to make this info available everywhere. Probably want to change this.
+                global.currentLoginEmail = userCredential.user.email
+                return userCredential.user
             })
     }
 
@@ -26,14 +37,18 @@ class LoginService {
         return await signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
                 let user = userCredential.user;
-
                 let docRef = doc(usersRef, user.email)
+                if (accountType === "Manager") {
+                    docRef = doc(collection(firestoredb, 'managers'), user.email)
+                }
+
                 let docSnap = await getDoc(docRef)
                 
-                let actualAccountType = docSnap.data()['accountType']
-                if (actualAccountType !== accountType){
+                if (!docSnap.exists){
                     throw new Error('Error: Incorrect account type!')
                 } else {
+                    // hacky global variable to make this info available everywhere. Probably want to change this.
+                    global.currentLoginEmail = user.email
                     return user;
                 }
             })
