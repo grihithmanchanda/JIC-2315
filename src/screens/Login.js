@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
 import React, {useState} from "react";
 import LoginService from '../services/login_service';
 
@@ -24,7 +24,7 @@ function Login({navigation}) {
     }
 
     return (
-        <View style={styles.outcontainer}>
+        <ScrollView style={styles.outcontainer}>
             <View style={styles.container}>
                 <Text style={styles.header}>NextGym</Text>
                 <Text style={styles.subheader}>Username:</Text>
@@ -60,6 +60,7 @@ function Login({navigation}) {
                     <Text style={styles.text}>Login as{'\n'}Manager</Text>
                 </Pressable>
             </View>
+            <View style={styles.container}>
             <Pressable //Registration button
                 style={styles.button}
                 textStyle={styles.text}
@@ -70,7 +71,8 @@ function Login({navigation}) {
             <Pressable style={styles.button} textStyle={styles.text}>
                 <Text style={styles.text}>Forgot Password?</Text>
             </Pressable>
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 
@@ -78,14 +80,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ebeeff',
-        alignItems: 'center',
         height: '80%',
-        width: '90%'
+        alignItems: 'center',
+        paddingBottom: 30
       },
       outcontainer: {
         flex: 1,
         backgroundColor: '#ebeeff',
-        alignItems: 'center',
         paddingBottom: 40,
         height: '80%',
       },
