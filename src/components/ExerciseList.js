@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     headtext: { color: '#ebeeff', textAlign: 'center' },
     wrapper: { flexDirection: 'row' },
     title: { flex: 1, backgroundColor: '#f6f8fa' },
-    row: { height: 28, backgroundColor: '#ebeeff', borderWidth: 0.5,  borderRadius: 4 },
-    rowSel: { height: 28, backgroundColor: '#ebeeff', borderWidth: 0.5,  borderRadius: 4, backgroundColor: '#293571'},
+    row: { height: 40, backgroundColor: '#ebeeff', borderWidth: 0.5,  borderRadius: 4 },
+    rowSel: { height: 40, backgroundColor: '#ebeeff', borderWidth: 0.5,  borderRadius: 4, backgroundColor: '#293571'},
     text: { textAlign: 'center' },
     textWhite: { textAlign: 'center', color: '#ffffff' },
     table: {paddingBottom: 35}
