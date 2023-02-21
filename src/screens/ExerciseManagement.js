@@ -17,7 +17,6 @@ function ExerciseManagement({ route, navigation }) {
         <Text style={styles.text}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         {/* <Text style={styles.text}>Relevant Equipment:</Text>
@@ -27,7 +26,6 @@ function ExerciseManagement({ route, navigation }) {
           keyboardType='number-pad'
           type='number'
           placeholder="0 to 2"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         <Text style={styles.subheader}>Number of Repetitions:</Text>
@@ -35,7 +33,6 @@ function ExerciseManagement({ route, navigation }) {
           keyboardType='number-pad'
           type='number'
           placeholder="e.g. 5, 6, or 7"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         <Text style={styles.subheader}>Weight Amount:</Text>
@@ -43,7 +40,6 @@ function ExerciseManagement({ route, navigation }) {
           keyboardType='number-pad'
           type='number'
           placeholder="in lbs"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         <Pressable //Add button
