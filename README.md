@@ -9,6 +9,28 @@
 
 # Release Notes / Changelog
 
+## v0.2.0
+UI Specific to Gyms!
+### Features
+ - Add equipment management screen that allows gym management to input gym equipment
+ - Add gym metadata registration page for storing data relating to the gym's name, address, active hours, and phone number
+ - Store gym metadata through Firebase
+ - Add workout of the day creation screen
+ - Store workout of the day through Firebase
+ - Allow filtering the exercise screen by muscle group
+ - Add comments to exercises
+ - Add additional fields in equipment that allows managers to create specific workouts for each equipment
+ - Allow equipment functionality to be modified or deleted
+ - Add exercise management screen
+ - Update equipment table to be gym specific
+ ### Bug Fixes
+ - Code styling and visuals made to be consistent
+ ### Known Issues
+- Lack of security rules for Firebase access (anyone can read/write)
+- Equipment table not refreshing 
+    
+---
+    
 ## v0.1.0
 Initial Release!
 ### Features
