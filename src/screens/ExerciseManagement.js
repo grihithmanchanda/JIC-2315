@@ -1,17 +1,17 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-function ExerciseManagement({ navigation }) {
+function ExerciseManagement({ route, navigation }) {
   return (
-    <View>
-      <View style={styles.Container}>
-        <Text style={styles.headerText}>Exercise Management</Text>
-        <Text style={styles.text}>Name of Exercise:</Text>
+    <View style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.header}>Exercise Management for {route.params.equipID}</Text>
+        <Text style={styles.subheader}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
           placeholderTextColor="#000"
           style={styles.input}
         />
-        <Text style={styles.text}>Difficulty Level:</Text>
+        <Text style={styles.subheader}>Difficulty Level:</Text>
         <TextInput //Difficulty level
           keyboardType='number-pad'
           type='number'
@@ -19,7 +19,7 @@ function ExerciseManagement({ navigation }) {
           placeholderTextColor="#000"
           style={styles.input}
         />
-        <Text style={styles.text}>Number of Repetitions:</Text>
+        <Text style={styles.subheader}>Number of Repetitions:</Text>
         <TextInput //Number of repetitions
           keyboardType='number-pad'
           type='number'
@@ -27,7 +27,7 @@ function ExerciseManagement({ navigation }) {
           placeholderTextColor="#000"
           style={styles.input}
         />
-        <Text style={styles.text}>Weight Amount:</Text>
+        <Text style={styles.subheader}>Weight Amount:</Text>
         <TextInput //Weight amount
           keyboardType='number-pad'
           type='number'
@@ -36,7 +36,7 @@ function ExerciseManagement({ navigation }) {
           style={styles.input}
         />
         <Pressable //Add button
-          style={styles.submit}
+          style={styles.button}
           textStyle={styles.text}>
           <Text style={styles.text}>Add</Text>
         </Pressable>
@@ -46,35 +46,57 @@ function ExerciseManagement({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  Container: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+  container: {
+    flex: 1,
+    backgroundColor: '#ebeeff',
+    alignItems: 'center',
+    paddingBottom: 40,
+    height: '80%'
   },
-  headerText: {
-    fontSize: 40,
-    textAlign: "center",
-    paddingTop: 20,
-    marginBottom: 50,
+  header: {
+      fontSize: 35,
+      textAlign: 'center',
+      paddingTop: 15,
+      paddingBottom: 20,
   },
-  input: {
-    height: 40,
-    backgroundColor: "#D9D9D9",
-    width: "90%",
-    textAlign: "center",
+  subheader: {
+    fontSize: 25,
+    textAlign: 'center',
+    paddingTop: 15,
+  },
+  button: {
+      height: 70,
+      backgroundColor: '#051739',
+      width: '90%',
+      borderWidth: 1,
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      justifyContent: 'center',
+      borderRadius: 4,
+      marginTop: 20,
   },
   text: {
-    color: "#000000",
-    textAlign: "center",
-    fontSize: 35,
+      color: '#ebeeff',
+      textAlign: 'center',
+      fontSize: 30,
   },
-  submit: {
-    justifyContent: 'center',
-    marginTop: 20,
-    backgroundColor: "#D9D9D9",
-    height: 50,
-    width: 150,
-    borderRadius: 10,
+  outer: {
+      flex: 1,
+      backgroundColor: '#ebeeff',
+  },
+  checkboxWrapper: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 5,
+      display: "flex",
+      flexWrap: "wrap",
+  },
+  input: {
+      paddingTop: 10,
+      borderColor: "grey",
+      borderBottomWidth: 2,
+      width: '90%'
   },
 });
 

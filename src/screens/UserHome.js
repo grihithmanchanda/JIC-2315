@@ -7,9 +7,6 @@ import { getAuth, signOut } from "firebase/auth";
 // Essentially entire user home page, including welcome,
 // streak, equipment, and buttons for working out and settings
 function UserHome({navigation}) {
-  const handleExerciseManagement = () => {
-    navigation.navigate('ExerciseManagement');
-  };
 
   return (
     <View style={styles.outer}>
@@ -30,9 +27,6 @@ function UserHome({navigation}) {
         </Pressable>
         <Pressable style={styles.button} textStyle={styles.text}>
           <Text style={styles.text}>User Settings</Text>
-        </Pressable>
-        <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
-          <Text style={styles.text}>Exercise Management</Text>
         </Pressable>
       </View>
     </View>
