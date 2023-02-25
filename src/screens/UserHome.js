@@ -11,6 +11,10 @@ function UserHome({navigation}) {
     navigation.navigate('ExerciseManagement');
   };
 
+  const handleGymInformation = () => {
+    navigation.navigate('GymInformation');
+  };
+
   return (
     <View style={styles.outer}>
       <Button //Logout button. TODO: format button style
@@ -33,6 +37,9 @@ function UserHome({navigation}) {
         </Pressable>
         <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
           <Text style={styles.text}>Exercise Management</Text>
+        </Pressable>
+        <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleGymInformation()}>
+          <Text style={styles.text}>Gym Information</Text>
         </Pressable>
       </View>
     </View>
