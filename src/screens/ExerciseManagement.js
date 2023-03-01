@@ -35,6 +35,12 @@ function ExerciseManagement({ navigation }) {
           placeholderTextColor="#000"
           style={styles.input}
         />
+        <Text style={styles.text}>Comments:</Text>
+        <TextInput //Exercise comments
+          placeholder="Comments"
+          placeholderTextColor="#000"
+          style={styles.input}
+        />
         <Pressable //Add button
           style={styles.submit}
           textStyle={styles.text}>
