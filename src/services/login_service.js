@@ -49,6 +49,7 @@ class LoginService {
                 } else {
                     // hacky global variable to make this info available everywhere. Probably want to change this.
                     global.currentLoginEmail = user.email
+                    global.gymID = docSnap.data()['gymID']
                     return user;
                 }
             })

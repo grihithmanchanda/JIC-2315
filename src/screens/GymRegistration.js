@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
 import React, { useState } from "react";
 import gymInfoService from '../services/gyminfo_service';
 import LoginService from '../services/login_service';
@@ -25,7 +25,7 @@ function GymRegistration({navigation}) {
     }
 
     return (
-        <View>
+        <ScrollView style={styles.outer}>
             <View style={styles.Container}>
                 <Text style={styles.headerText}>Gym Registration</Text>
                 <Text style={styles.headerText}>Gym Name:</Text>
@@ -67,7 +67,7 @@ function GymRegistration({navigation}) {
                 <Text style={styles.text}>Submit</Text>
                 </Pressable>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -101,6 +101,10 @@ const styles = StyleSheet.create({
         width: 150,
         borderRadius: 10,
     },
+    outer: {
+        flex: 1,
+        backgroundColor: '#ebeeff',
+    }
   });
   
   export default GymRegistration;

@@ -25,6 +25,50 @@ class EquipmentService {
         return equipmentDocs
     };
 
+    getAllExercises = async (currentLoginEmail) => {
+
+        console.log('hi')
+        const equipmentQuery = await this.getAllEquipment(currentLoginEmail);
+        // let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
+        // let testDoc = await getDoc(equipmentQuery[0]).id
+        const exercises = [];
+        // console.log(testDoc)
+
+        // Loop through each equipment document
+        for (const equipmentDoc of equipmentQuery) {
+            console.log(equipmentDoc.id)
+            
+            const exerciseRefs = collection(equipmentDoc.ref, 'exercises')
+            
+            const exerciseDocs = await getDocs(exerciseRefs)
+
+            exerciseDocs.forEach((exerciseDoc) => {
+                // doc.data() is never undefined for query doc snapshots
+
+                // console.log(doc.id, " => ", doc.data());
+
+                const exerciseData = exerciseDoc.data()
+                if (exerciseData['difficulty'] === undefined) {
+                    console.log('difficulty undefined')
+                    exerciseData['difficulty'] = 'N/A'
+                } else {
+                    console.log('difficulty:', exerciseData['difficulty'])
+                }
+
+                // build exercise data object
+                let exerciseObj = {
+                    'exercise name': exerciseDoc.id,
+                    'equipment name': equipmentDoc.id,
+                    'difficulty': exerciseData['difficulty']
+                }
+                exercises.push(exerciseObj)
+            });
+        }
+      
+    
+        return exercises;
+    }
+
     addEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
         let equipmentData = {
             'count': equipmentCount,
