@@ -1,145 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
-import EquipmentList from "../components/EquipmentList";
-import workout_service from "../services/workout_service";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-function ExerciseManagement({ route, navigation }) {
-  const [eqName, setEqName] = useState(route?.params['equipID'] ?? '')
-  const [exerciseName, setExerciseName] = useState('')
-  const [difficultyLevel, setDifficultyLevel] = useState(0)
-  const [numReps, setNumReps] = useState(0)
-  const [amtWeight, setAmtWeight] = useState(0)
-
-  const handleExerciseCreation = async () => {
-    console.log(eqName, exerciseName, difficultyLevel, numReps, amtWeight)
-    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight).then((exerciseData) => {
-      console.log('Added exercise!', exerciseData);
-      navigation.navigate('EditEquipment', {
-        'equipment': eqName
-      });
-    })
-  };
-
+function ExerciseManagement({ navigation }) {
   return (
-    <ScrollView style={styles.outer}>
-      <View style={styles.container}>
-        <Text style={styles.header}>{eqName} exercise:</Text>
+    <View>
+      <View style={styles.Container}>
+        <Text style={styles.headerText}>Exercise Management</Text>
         <Text style={styles.text}>Name of Exercise:</Text>
         <TextInput //Name of exercise field
           placeholder="Name"
+          placeholderTextColor="#000"
           style={styles.input}
-          onChangeText={text => setExerciseName(text)}
         />
-        {/* <Text style={styles.text}>Relevant Equipment:</Text>
-        <EquipmentList style={styles.equipmentList} ></EquipmentList> */}
-        <Text style={styles.subheader}>Difficulty Level:</Text>
+        <Text style={styles.text}>Difficulty Level:</Text>
         <TextInput //Difficulty level
           keyboardType='number-pad'
           type='number'
           placeholder="0 to 2"
+          placeholderTextColor="#000"
           style={styles.input}
-          onChangeText={text => setDifficultyLevel(text)}
         />
-        <Text style={styles.subheader}>Number of Repetitions:</Text>
+        <Text style={styles.text}>Number of Repetitions:</Text>
         <TextInput //Number of repetitions
           keyboardType='number-pad'
           type='number'
           placeholder="e.g. 5, 6, or 7"
+          placeholderTextColor="#000"
           style={styles.input}
-          onChangeText={text => setNumReps(text)}
         />
-        <Text style={styles.subheader}>Weight Amount:</Text>
+        <Text style={styles.text}>Weight Amount:</Text>
         <TextInput //Weight amount
           keyboardType='number-pad'
           type='number'
           placeholder="in lbs"
+          placeholderTextColor="#000"
           style={styles.input}
-          onChangeText={text => setAmtWeight(text)}
         />
         <Pressable //Add button
-          style={styles.button}
-          textStyle={styles.text}
-          onPress={handleExerciseCreation}>
-          <Text style={styles.textWhite}>Add</Text>
+          style={styles.submit}
+          textStyle={styles.text}>
+          <Text style={styles.text}>Add</Text>
         </Pressable>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ebeeff',
-    alignItems: 'center',
-    paddingBottom: 40,
-    height: '80%'
+  Container: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  header: {
-      fontSize: 35,
-      textAlign: 'center',
-      paddingTop: 15,
-      paddingBottom: 20,
-  },
-  subheader: {
-    fontSize: 25,
-    textAlign: 'center',
-    paddingTop: 15,
-  },
-  button: {
-      height: 70,
-      backgroundColor: '#051739',
-      width: '90%',
-      borderWidth: 1,
-      paddingVertical: 15,
-      paddingHorizontal: 20,
-      justifyContent: 'center',
-      borderRadius: 4,
-      marginTop: 20,
-  },
-  text: {
-      // color: '#ebeeff',
-      textAlign: 'center',
-      fontSize: 30,
-  },
-  textWhite: {
-    color: '#ebeeff',
-    textAlign: 'center',
-    fontSize: 30,
-},
-  outer: {
-      flex: 1,
-      backgroundColor: '#ebeeff',
-  },
-  checkboxWrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 5,
-      display: "flex",
-      flexWrap: "wrap",
+  headerText: {
+    fontSize: 40,
+    textAlign: "center",
+    paddingTop: 20,
+    marginBottom: 50,
   },
   input: {
-      paddingTop: 10,
-      borderColor: "grey",
-      borderBottomWidth: 2,
-      textAlign: 'center',
-      // width: '60%',
-      // justifyContent: 'center',
-  },
-  equipmentContainer: {
-    fontSize: 20,
+    height: 40,
+    backgroundColor: "#D9D9D9",
+    width: "90%",
     textAlign: "center",
   },
-  equipmentList: {
-    height: "flex",
-    paddingTop: 20,
-    paddingBottom: 20,
+  text: {
+    color: "#000000",
+    textAlign: "center",
+    fontSize: 35,
   },
-  outer: {
-    flex: 1,
-    backgroundColor: '#ebeeff',
-  }
+  submit: {
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: "#D9D9D9",
+    height: 50,
+    width: 150,
+    borderRadius: 10,
+  },
 });
 
 export default ExerciseManagement;

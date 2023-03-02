@@ -20,8 +20,6 @@ class gymInfoService {
         let gymInfoDoc = doc(firestoredb, 'gym metadata', gymID);
         await setDoc(gymInfoDoc, gymInfoData);
 
-        global.gymID = gymName
-
         await updateDoc(doc(firestoredb, "managers", email), 
         {
             gymID: gymName,
