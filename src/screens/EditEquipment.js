@@ -23,10 +23,6 @@ function EditEquipment({route, navigation}) {
     const handleManageEquipment = () => {
         navigation.navigate('ManageEquipment')
     }
-    const handleExerciseManagement = () => {
-        navigation.navigate('ExerciseManagement', {'equipID': equipmentId[0]});
-    };
-
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -79,9 +75,6 @@ function EditEquipment({route, navigation}) {
                 />
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Confirm Selection</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleExerciseManagement}>
-                    <Text style={styles.text}>Manage Exercises</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text}>Delete Equipment</Text>
