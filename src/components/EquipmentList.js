@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
-import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
+import { ScrollView } from 'react-native';
+import { Table, Row } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
-import LoginService from '../services/login_service';
+import styles from "../styles/styles";
 
 
 // renders equipment list for home pages
@@ -28,7 +28,7 @@ function EquipmentList({navigation}) {
     }
 
     return (
-        <ScrollView style={styles.container} scrollEnabled={true}>
+        <ScrollView contentContainerStyle={styles.container} scrollEnabled={true}>
         <Table style={styles.table} >
             <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
                 {   
@@ -47,17 +47,6 @@ function EquipmentList({navigation}) {
     </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, paddingTop: 16, width: '90%', backgroundColor: '#8794d4', overflow: 'scroll', borderRadius: 4 },
-    head: { height: 40, backgroundColor: '#051739', borderWidth: 1, borderRadius: 4 },
-    headtext: { color: '#ebeeff', textAlign: 'center' },
-    wrapper: { flexDirection: 'row' },
-    title: { flex: 1, backgroundColor: '#f6f8fa' },
-    row: { height: 28, backgroundColor: '#ebeeff', borderWidth: 0.5,  borderRadius: 4 },
-    text: { textAlign: 'center' },
-    table: {paddingBottom: 35}
-});
 
 const generateTableRows = (equipmentQuery) => {
     let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))

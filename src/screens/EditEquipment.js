@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {Pressable, ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
+import React, { useState } from "react";
+import {Pressable, ScrollView, Text, View, TextInput} from 'react-native';
 import {Button, CheckBox} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
+import styles from "../styles/styles";
 import EquipmentService from "../services/equipment_service";
 import EquipmentList from "../components/EquipmentList";
 import login_service from "../services/login_service";
