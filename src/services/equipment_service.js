@@ -28,12 +28,13 @@ class EquipmentService {
     };
 
     addEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
-        // Creates the new equipment and adds it to the equipment collection
+        // Creates the new equipment and adds it to the equipment collection under gym metadata
         let equipmentData = {
             'count': equipmentCount,
             'muscle groups': equipmentMuscleGroups
         }
-        let equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
+
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
         setDoc(equipmentDoc, equipmentData);
 
         // Adds the reference to the equipment under the gym metadata
@@ -44,8 +45,8 @@ class EquipmentService {
     };
 
     deleteEquipment = async (equipmentName) => {
-        // Deletes the equipment from equipment collection
-        let equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
+        // Deletes the equipment from equipment collection under gym metadata
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
         deleteDoc(equipmentDoc);
         
         // Removes the reference to the equipment
@@ -56,12 +57,12 @@ class EquipmentService {
     };
 
     updateEquipment = async (equipmentName, equipmentCount, equipmentMuscleGroups) => {
-        // Updates the equipment in the equipment collection
+        // Updates the equipment in the equipment collection under gym metadata
         let equipmentData = {
             'count': equipmentCount,
             'muscle groups': equipmentMuscleGroups
         }
-        let equipmentDoc = doc(firestoredb, 'equipment', equipmentName)
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
         return updateDoc(equipmentDoc, equipmentData);
     };
 
