@@ -1,11 +1,27 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import gyminfo_service from "../services/gyminfo_service";
 
 function GymSearch({navigation}) {
     const [gymName, setGymName] = useState('')
 
     const handleGymSearch = async () => {
         navigation.navigate('UserHome');
+        let gymData = {} // dictionary mapping gym name -> firebase reference
+
+        let gymQuery = await gyminfo_service.getAllGymInfo() // get all gyms
+        await gymQuery.forEach((doc) => {
+            gymData[doc.id] = doc.ref; // store gym name and reference
+        });
+
+        console.log('gym list:', Object.keys(gymData)) // print all gym names
+
+        // TODO:
+        // 1. get user document reference using userEmail parameter
+        // 2. match user's entered gym name with map of gym references to get appopriate document reference
+        // 3. add user's reference to gym document
+
+        // navigation.navigate('UserHome');
     }
 
     return (
