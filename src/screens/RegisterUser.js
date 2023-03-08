@@ -17,7 +17,11 @@ function RegisterUser({route, navigation}) {
         await LoginService.registerNewUser(email, password, accountType)
             .then((user) => {
                 alert(`User ${user.email} registered!`);
-                navigation.navigate(accountType === 'User' ? 'GymSearch' : 'GymRegistration');
+                if (accountType === 'User') {
+                    navigation.navigate('GymSearch', {"userEmail": user.email})
+                } else {
+                    navigation.navigate('GymRegistration')
+                }
             })
             .catch(error => alert(error.message))
     }

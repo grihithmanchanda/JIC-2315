@@ -2,11 +2,11 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import gyminfo_service from "../services/gyminfo_service";
 
-function GymSearch({navigation}) {
+function GymSearch({route, navigation}) {
     const [gymName, setGymName] = useState('')
+    const [userEmail, setUserEmail] = useState(route?.params['userEmail'] ?? null)
 
     const handleGymSearch = async () => {
-        navigation.navigate('UserHome');
         let gymData = {} // dictionary mapping gym name -> firebase reference
 
         let gymQuery = await gyminfo_service.getAllGymInfo() // get all gyms
