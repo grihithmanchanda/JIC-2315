@@ -13,6 +13,7 @@ import ConfirmWorkout from "./src/screens/ConfirmWorkout";
 import ExerciseManagement from "./src/screens/ExerciseManagement";
 import GymRegistration from "./src/screens/GymRegistration";
 import GymInformation from "./src/screens/GymInformation"
+import GymSearch from "./src/screens/GymSearch";
 
 const navigationStack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function App() {
                 <navigationStack.Screen name="ExerciseManagement" component={ExerciseManagement}/>
                 <navigationStack.Screen name="GymRegistration" component={GymRegistration}/>
                 <navigationStack.Screen name="GymInformation" component={GymInformation}/>
+                <navigationStack.Screen name="GymSearch" component={GymSearch}/>
             </navigationStack.Navigator>
         </NavigationContainer>
     );
