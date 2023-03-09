@@ -5,16 +5,13 @@ import {getAuth, signOut} from "firebase/auth";
 import ExerciseList from "../components/ExerciseList";
 import workout_service from "../services/workout_service";
 import gyminfo_service from "../services/gyminfo_service";
-// import login_service from "../services/login_service";
 
-// Essentially entire manager home page, including welcome,
-//   user num, equipment, and buttons for settings
+// WOTD page for creating workout routines
 function WOTD({route, navigation}) {
     const [workoutDifficulty, setWorkoutDifficulty] = useState(route?.params['workoutDifficulty'] ?? 0)
     const [workouts, setWorkouts] = useState([]);
 
     let handleWorkoutSubmission= async() => {
-        // console.log(workouts)
         await workout_service.addWorkout(workouts, gymID)
         navigation.navigate('ManagerHome');
     }

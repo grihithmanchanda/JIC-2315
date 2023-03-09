@@ -19,10 +19,6 @@ class WorkoutService {
         
         let exerciseDoc = await getDoc(exerciseRef)
         return exerciseDoc.data()
-        // let exerciseCollection = collection(equipmentRef.ref, 'exercises')
-        // let exerciseDoc = doc(exerciseCollection, exerciseName)
-        // console.log(await getDocs(exerciseCollection).data())
-        // return setDoc(exerciseDoc, exerciseData);
     };
 
     addWorkout = async (workoutList, gymID) => {

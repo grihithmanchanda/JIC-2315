@@ -11,9 +11,7 @@ function ExerciseManagement({ route, navigation }) {
   const [amtWeight, setAmtWeight] = useState(0)
 
   const handleExerciseCreation = async () => {
-    console.log(eqName, exerciseName, difficultyLevel, numReps, amtWeight)
     await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight).then((exerciseData) => {
-      console.log('Added exercise!', exerciseData);
       navigation.navigate('EditEquipment', {
         'equipment': eqName
       });

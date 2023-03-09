@@ -29,10 +29,7 @@ class EquipmentService {
 
         console.log('hi')
         const equipmentQuery = await this.getAllEquipment(currentLoginEmail);
-        // let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
-        // let testDoc = await getDoc(equipmentQuery[0]).id
         const exercises = [];
-        // console.log(testDoc)
 
         // Loop through each equipment document
         for (const equipmentDoc of equipmentQuery) {
@@ -44,9 +41,6 @@ class EquipmentService {
 
             exerciseDocs.forEach((exerciseDoc) => {
                 // doc.data() is never undefined for query doc snapshots
-
-                // console.log(doc.id, " => ", doc.data());
-
                 const exerciseData = exerciseDoc.data()
                 if (exerciseData['difficulty'] === undefined) {
                     console.log('difficulty undefined')

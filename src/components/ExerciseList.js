@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
 
 const generateTableRows = (exerciseData) => {
     return exerciseData.map((exercise) => [exercise['exercise name'], exercise['equipment name'], exercise['difficulty']])
-    // equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
-    // return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
 }
 
 export default ExerciseList;
