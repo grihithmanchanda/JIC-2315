@@ -54,6 +54,12 @@ function ExerciseManagement({ route, navigation }) {
           style={styles.input}
           onChangeText={text => setAmtWeight(text)}
         />
+        <Text style={styles.text}>Comments:</Text>
+        <TextInput //Exercise comments
+          placeholder="Comments"
+          placeholderTextColor="#000"
+          style={styles.input}
+        />
         <Pressable //Add button
           style={styles.button}
           textStyle={styles.text}

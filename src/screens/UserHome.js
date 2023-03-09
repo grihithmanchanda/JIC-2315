@@ -8,6 +8,10 @@ import { getAuth, signOut } from "firebase/auth";
 // streak, equipment, and buttons for working out and settings
 function UserHome({navigation}) {
 
+  const handleGymInformation = () => {
+    navigation.navigate('GymInformation');
+  };
+
   return (
     <View style={styles.outer}>
       <Button //Logout button. TODO: format button style
@@ -27,6 +31,12 @@ function UserHome({navigation}) {
         </Pressable>
         <Pressable style={styles.button} textStyle={styles.text}>
           <Text style={styles.text}>User Settings</Text>
+        </Pressable>
+        <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
+          <Text style={styles.text}>Exercise Management</Text>
+        </Pressable>
+        <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleGymInformation()}>
+          <Text style={styles.text}>Gym Information</Text>
         </Pressable>
       </View>
     </View>

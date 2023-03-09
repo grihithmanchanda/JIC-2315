@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
 import {Button, CheckBox} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
+import EquipmentService from "../services/equipment_service";
+import EquipmentList from "../components/EquipmentList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
@@ -18,10 +20,23 @@ function EditEquipment({route, navigation}) {
     const [legs, setLegs] = useState(false)
     const [abs, setAbs] = useState(false)
 
+    useEffect(() => {
+        getEquipmentList();
+    }, []);
+
+    const getEquipmentList = async () => {
+        console.log('getting equipment...');
+        const equipmentQuery = await EquipmentService.getAllEquipment();
+        if (equipmentQuery !== null) {
+            setTableRows(generateTableRows(equipmentQuery))
+        }
+    }
 
     const [equipmentId, setEquipmentId] = useState(route?.params['equipment'] ?? '')
     const handleManageEquipment = () => {
+        handleUpdateEquipment(equipmentId[0], eqQuantity, biceps, triceps, back, chest, legs, abs);
         navigation.navigate('ManageEquipment')
+        getEquipmentList();
     }
     const handleExerciseManagement = () => {
         navigation.navigate('ExerciseManagement', {'equipID': equipmentId[0]});
@@ -80,10 +95,12 @@ function EditEquipment({route, navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Confirm Selection</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleExerciseManagement}>
-                    <Text style={styles.text}>Manage Exercises</Text>
-                </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text}
+                onPress = {() => {
+                    handleDeleteEquipment(equipmentId[0])
+                    navigation.navigate('ManageEquipment')
+                    getEquipmentList();
+                }}>
                     <Text style={styles.text}>Delete Equipment</Text>
                 </Pressable>
                 </View>
@@ -171,5 +188,38 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
     },
 });
+
+const generateTableRows = (equipmentQuery) => {
+    equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+    return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
+}
+
+const handleDeleteEquipment = (eqName) => {
+    EquipmentService.deleteEquipment(eqName);
+}
+
+const handleUpdateEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, legs, abs) => {
+    let muscleGroups = []
+    if (biceps) {
+        muscleGroups.push('biceps')
+    }
+    if (triceps) {
+        muscleGroups.push('triceps')
+    }
+    if (back) {
+        muscleGroups.push('back')
+    }
+    if (chest) {
+        muscleGroups.push('chest')
+    }
+    if (legs) {
+        muscleGroups.push('legs')
+    }
+    if (abs) {
+        muscleGroups.push('abs')
+    }
+    EquipmentService.updateEquipment(eqName, eqQuantity, muscleGroups);
+}
+
 
 export default EditEquipment;
