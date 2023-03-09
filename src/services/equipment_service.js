@@ -16,15 +16,26 @@ class EquipmentService {
 
         // retrieve all equipment present at this gym
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
-        let equipmentRefs = gymDataSnap.data()['equipment']
-
-        // get all equipment docs, return to frontend
-        let equipmentDocs = []
-        for (let i = 0; i < equipmentRefs.length; i++) {
-            equipmentDocs.push((await getDoc(equipmentRefs[i])))
+        // let equipmentRefs = gymDataSnap.data()['equipment']
+        let equipmentRefs = [];
+        if (gymDataSnap.exists()) {
+            let equipmentRef = collection(gymDataSnap.ref, 'equipment')
+            let equipmentQuery = await getDocs(equipmentRef)
+            if (equipmentQuery.empty) {
+                // equipment collection doesn't exist
+                // TODO: create equipment collection
+            } else {
+                // equipment collection exists, pull data
+                equipmentQuery.forEach((doc) => {
+                    equipmentRefs.push(doc)
+                })
+                return equipmentRefs
+            }
+        } else {
+            //TODO: gym doesn't exist?
         }
 
-        return equipmentDocs
+        return equipmentRefs
     };
 
     getAllExercises = async (currentLoginEmail) => {

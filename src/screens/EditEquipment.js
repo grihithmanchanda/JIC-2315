@@ -25,7 +25,6 @@ function EditEquipment({route, navigation}) {
     }, []);
 
     const getEquipmentList = async () => {
-        console.log('getting equipment...');
         const equipmentQuery = await EquipmentService.getAllEquipment();
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))

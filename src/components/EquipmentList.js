@@ -15,7 +15,6 @@ function EquipmentList({navigation}) {
     }, []);
 
     const getEquipmentList = async (currentLoginEmail) => {
-        console.log('getting equipment...');
         const equipmentQuery = await EquipmentService.getAllEquipment(currentLoginEmail);
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
