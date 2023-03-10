@@ -91,6 +91,9 @@ function EditEquipment({route, navigation}) {
                     keyboardType="default"
                     onChangeText={(val) => setEqQuantity(val)}
                 />
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleExerciseManagement}>
+                    <Text style={styles.text}>Exercise Management</Text>
+                </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
                     <Text style={styles.text}>Confirm Selection</Text>
                 </Pressable>

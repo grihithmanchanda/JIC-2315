@@ -32,9 +32,6 @@ function UserHome({navigation}) {
         <Pressable style={styles.button} textStyle={styles.text}>
           <Text style={styles.text}>User Settings</Text>
         </Pressable>
-        <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleExerciseManagement()}>
-          <Text style={styles.text}>Exercise Management</Text>
-        </Pressable>
         <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleGymInformation()}>
           <Text style={styles.text}>Gym Information</Text>
         </Pressable>
