@@ -4,6 +4,8 @@ import {Button, CheckBox} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import EquipmentService from "../services/equipment_service";
 import EquipmentList from "../components/EquipmentList";
+import login_service from "../services/login_service";
+import equipment_service from "../services/equipment_service";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
@@ -11,7 +13,7 @@ function EditEquipment({route, navigation}) {
     const [tableRows, setTableRows] = useState([['', '', '']])
     const [modalVisible, setModalVisible] = useState(false)
     const tableHead = ['Name', 'Quantity', 'Muscle Groups']
-    const [eqName, setEqName] = useState('')
+    const [equipmentId, setEquipmentId] = useState(route?.params['equipment'] ?? '')
     const [eqQuantity, setEqQuantity] = useState("0")
     const [biceps, setBiceps] = useState(false)
     const [triceps, setTriceps] = useState(false)
@@ -21,21 +23,55 @@ function EditEquipment({route, navigation}) {
     const [abs, setAbs] = useState(false)
 
     useEffect(() => {
-        getEquipmentList();
+        // getEquipmentList();
+        if (equipmentId != ''){
+            let eqName = equipmentId[0]
+            getEquipment(eqName)
+        }
     }, []);
 
-    const getEquipmentList = async () => {
-        const equipmentQuery = await EquipmentService.getAllEquipment();
-        if (equipmentQuery !== null) {
-            setTableRows(generateTableRows(equipmentQuery))
+    // const getEquipmentList = async () => {
+    //     const equipmentQuery = await EquipmentService.getAllEquipment();
+    //     if (equipmentQuery !== null) {
+    //         setTableRows(generateTableRows(equipmentQuery))
+    //     }
+    // }
+
+    const getEquipment = async(eqName=equipmentId[0]) => {
+        let eqSnap = await equipment_service.getEquipment(eqName)
+        let eqCount = eqSnap.data['count']
+        let muscleGroups = eqSnap.data['muscle groups']
+
+        setEqQuantity(eqCount)
+
+        for (const muscleGroup of muscleGroups) {
+            switch(muscleGroup) {
+                case 'biceps':
+                    setBiceps(true)
+                    break
+                case 'triceps':
+                    setTriceps(true)
+                    break
+                case 'back':
+                    setBack(true)
+                    break
+                case 'chest':
+                    setChest(true)
+                    break
+                case 'legs':
+                    setLegs(true)
+                    break
+                case 'abs':
+                    setAbs(true)
+                    break
+            }
         }
     }
 
-    const [equipmentId, setEquipmentId] = useState(route?.params['equipment'] ?? '')
     const handleManageEquipment = () => {
         handleUpdateEquipment(equipmentId[0], eqQuantity, biceps, triceps, back, chest, legs, abs);
         navigation.navigate('ManageEquipment')
-        getEquipmentList();
+        // getEquipmentList();
     }
     const handleExerciseManagement = () => {
         navigation.navigate('ExerciseManagement', {'equipID': equipmentId[0]});
@@ -89,6 +125,7 @@ function EditEquipment({route, navigation}) {
                     style={styles.input}
                     placeholder="e.g. 5"
                     keyboardType="default"
+                    value={eqQuantity}
                     onChangeText={(val) => setEqQuantity(val)}
                 />
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleExerciseManagement}>
@@ -101,7 +138,7 @@ function EditEquipment({route, navigation}) {
                 onPress = {() => {
                     handleDeleteEquipment(equipmentId[0])
                     navigation.navigate('ManageEquipment')
-                    getEquipmentList();
+                    // getEquipmentList();
                 }}>
                     <Text style={styles.text}>Delete Equipment</Text>
                 </Pressable>
@@ -192,15 +229,15 @@ const styles = StyleSheet.create({
 });
 
 const generateTableRows = (equipmentQuery) => {
-    equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+    let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
     return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
 }
 
-const handleDeleteEquipment = (eqName) => {
-    EquipmentService.deleteEquipment(eqName);
+const handleDeleteEquipment = async (eqName) => {
+    await EquipmentService.deleteEquipment(eqName);
 }
 
-const handleUpdateEquipment = (eqName, eqQuantity, biceps, triceps, back, chest, legs, abs) => {
+const handleUpdateEquipment = async (eqName, eqQuantity, biceps, triceps, back, chest, legs, abs) => {
     let muscleGroups = []
     if (biceps) {
         muscleGroups.push('biceps')
@@ -220,7 +257,7 @@ const handleUpdateEquipment = (eqName, eqQuantity, biceps, triceps, back, chest,
     if (abs) {
         muscleGroups.push('abs')
     }
-    EquipmentService.updateEquipment(eqName, eqQuantity, muscleGroups);
+    await EquipmentService.updateEquipment(eqName, eqQuantity, muscleGroups);
 }
 
 

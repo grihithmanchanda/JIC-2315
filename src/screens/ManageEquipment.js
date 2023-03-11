@@ -5,6 +5,7 @@ import EquipmentService from "../services/equipment_service";
 import { Modal } from "../components/Modal";
 import { CheckBox } from 'react-native-elements'
 import EquipmentList from "../components/EquipmentList";
+import login_service from "../services/login_service";
 
 function ManageEquipment({navigation}) {
     const [tableRows, setTableRows] = useState([['', '', '']])
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
 });
 
 const generateTableRows = (equipmentQuery) => {
-    equipmentData = equipmentQuery.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+    let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))
     return equipmentData.map((eq) => [eq.id, eq.data['count'], eq.data['muscle groups'].toString()])
 }
 
