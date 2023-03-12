@@ -5,12 +5,12 @@ const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
 class gymInfoService {
     getAllGymInfo = async () => {
-        return getDocs(gymInfoCollectionRef)
+        return await getDocs(gymInfoCollectionRef)
     };
 
     addGymInfo = async (gymID, gymAddress, gymName, hourStart, hourEnd, phoneNumber, email) => {
         let gymInfoData = {
-            'Address' : gymAddress,
+            'Address': gymAddress,
             'Name': gymName,
             'hourEnd': hourEnd,
             'hourStart': hourStart,
@@ -21,11 +21,6 @@ class gymInfoService {
         await setDoc(gymInfoDoc, gymInfoData);
 
         global.gymID = gymName
-
-        await updateDoc(doc(firestoredb, "managers", email), {
-            gymID: gymName,
-        });
-    };
 
     addUserToGym = async(gymName) => {
         // TODO: check if gym exists
@@ -38,6 +33,20 @@ class gymInfoService {
         await updateDoc(gymDoc, {
             users: arrayUnion(userDoc)
         })
+
+        await updateDoc(doc(firestoredb, "managers", email),
+            {
+                gymID: gymName,
+            });
+    };
+
+    getAllGymNames = async () => {
+        const gymMetadataCollection = await this.getAllGymInfo();
+        let gymNames = [];
+        gymMetadataCollection.docs.forEach((doc) => {
+            gymNames.push(doc.data()['Name'])
+        });
+        return gymNames;
     }
 }
 
