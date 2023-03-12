@@ -9,9 +9,10 @@ function ExerciseManagement({ route, navigation }) {
   const [difficultyLevel, setDifficultyLevel] = useState(0)
   const [numReps, setNumReps] = useState(0)
   const [amtWeight, setAmtWeight] = useState(0)
+  const [exerciseComment, setExerciseComment] = useState('')
 
   const handleExerciseCreation = async () => {
-    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight).then((exerciseData) => {
+    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment).then((exerciseData) => {
       navigation.navigate('EditEquipment', {
         'equipment': eqName
       });
@@ -58,6 +59,7 @@ function ExerciseManagement({ route, navigation }) {
         <TextInput //Exercise comments
           placeholder="Comments"
           style={styles.input}
+          onChangeText={text => setExerciseComment(text)}
         />
         <Pressable //Add button
           style={styles.button}
