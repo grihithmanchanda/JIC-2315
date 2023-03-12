@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {Pressable, ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
+import {Pressable, ScrollView, Text, View, TextInput} from 'react-native';
 import {Button, CheckBox} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
+import styles from "../styles/styles";
 import EquipmentService from "../services/equipment_service";
-import EquipmentList from "../components/EquipmentList";
-import login_service from "../services/login_service";
 import equipment_service from "../services/equipment_service";
 
 // Essentially entire manager home page, including welcome,
@@ -122,7 +121,7 @@ function EditEquipment({route, navigation}) {
                 </View>
                 <Text style={styles.subheader}>Quantity</Text>
                 <TextInput
-                    style={styles.input}
+                    style={styles.numInput}
                     placeholder="e.g. 5"
                     keyboardType="default"
                     value={eqQuantity}
@@ -131,9 +130,6 @@ function EditEquipment({route, navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleExerciseManagement}>
                     <Text style={styles.text}>Exercise Management</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
-                    <Text style={styles.text}>Confirm Selection</Text>
-                </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text}
                 onPress = {() => {
                     handleDeleteEquipment(equipmentId[0])
@@ -141,6 +137,9 @@ function EditEquipment({route, navigation}) {
                     // getEquipmentList();
                 }}>
                     <Text style={styles.text}>Delete Equipment</Text>
+                </Pressable>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleManageEquipment}>
+                    <Text style={styles.text}>Confirm Selection</Text>
                 </Pressable>
                 </View>
         </ScrollView>
@@ -155,78 +154,6 @@ function logout({navigation}) {
         navigation.navigate('Login');
     });
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ebeeff',
-        alignItems: 'center',
-        paddingBottom: 40,
-        height: '80%'
-    },
-    header: {
-        fontSize: 35,
-        textAlign: 'center',
-        paddingTop: 15,
-    },
-    subheader: {
-        fontSize: 25,
-        textAlign: 'center',
-        paddingTop: 15,
-    },
-    number: {
-        fontSize: 35,
-        textAlign: 'center',
-        paddingTop: 15,
-    },
-    regText: {
-        fontSize: 25,
-        textAlign: 'center',
-        paddingTop: 10,
-    },
-    equipmentContainer: {
-        fontSize: 40,
-        textAlign: 'center',
-        paddingTop: 20,
-        paddingBottom: 20,
-    },
-    equipmentList: {
-        height: 'flex'
-    },
-    button: {
-        height: 70,
-        backgroundColor: '#051739',
-        width: '90%',
-        borderWidth: 1,
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        justifyContent: 'center',
-        borderRadius: 4,
-        marginTop: 20,
-    },
-    text: {
-        color: '#ebeeff',
-        textAlign: 'center',
-        fontSize: 30,
-    },
-    outer: {
-        flex: 1,
-        backgroundColor: '#ebeeff',
-    },
-    checkboxWrapper: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 5,
-        display: "flex",
-        flexWrap: "wrap",
-    },
-    input: {
-        paddingTop: 10,
-        borderColor: "grey",
-        borderBottomWidth: 2,
-    },
-});
 
 const generateTableRows = (equipmentQuery) => {
     let equipmentData = equipmentQuery.map((doc) => ({ data: doc.data(), id: doc.id }))

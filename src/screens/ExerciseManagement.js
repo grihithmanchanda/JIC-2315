@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View, ScrollView } from "react-native";
-import EquipmentList from "../components/EquipmentList";
+import React, { useState } from "react";
+import { Pressable, Text, TextInput, View, ScrollView } from "react-native";
 import workout_service from "../services/workout_service";
+import styles from "../styles/styles";
 
 function ExerciseManagement({ route, navigation }) {
   const [eqName, setEqName] = useState(route?.params['equipID'] ?? '')
@@ -57,93 +57,17 @@ function ExerciseManagement({ route, navigation }) {
         <Text style={styles.text}>Comments:</Text>
         <TextInput //Exercise comments
           placeholder="Comments"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         <Pressable //Add button
           style={styles.button}
           textStyle={styles.text}
           onPress={handleExerciseCreation}>
-          <Text style={styles.textWhite}>Add</Text>
+          <Text style={styles.text}>Add</Text>
         </Pressable>
       </View>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ebeeff',
-    alignItems: 'center',
-    paddingBottom: 40,
-    height: '80%'
-  },
-  header: {
-      fontSize: 35,
-      textAlign: 'center',
-      paddingTop: 15,
-      paddingBottom: 20,
-  },
-  subheader: {
-    fontSize: 25,
-    textAlign: 'center',
-    paddingTop: 15,
-  },
-  button: {
-      height: 70,
-      backgroundColor: '#051739',
-      width: '90%',
-      borderWidth: 1,
-      paddingVertical: 15,
-      paddingHorizontal: 20,
-      justifyContent: 'center',
-      borderRadius: 4,
-      marginTop: 20,
-  },
-  text: {
-      // color: '#ebeeff',
-      textAlign: 'center',
-      fontSize: 30,
-  },
-  textWhite: {
-    color: '#ebeeff',
-    textAlign: 'center',
-    fontSize: 30,
-},
-  outer: {
-      flex: 1,
-      backgroundColor: '#ebeeff',
-  },
-  checkboxWrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 5,
-      display: "flex",
-      flexWrap: "wrap",
-  },
-  input: {
-      paddingTop: 10,
-      borderColor: "grey",
-      borderBottomWidth: 2,
-      textAlign: 'center',
-      // width: '60%',
-      // justifyContent: 'center',
-  },
-  equipmentContainer: {
-    fontSize: 20,
-    textAlign: "center",
-  },
-  equipmentList: {
-    height: "flex",
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  outer: {
-    flex: 1,
-    backgroundColor: '#ebeeff',
-  }
-});
 
 export default ExerciseManagement;

@@ -1,7 +1,9 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 import React, { useState } from "react";
 import { CheckBox } from 'react-native-elements'
 import LoginService from '../services/login_service';
+import styles from '../styles/styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function RegisterUser({route, navigation}) {
     const [email, setEmail] = useState(route?.params['email'] ?? '')
@@ -23,17 +25,17 @@ function RegisterUser({route, navigation}) {
     }
 
     return (
-        <View>
+        <ScrollView style={styles.outer}>
             <View style={styles.container}>
-                <Text style={styles.headerText}>Create account</Text>
-                <Text style={styles.text}>Username:</Text>
+                <Text style={styles.header}>Create account</Text>
+                <Text style={styles.subheader}>Username:</Text>
                 <TextInput //Username/Email field
                     placeholder="Email"
                     value={email}
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
-                <Text style={styles.text}>Password:</Text>
+                <Text style={styles.subheader}>Password:</Text>
                 <TextInput //Password field
                     placeholder="Password"
                     value={password}
@@ -41,7 +43,7 @@ function RegisterUser({route, navigation}) {
                     style={styles.input}
                     secureTextEntry //automatically turn characters into asterisks
                 />
-                <Text style={styles.text}>Confirm Password:</Text>
+                <Text style={styles.subheader}>Confirm Password:</Text>
                 <TextInput //Password Confirmation field
                     placeholder="Password"
                     value={confirmPassword}
@@ -50,7 +52,7 @@ function RegisterUser({route, navigation}) {
                     secureTextEntry //automatically turn characters into asterisks
                 />
             </View>
-            <Text style={styles.text}>Account Type:</Text>
+            <Text style={styles.subheader}>Account Type:</Text>
             <View style={styles.checkboxWrapper}>
                 <CheckBox
                     checked={accountType === 'User'}
@@ -65,80 +67,16 @@ function RegisterUser({route, navigation}) {
             </View>
 
             <View style={styles.container}>
-                <Pressable style={styles.forgotPassword} textStyle={styles.text} onPress={registerUser}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={registerUser}>
                     <Text style={styles.text}>Register</Text>
                 </Pressable>
-            </View>
-            <View style={styles.container}>
-                <Pressable style={styles.forgotPassword} textStyle={styles.text}
+                <Pressable style={styles.button} textStyle={styles.text}
                            onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.text}>Go back</Text>
                 </Pressable>
             </View>
-        </View>
+        </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    loginButtonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 15,
-    },
-    headerText: {
-        fontSize: 50,
-        textAlign: 'center',
-        paddingTop: 20,
-        paddingBottom: 30,
-    },
-    input: {
-        height: 40,
-        backgroundColor: '#D9D9D9',
-        width: '90%',
-        textAlign: 'center',
-    },
-    userLogin: {
-        height: 150,
-        backgroundColor: '#D9D9D9',
-        width: '43%',
-        justifyContent: 'center',
-    },
-    blank: {
-        height: 150,
-        backgroundColor: '#FFFFFF',
-        width: '4%',
-    },
-    managerLogin: {
-        height: 150,
-        backgroundColor: '#D9D9D9',
-        width: '43%',
-        justifyContent: 'center',
-    },
-    forgotPassword: {
-        height: 80,
-        backgroundColor: '#D9D9D9',
-        width: '90%',
-        justifyContent: 'center',
-        marginTop: 15,
-    },
-    text: {
-        color: '#000000',
-        textAlign: 'center',
-        fontSize: 35,
-    },
-    checkboxWrapper: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingVertical: 5,
-        paddingLeft: 30,
-        display: "flex",
-        flexWrap: "wrap",
-    },
-})
 
 export default RegisterUser;
