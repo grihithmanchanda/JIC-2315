@@ -1,6 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDoc, setDoc, updateDoc, deleteField, deleteDoc } from "firebase/firestore"
-import login_service from "./login_service";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore"
 import equipment_service from "./equipment_service";
 
 class WorkoutService {
@@ -27,7 +26,7 @@ class WorkoutService {
         return exerciseData
     };
 
-    addWorkout = async (workoutList, gymID) => {
+    addWorkout = async (workoutList, gymID, workoutDifficulty) => {
         let gymDoc = doc(firestoredb, 'gym metadata', gymID)
         let workoutsCollectionRef = collection(gymDoc, 'workouts')
 
@@ -37,14 +36,17 @@ class WorkoutService {
         const day = String(currentDate.getDate()).padStart(2, '0');
         const date = `${month}-${day}-${year}`;
 
+        let difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'}
+        let difficultyLevelText = difficultyMapping[workoutDifficulty];
+
         // This arrangement can be altered based on how we want the date's format to appear.
         let wotdDocRef = doc(workoutsCollectionRef, date)
 
         let wotdData = {
-            'exercises': workoutList
+            [difficultyLevelText]: workoutList
         }
 
-        let wotdDoc = await setDoc(wotdDocRef, wotdData)
+        let wotdDoc = await updateDoc(wotdDocRef, wotdData)
 
         return wotdDoc
 

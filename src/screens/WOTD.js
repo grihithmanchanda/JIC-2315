@@ -4,7 +4,6 @@ import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import ExerciseList from "../components/ExerciseList";
 import workout_service from "../services/workout_service";
-import gyminfo_service from "../services/gyminfo_service";
 
 // WOTD page for creating workout routines
 function WOTD({route, navigation}) {
@@ -12,7 +11,7 @@ function WOTD({route, navigation}) {
     const [workouts, setWorkouts] = useState([]);
 
     let handleWorkoutSubmission= async() => {
-        await workout_service.addWorkout(workouts, gymID)
+        await workout_service.addWorkout(workouts, gymID, workoutDifficulty)
         navigation.navigate('ManagerHome');
     }
 
