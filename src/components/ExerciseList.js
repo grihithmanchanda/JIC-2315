@@ -15,15 +15,16 @@ function ExerciseList({navigation, getWorkouts}) {
         getExerciseList();
     }, []);
 
+    useEffect(() => {
+        getWorkouts(selectedExercises);
+    }, [selectedExercises])
+
     const getExerciseList = async () => {
-        console.log('getting exercises...');
         const exerciseData = await EquipmentService.getAllExercises(currentLoginEmail);
         if (exerciseData !== null) {
             setTableRows(generateTableRows(exerciseData))
         }
     }
-
-    getWorkouts(selectedExercises);
 
     function handleExerciseSelect(row) {
         var newExercises = selectedExercises;
