@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import styles from "../styles/styles";
 
 function GymSearch({navigation}) {
     const [gymName, setGymName] = useState('')
@@ -9,56 +10,24 @@ function GymSearch({navigation}) {
     }
 
     return (
-        <View>
-            <View style={styles.Container}>
-                <Text style={styles.headerText}>Gym Search</Text>
-                <Text style={styles.headerText}>Gym Name:</Text>
+        <ScrollView style={styles.outer}>
+            <View style={styles.container}>
+                <Text style={styles.header}>Gym Search</Text>
+                <Text style={styles.subheader}>Gym Name:</Text>
                 <TextInput //Name field
                     value={gymName}
                     onChangeText={text => setGymName(text)}
                     style={styles.input}
                 />
                 <Pressable //Submit button
-                    style={styles.submit}
+                    style={styles.button}
                     textStyle={styles.text}
                     onPress={handleGymSearch}>
                 <Text style={styles.text}>Submit</Text>
                 </Pressable>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
-const styles = StyleSheet.create({
-    Container: {
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    headerText: {
-      fontSize: 40,
-      textAlign: "center",
-      paddingTop: 20,
-    },
-    input: {
-      height: 40,
-      backgroundColor: "#D9D9D9",
-      width: "90%",
-      textAlign: "center",
-    },
-    text: {
-      color: "#000000",
-      textAlign: "center",
-      fontSize: 35,
-    },
-    submit: {
-        justifyContent: 'center',
-        marginTop: 15,
-        backgroundColor: "#D9D9D9",
-        height: 50,
-        width: 150,
-        borderRadius: 10,
-    },
-  });
-  
-  export default GymSearch;
+export default GymSearch;

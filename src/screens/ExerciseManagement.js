@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Pressable, Text, TextInput, View, ScrollView } from "react-native";
 import workout_service from "../services/workout_service";
 import styles from "../styles/styles";
 
@@ -57,14 +57,13 @@ function ExerciseManagement({ route, navigation }) {
         <Text style={styles.text}>Comments:</Text>
         <TextInput //Exercise comments
           placeholder="Comments"
-          placeholderTextColor="#000"
           style={styles.input}
         />
         <Pressable //Add button
           style={styles.button}
           textStyle={styles.text}
           onPress={handleExerciseCreation}>
-          <Text style={styles.textWhite}>Add</Text>
+          <Text style={styles.text}>Add</Text>
         </Pressable>
       </View>
     </ScrollView>

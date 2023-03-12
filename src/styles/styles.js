@@ -49,6 +49,15 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         height: 'flex'
     },
+    listContainer: {
+        flex: 1,
+        padding: 16,
+        paddingTop: 16,
+        width: '90%', 
+        backgroundColor: '#8794d4',
+        overflow: 'scroll',
+        borderRadius: 4
+    },
     button: {
         height: 70,
         backgroundColor: '#051739',
@@ -92,6 +101,14 @@ const styles = StyleSheet.create({
         borderColor: "grey",
         borderBottomWidth: 2,
         width: '80%',
+        fontSize: 20,
+        textAlign: "center",
+    },
+    numInput: {
+        paddingTop: 10,
+        borderColor: "grey",
+        borderBottomWidth: 2,
+        width: '15%',
         fontSize: 20,
         textAlign: "center",
     },
@@ -139,6 +156,12 @@ const styles = StyleSheet.create({
     row: {
         height: 28,
         backgroundColor: '#ebeeff',
+        borderWidth: 0.5,
+        borderRadius: 4
+    },
+    rowSel: {
+        height: 28,
+        backgroundColor: '#293571',
         borderWidth: 0.5,
         borderRadius: 4
     },
@@ -191,7 +214,14 @@ const styles = StyleSheet.create({
     },
     modalView: {
         alignItems: "center",
-    }
+    },
+    tableText: {
+        textAlign: 'center'
+    },
+    textWhite: {
+        textAlign: 'center',
+        color: '#ffffff'
+    },
 });
 
 export default styles;

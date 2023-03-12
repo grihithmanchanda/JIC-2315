@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ScrollView } from 'react-native';
 import { Table, Row } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
-import login_service from "../services/login_service";
 import styles from "../styles/styles";
 
 
@@ -37,7 +36,7 @@ function ExerciseList({navigation, getWorkouts}) {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container} scrollEnabled={true}>
+        <ScrollView style={styles.listContainer} scrollEnabled={true}>
             <Table style={styles.table} >
                 <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
                     {   
@@ -47,7 +46,7 @@ function ExerciseList({navigation, getWorkouts}) {
                             data={tableRow}
                             flexArr={[2, 1, 2]}
                             style={selectedExercises.includes(tableRow[0]) ? styles.rowSel : styles.row}
-                            textStyle={selectedExercises.includes(tableRow[0]) ? styles.textWhite : styles.text}
+                            textStyle={selectedExercises.includes(tableRow[0]) ? styles.textWhite : styles.tableText}
                             onPress={() => handleExerciseSelect(tableRow[0])}
                             />
                         ))

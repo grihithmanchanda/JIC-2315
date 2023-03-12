@@ -28,7 +28,7 @@ function EquipmentList({navigation}) {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container} scrollEnabled={true}>
+        <ScrollView style={styles.listContainer} scrollEnabled={true}>
         <Table style={styles.table} >
             <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
                 {   
@@ -38,7 +38,7 @@ function EquipmentList({navigation}) {
                         data={tableRow}
                         flexArr={[2, 1, 2]}
                         style={styles.row}
-                        textStyle={styles.text}
+                        textStyle={styles.tableText}
                         onPress={() => navigation ? handleEditEquipment(tableRow) : void(0)}
                         />
                     ))

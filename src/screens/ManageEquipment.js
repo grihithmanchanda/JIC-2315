@@ -5,8 +5,8 @@ import EquipmentService from "../services/equipment_service";
 import { Modal } from "../components/Modal";
 import { CheckBox } from 'react-native-elements'
 import EquipmentList from "../components/EquipmentList";
-import login_service from "../services/login_service";
 import styles from "../styles/styles";
+import {getAuth, signOut} from "firebase/auth";
 
 function ManageEquipment({navigation}) {
     const [tableRows, setTableRows] = useState([['', '', '']])
@@ -126,6 +126,18 @@ function ManageEquipment({navigation}) {
             </View>
         </ScrollView>
     )
+}
+
+//Method to sign out of firebase, returns user to login screen
+function logout({navigation}) {
+    const auth = getAuth();
+    // Signs out user
+    signOut(auth).then(() => {
+        // console.log("LOGOUT"); //Debugging
+        navigation.navigate('Login');
+    }).catch((error) => {
+        // console.log("ERROR");
+    });
 }
 
 const generateTableRows = (equipmentQuery) => {
