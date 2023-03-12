@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
 const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
@@ -35,6 +35,11 @@ class gymInfoService {
             gymNames.push(doc.data()['Name'])
         });
         return gymNames;
+    }
+
+    getGymMemberCount = async () => {
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        return gymDataSnap.data()['users'].length
     }
 }
 
