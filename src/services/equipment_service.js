@@ -69,16 +69,12 @@ class EquipmentService {
 
     getAllExercises = async (loginEmail=currentLoginEmail) => {
 
-        console.log('hi')
         const equipmentQuery = await this.getAllEquipment(loginEmail);
         const exercises = [];
 
         // Loop through each equipment document
-        for (const equipmentDoc of equipmentQuery) {
-            console.log(equipmentDoc.id)
-            
+        for (const equipmentDoc of equipmentQuery) {            
             const exerciseRefs = collection(equipmentDoc.ref, 'exercises')
-            
             const exerciseDocs = await getDocs(exerciseRefs)
 
             exerciseDocs.forEach((exerciseDoc) => {
@@ -87,8 +83,6 @@ class EquipmentService {
                 if (exerciseData['difficulty'] === undefined) {
                     console.log('difficulty undefined')
                     exerciseData['difficulty'] = 'N/A'
-                } else {
-                    console.log('difficulty:', exerciseData['difficulty'])
                 }
 
                 // build exercise data object
