@@ -55,7 +55,7 @@ function ExerciseManagement({ route, navigation }) {
           style={styles.input}
           onChangeText={text => setAmtWeight(text)}
         />
-        <Text style={styles.text}>Comments:</Text>
+        <Text style={styles.subheader}>Comments:</Text>
         <TextInput //Exercise comments
           placeholder="Comments"
           style={styles.input}

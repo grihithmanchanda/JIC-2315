@@ -44,7 +44,7 @@ class WorkoutService {
             [difficultyLevelText]: workoutList
         }
 
-        let wotdDoc = await updateDoc(wotdDocRef, wotdData)
+        let wotdDoc = await setDoc(wotdDocRef, wotdData)
 
         return wotdDoc
 
