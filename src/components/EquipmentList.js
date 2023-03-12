@@ -11,12 +11,11 @@ function EquipmentList({navigation}) {
     const tableHead = ['Name', 'Quantity', 'Muscle Groups'];
 
     useEffect(() => {
-        getEquipmentList(currentLoginEmail);
+        getEquipmentList();
     }, []);
 
-    const getEquipmentList = async (currentLoginEmail) => {
-        console.log('getting equipment...');
-        const equipmentQuery = await EquipmentService.getAllEquipment(currentLoginEmail);
+    const getEquipmentList = async () => {
+        const equipmentQuery = await EquipmentService.getAllEquipment();
         if (equipmentQuery !== null) {
             setTableRows(generateTableRows(equipmentQuery))
         }

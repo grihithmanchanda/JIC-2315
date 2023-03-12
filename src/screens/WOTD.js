@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
-import WorkoutList from "../components/WorkoutList";
+import ExerciseList from "../components/ExerciseList";
+import workout_service from "../services/workout_service";
 
-// Essentially entire manager home page, including welcome,
-//   user num, equipment, and buttons for settings
-function WOTD({navigation}) {
+// WOTD page for creating workout routines
+function WOTD({route, navigation}) {
+    const [workoutDifficulty, setWorkoutDifficulty] = useState(route?.params['workoutDifficulty'] ?? 0)
     const [workouts, setWorkouts] = useState([]);
+
+    let handleWorkoutSubmission= async() => {
+        await workout_service.addWorkout(workouts, gymID, workoutDifficulty)
+        navigation.navigate('ManagerHome');
+    }
 
     return (
         <ScrollView style={styles.outer}>
@@ -19,10 +25,10 @@ function WOTD({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
-                <Text style={styles.subheader}>Select 4 Workouts</Text>
-                <WorkoutList style={styles.equipmentList} getWorkouts={setWorkouts}/>
+                <Text style={styles.subheader}>Select 4 exercises</Text>
+                <ExerciseList style={styles.exerciseList} getWorkouts={setWorkouts}/>
                 <Pressable style={styles.button} textStyle={styles.text}>
-                    <Text style={styles.text} onPress={() => navigation.navigate('ConfirmWorkout', {'workouts': workouts})}>Use These Workouts</Text>
+                    <Text style={styles.text} onPress={handleWorkoutSubmission}>Use These Exercises</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -63,7 +69,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
     },
-    equipmentList: {
+    exerciseList: {
         paddingTop: 10,
         height: 'flex'
     },

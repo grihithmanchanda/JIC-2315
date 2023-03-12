@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {Pressable, ScrollView, StyleSheet, Text, View, TextInput} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
-import WorkoutList from "../components/WorkoutList";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
@@ -31,14 +30,14 @@ function ConfirmWorkout({route, navigation}) {
                         <TextInput
                             style={styles.input}
                             placeholder="e.g. 5"
-                            keyboardType="default"
+                            keyboardType="number"
                             onChangeText={(val) => setSetQuantity(val)}
                         />
                         <Text style={styles.subsubheader}>Reps per Set</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="e.g. 5"
-                            keyboardType="default"
+                            keyboardType="number"
                             onChangeText={(val) => setRepQuantity(val)} />
                         </>
                     ))
