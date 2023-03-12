@@ -27,8 +27,8 @@ function UserHome({navigation}) {
         <Text style={styles.subheader}>5 Day Streak!</Text>
         <Text style={styles.equipmentContainer}>Equipment at a Glance</Text>
         <EquipmentList style={styles.equipmentList} />
-        <Pressable style={styles.button} textStyle={styles.text}>
-          <Text style={styles.text}>Select/Start Workout</Text>
+        <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('WOTDInfo')}}>
+          <Text style={styles.text}>Start Workout</Text>
         </Pressable>
         <Pressable style={styles.button} textStyle={styles.text}>
           <Text style={styles.text}>User Settings</Text>
