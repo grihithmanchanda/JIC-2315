@@ -62,7 +62,7 @@ class EquipmentService {
 
         let eqRef = doc(firestoredb, 'gym metadata', gymID, 'equipment', eqName)
         let eqSnap = await getDoc(eqRef)
-        let eqData = {'id':eqSnap.id, 'data':eqSnap.data()}
+        let eqData = {'id':eqSnap.id, 'data':eqSnap.data(), 'ref': eqSnap.ref}
 
         return eqData
     }

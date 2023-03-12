@@ -1,9 +1,10 @@
 import { firestoredb } from "../../firebase-config"
 import { collection, doc, getDoc, setDoc, updateDoc, deleteField, deleteDoc } from "firebase/firestore"
-
-const equipmentCollectionRef = collection(firestoredb, "equipment");
+import login_service from "./login_service";
+import equipment_service from "./equipment_service";
 
 class WorkoutService {
+
     addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight) => {
         let difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'}
         let difficultyLevelText = difficultyMapping[difficultyLevel];
@@ -12,17 +13,21 @@ class WorkoutService {
             'numReps': numReps,
             'amtWeight': amtWeight
         }
-        let equipmentRef = doc(equipmentCollectionRef, equipmentName)
-        let exercisesRef = collection(equipmentRef, 'exercises')
-        let exerciseRef = doc(exercisesRef, exerciseName)
+        // let equipmentRef = doc(equipmentCollectionRef, equipmentName)
+        // let exercisesRef = collection(equipmentRef, 'exercises')
+        // let exerciseRef = doc(exercisesRef, exerciseName)
+
+        let equipmentData = await equipment_service.getEquipment(equipmentName)
+        let eqRef = equipmentData.ref
+
+        let exerciseRef = doc(eqRef, 'exercises', exerciseName)
+
         await setDoc(exerciseRef, exerciseData)
         
-        let exerciseDoc = await getDoc(exerciseRef)
-        return exerciseDoc.data()
+        return exerciseData
     };
 
     addWorkout = async (workoutList, gymID) => {
-        console.log(workoutList, gymID)
         let gymDoc = doc(firestoredb, 'gym metadata', gymID)
         let workoutsCollectionRef = collection(gymDoc, 'workouts')
 
