@@ -4,17 +4,15 @@ import equipment_service from "./equipment_service";
 
 class WorkoutService {
 
-    addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight) => {
+    addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment) => {
         let difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'}
         let difficultyLevelText = difficultyMapping[difficultyLevel];
         let exerciseData = {
             'difficulty': difficultyLevelText,
             'numReps': numReps,
-            'amtWeight': amtWeight
+            'amtWeight': amtWeight,
+            'exerciseComment': exerciseComment
         }
-        // let equipmentRef = doc(equipmentCollectionRef, equipmentName)
-        // let exercisesRef = collection(equipmentRef, 'exercises')
-        // let exerciseRef = doc(exercisesRef, exerciseName)
 
         let equipmentData = await equipment_service.getEquipment(equipmentName)
         let eqRef = equipmentData.ref
@@ -46,7 +44,7 @@ class WorkoutService {
             [difficultyLevelText]: workoutList
         }
 
-        let wotdDoc = await updateDoc(wotdDocRef, wotdData)
+        let wotdDoc = await setDoc(wotdDocRef, wotdData)
 
         return wotdDoc
 
