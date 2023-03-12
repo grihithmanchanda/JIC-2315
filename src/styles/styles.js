@@ -222,6 +222,25 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#ffffff'
     },
+
+    // picker styling
+    pickerText: {
+        textAlign: 'left',
+        color:'#ffffff',
+        width: '50%'
+    },
+    pickerInnerView: {
+        width: '50%',
+        marginLeft: 10
+    },
+    pickerOuterView: {
+        flexDirection: 'row'
+    },
+    pickerItem: {
+        color:'#ffffff',
+        width:'50%',
+        textAlign: 'center'
+    }
 });
 
 export default styles;

@@ -48,6 +48,11 @@ class gymInfoService {
         });
         return gymNames;
     }
+
+    getGymMemberCount = async () => {
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        return gymDataSnap.data()['users'].length
+    }
 }
 
 export default new gymInfoService();

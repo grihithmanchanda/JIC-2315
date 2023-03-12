@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import { Table, Row } from 'react-native-table-component';
 import EquipmentService from "../services/equipment_service";
 import styles from "../styles/styles";
@@ -7,23 +8,35 @@ import styles from "../styles/styles";
 
 // renders equipment list for home pages
 function ExerciseList({navigation, getWorkouts}) {
+    const [exerciseData, setExerciseData] = useState([])
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
-    const tableHead = ['Name', 'Assoc. Equipment', 'Difficulty'];
     const [selectedExercises, setSelectedExercises] = useState([]);
+    const [difficultyFilter, setDifficultyFilter] = useState('')
+    const tableHead = ['Name', 'Assoc. Equipment', 'Difficulty'];
 
+    // when selectedExercises changes, send data to superclass
+    useEffect(() => {
+        getWorkouts(selectedExercises);
+    }, [selectedExercises])
+
+    // when exerciseData is updated, generate updated table
+    useEffect(() => {
+        setTableRows(generateTableRows(exerciseData))
+    }, [exerciseData])
+
+    // when difficulty changes, get exercises from firebase
     useEffect(() => {
         getExerciseList();
-    }, []);
+    }, [difficultyFilter]);
 
     const getExerciseList = async () => {
-        console.log('getting exercises...');
-        const exerciseData = await EquipmentService.getAllExercises(currentLoginEmail);
-        if (exerciseData !== null) {
-            setTableRows(generateTableRows(exerciseData))
+        const exerciseDataSnap = await EquipmentService.getAllExercises(currentLoginEmail);
+        if (exerciseDataSnap !== null) {
+            setExerciseData(exerciseDataSnap)
+        } else {
+            //TODO: handle case when no exercises available
         }
     }
-
-    getWorkouts(selectedExercises);
 
     function handleExerciseSelect(row) {
         var newExercises = selectedExercises;
@@ -35,8 +48,29 @@ function ExerciseList({navigation, getWorkouts}) {
         setSelectedExercises(newExercises);
     }
 
+    const generateTableRows = (exerciseData) => {
+        // filter by difficulty
+        const filteredExerciseData = exerciseData.filter((exercise) => {
+            return difficultyFilter ? exercise['difficulty'] === difficultyFilter : true
+        })
+        // map to table rows
+        const filteredExerciseRows = filteredExerciseData.map((exercise) => [exercise['exercise name'], exercise['equipment name'], exercise['difficulty']])
+        return filteredExerciseRows
+    }
+
     return (
         <ScrollView style={styles.listContainer} scrollEnabled={true}>
+            <View style={styles.pickerOuterView}>
+                <Text style={styles.pickerText}>Filter by Difficulty:</Text>
+                <View style={styles.pickerInnerView}>
+                    <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
+                        <Picker.Item label="No Filter" value=""/>
+                        <Picker.Item label="Beginner" value="beginner"/>
+                        <Picker.Item label="Intermediate" value="intermediate"/>
+                        <Picker.Item label="Advanced" value="advanced"/>
+                    </Picker>
+                </View>
+            </View>
             <Table style={styles.table} >
                 <Row data={tableHead} flexArr={[2, 1, 2]} style={styles.head} textStyle={styles.headtext} />
                     {   
@@ -54,10 +88,6 @@ function ExerciseList({navigation, getWorkouts}) {
             </Table>
         </ScrollView>
     )
-}
-
-const generateTableRows = (exerciseData) => {
-    return exerciseData.map((exercise) => [exercise['exercise name'], exercise['equipment name'], exercise['difficulty']])
 }
 
 export default ExerciseList;
