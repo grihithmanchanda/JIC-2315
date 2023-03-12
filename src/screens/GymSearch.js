@@ -1,11 +1,13 @@
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import styles from "../styles/styles";
+import gyminfo_service from "../services/gyminfo_service";
 
 function GymSearch({navigation}) {
     const [gymName, setGymName] = useState('')
 
     const handleGymSearch = async () => {
+        await gyminfo_service.addUserToGym(gymName)
         navigation.navigate('UserHome');
     }
 

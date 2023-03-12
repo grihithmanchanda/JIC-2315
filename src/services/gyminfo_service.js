@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc, deleteField, arrayUnion } from "firebase/firestore"
 
 const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
@@ -21,6 +21,18 @@ class gymInfoService {
         await setDoc(gymInfoDoc, gymInfoData);
 
         global.gymID = gymName
+
+    addUserToGym = async(gymName) => {
+        // TODO: check if gym exists
+        // for now, we will assume the gym exists
+
+        let gymDoc = doc(firestoredb, 'gym metadata', gymName)
+
+        let userDoc = doc(firestoredb, 'users', currentLoginEmail)
+        
+        await updateDoc(gymDoc, {
+            users: arrayUnion(userDoc)
+        })
 
         await updateDoc(doc(firestoredb, "managers", email),
             {
