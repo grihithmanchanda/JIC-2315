@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, setDoc, updateDoc } from "firebase/firestore"
+import { collection, doc, setDoc } from "firebase/firestore"
 import equipment_service from "./equipment_service";
 
 class WorkoutService {
