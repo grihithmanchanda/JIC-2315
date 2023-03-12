@@ -1,6 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteField, deleteDoc, listCollections, arrayUnion, arrayRemove } from "firebase/firestore"
-import login_service from "./login_service";
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove } from "firebase/firestore"
 
 const equipmentCollectionRef = collection(firestoredb, "equipment");
 
