@@ -32,9 +32,11 @@ class gymInfoService {
         // for now, we will assume the gym exists
 
         let gymDoc = doc(firestoredb, 'gym metadata', gymName)
+
+        let userDoc = doc(firestoredb, 'users', currentLoginEmail)
         
         await updateDoc(gymDoc, {
-            users: arrayUnion(currentLoginEmail)
+            users: arrayUnion(userDoc)
         })
     }
 }
