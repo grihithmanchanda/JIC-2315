@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Pressable, ScrollView, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
-import ExerciseList from "../components/ExerciseList";
+import ManagerExerciseList from "../components/ManagerExerciseList";
 import workout_service from "../services/workout_service";
 import styles from "../styles/styles";
 
@@ -29,7 +29,7 @@ function WOTD({route, navigation}) {
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
                 <Text style={styles.subheader}>Select 4 exercises</Text>
-                <ExerciseList style={styles.exerciseList} getWorkouts={setWorkouts}/>
+                <ManagerExerciseList style={styles.managerExerciseList} getWorkouts={setWorkouts}/>
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text} onPress={handleWorkoutSubmission}>Use These Exercises</Text>
                 </Pressable>
