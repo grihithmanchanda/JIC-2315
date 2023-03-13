@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Pressable, ScrollView, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
+import {Picker} from '@react-native-picker/picker';
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function WOTDInfo({navigation}) {
-    function handleWOTD() {
-        navigation.navigate('WOTD')
-    }
+    const [difficultyFilter, setDifficultyFilter] = useState('')
 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -31,7 +30,16 @@ function WOTDInfo({navigation}) {
                 <Text style={styles.header}>Workout of the Day</Text>
                 <Text style={styles.subheader}>{date}</Text>
                 <Text style={styles.subheader}>Difficulty Level: </Text>
-                <Text style={styles.subsubheader}>Insert Dropdown Here</Text>
+                <View style={styles.pickerOuterView}>
+                 <Text style={styles.pickerText}></Text>
+                 <View style={styles.pickerInnerView}>
+                     <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
+                         <Picker.Item label="Beginner" value="beginner"/>
+                         <Picker.Item label="Intermediate" value="intermediate"/>
+                         <Picker.Item label="Advanced" value="advanced"/>
+                     </Picker>
+                 </View>
+             </View>
                 <Text style={styles.subheader}>Exercises:</Text>
                 {   
                     data.map((val) => (

@@ -226,18 +226,20 @@ const styles = StyleSheet.create({
     // picker styling
     pickerText: {
         textAlign: 'left',
-        color:'#ffffff',
-        width: '50%'
+        color:'#000000',
+        width: '50%',
+        fontSize: 30
     },
     pickerInnerView: {
-        width: '50%',
+        width: '100%',
         marginLeft: 10
     },
     pickerOuterView: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     pickerItem: {
-        color:'#ffffff',
+        color:'#000000',
         width:'50%',
         textAlign: 'center'
     }
