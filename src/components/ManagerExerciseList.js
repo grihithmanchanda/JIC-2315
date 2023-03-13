@@ -61,7 +61,7 @@ function ManagerExerciseList({navigation, getWorkouts}) {
     return (
         <ScrollView style={styles.listContainer} scrollEnabled={true}>
             <View style={styles.pickerOuterView}>
-                <Text style={styles.pickerText}>Filter by Difficulty:</Text>
+                <Text style={styles.pickerText}>Difficulty:</Text>
                 <View style={styles.pickerInnerView}>
                     <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
                         <Picker.Item label="No Filter" value=""/>
