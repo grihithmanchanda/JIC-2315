@@ -21,6 +21,7 @@ class gymInfoService {
         await setDoc(gymInfoDoc, gymInfoData);
 
         global.gymID = gymName
+    }
 
     addUserToGym = async(gymName) => {
         // TODO: check if gym exists

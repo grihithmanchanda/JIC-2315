@@ -7,7 +7,7 @@ import styles from "../styles/styles";
 
 
 // renders equipment list for home pages
-function ExerciseList({navigation, getWorkouts}) {
+function ManagerExerciseList({navigation, getWorkouts}) {
     const [exerciseData, setExerciseData] = useState([])
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
     const [selectedExercises, setSelectedExercises] = useState([]);
@@ -26,10 +26,10 @@ function ExerciseList({navigation, getWorkouts}) {
 
     // when difficulty changes, get exercises from firebase
     useEffect(() => {
-        getExerciseList();
+        getManagerExerciseList();
     }, [difficultyFilter]);
 
-    const getExerciseList = async () => {
+    const getManagerExerciseList = async () => {
         const exerciseDataSnap = await EquipmentService.getAllExercises(currentLoginEmail);
         if (exerciseDataSnap !== null) {
             setExerciseData(exerciseDataSnap)
@@ -90,4 +90,4 @@ function ExerciseList({navigation, getWorkouts}) {
     )
 }
 
-export default ExerciseList;
+export default ManagerExerciseList;
