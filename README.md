@@ -9,6 +9,23 @@
 
 # Release Notes / Changelog
 
+## v0.3.0
+Added more gym-specific functionality!
+### Features
+ - Gym managers can add comments on exercises to relay information to users.
+ - Users can register for a specific gym and see that gym's specific information.
+ - Gym managers now see an accurate number representing the number of users registered to their gym.
+ - Users can filter exercises by muscle groups.
+ - Users can view gym-specific information such as operating hours, location etc.
+ - Users can now view Workout of the Day (WOTD) screens - which are workouts created by the gym managers.
+ ### Bug Fixes
+ - Aggregated all stylesheets to one file instead of each file having their own set.
+ ### Known Issues
+- Lack of security rules for Firebase access (anyone can read/write)
+- WOTD screens lack backend functionality for now.
+    
+---
+
 ## v0.2.0
 UI Specific to Gyms!
 ### Features
