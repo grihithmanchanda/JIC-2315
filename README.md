@@ -10,7 +10,7 @@
 # Release Notes / Changelog
 
 ## v0.3.0
-UI Specific to Gyms!
+Added more gym-specific functionality!
 ### Features
  - Gym managers can add comments on exercises to relay information to users.
  - Users can register for a specific gym and see that gym's specific information.
