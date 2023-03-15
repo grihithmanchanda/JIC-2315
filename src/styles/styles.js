@@ -154,13 +154,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6f8fa'
     },
     row: {
-        height: 28,
+        height: 40,
         backgroundColor: '#ebeeff',
         borderWidth: 0.5,
         borderRadius: 4
     },
     rowSel: {
-        height: 28,
+        height: 40,
         backgroundColor: '#293571',
         borderWidth: 0.5,
         borderRadius: 4
