@@ -15,6 +15,7 @@ import GymRegistration from "./src/screens/GymRegistration";
 import GymInformation from "./src/screens/GymInformation";
 import GymSearch from "./src/screens/GymSearch";
 import WOTDInfo from "./src/screens/WOTDInfo";
+import Workout from "./src/screens/Workout";
 
 const navigationStack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ function App() {
                 <navigationStack.Screen name="GymInformation" component={GymInformation}/>
                 <navigationStack.Screen name="GymSearch" component={GymSearch}/>
                 <navigationStack.Screen name="WOTDInfo" component={WOTDInfo}/>
+                <navigationStack.Screen name="Workout" component={Workout}/>
             </navigationStack.Navigator>
         </NavigationContainer>
     );

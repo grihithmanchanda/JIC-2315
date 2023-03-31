@@ -48,7 +48,7 @@ function WOTDInfo({navigation}) {
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
                 <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout')}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>
