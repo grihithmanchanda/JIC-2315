@@ -21,10 +21,10 @@ const Stopwatch = () => {
         <View style={styles.container}>
           <Text style={styles.header}>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</Text>
         </View>
-        <View style={styles.container}>
-          <Pressable style={styles.button} onPress={() => setRunning(true)}><Text style={styles.text}>Start</Text></Pressable>
-          <Pressable style={styles.button} onPress={() => setRunning(false)}><Text style={styles.text}>Stop</Text></Pressable>
-          <Pressable style={styles.button} onPress={() => setTime(0)}><Text style={styles.text}>Reset</Text></Pressable>       
+        <View style={styles.stopwatchContainer}>
+          <Pressable style={styles.button3} onPress={() => setRunning(true)}><Text style={styles.text}>Start</Text></Pressable>
+          <Pressable style={styles.button3} onPress={() => setRunning(false)}><Text style={styles.text}>Stop</Text></Pressable>
+          <Pressable style={styles.button3} onPress={() => setTime(0)}><Text style={styles.text}>Reset</Text></Pressable>       
         </View>
       </View>
     );

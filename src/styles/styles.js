@@ -69,6 +69,17 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginTop: 20,
     },
+    button3: {
+        height: 70,
+        backgroundColor: '#051739',
+        width: '25%',
+        borderWidth: 1,
+        paddingVertical: 15,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginLeft: 10,
+        marginRight: 10
+    },
     text: {
         color: '#ebeeff',
         textAlign: 'center',
@@ -87,6 +98,7 @@ const styles = StyleSheet.create({
     outer: {
         flex: 1,
         backgroundColor: '#ebeeff',
+        width: "100%"
     },
     checkboxWrapper: {
         flexDirection: 'row',
@@ -113,6 +125,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     loginButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%'
+    },
+    stopwatchContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         width: '100%'
