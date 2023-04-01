@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDocs, setDoc, updateDoc, deleteField, arrayUnion } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc, getDoc, arrayUnion } from "firebase/firestore"
 
 const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
@@ -10,8 +10,8 @@ class gymInfoService {
 
     addGymInfo = async (gymID, gymAddress, gymName, hourStart, hourEnd, phoneNumber, email) => {
         let gymInfoData = {
-            'Address': gymAddress,
-            'Name': gymName,
+            'gymAddress': gymAddress,
+            'gymName': gymName,
             'hourEnd': hourEnd,
             'hourStart': hourStart,
             'phoneNumber': phoneNumber,
@@ -35,7 +35,7 @@ class gymInfoService {
             users: arrayUnion(userDoc)
         })
 
-        await updateDoc(doc(firestoredb, "managers", email),
+        await updateDoc(userDoc,
             {
                 gymID: gymName,
             });
@@ -53,6 +53,23 @@ class gymInfoService {
     getGymMemberCount = async () => {
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
         return gymDataSnap.data()['users'].length
+    }
+
+    getGymInfo = async() => {
+        console.log('in getGymInfo:', gymID)
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        const gymData = gymDataSnap.data()
+
+        // build exercise data object
+        let gymDataObj = {
+            'address': gymData.Address,
+            'gymName': gymData.Name,
+            'hourEnd': gymData.hourEnd,
+            'hourStart': gymData.hourStart,
+            'phoneNumber': gymData.phoneNumber
+        }
+
+        return gymDataObj
     }
 }
 
