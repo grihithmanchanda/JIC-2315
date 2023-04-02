@@ -6,11 +6,15 @@ import styles from "../styles/styles";
 export const Modal = ({
   isVisible,
   children,
+  onHide,
   ...props
 }) => {
   return (
     <RNModal
       isVisible={isVisible}
+      onModalHide={onHide}
+      onBackButtonPress={onHide}
+      onBackdropPress={onHide}
       animationInTiming={1000}
       animationOutTiming={1000}
       backdropTransitionInTiming={800}

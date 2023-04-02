@@ -12,14 +12,15 @@ function ManageEquipment({navigation}) {
     const [tableRows, setTableRows] = useState([['', '', '']])
     const [modalVisible, setModalVisible] = useState(false)
     const tableHead = ['Name', 'Quantity', 'Muscle Groups']
-    const [eqName, setEqName] = useState('')
-    const [eqQuantity, setEqQuantity] = useState("0")
+    const [eqName, setEqName] = useState('dumbbell')
+    const [eqQuantity, setEqQuantity] = useState(3)
     const [biceps, setBiceps] = useState(false)
     const [triceps, setTriceps] = useState(false)
     const [back, setBack] = useState(false)
     const [chest, setChest] = useState(false)
     const [legs, setLegs] = useState(false)
     const [abs, setAbs] = useState(false)
+    const [shouldReload, setShouldReload] = useState(false);
 
 
     useEffect(() => {
@@ -32,6 +33,18 @@ function ManageEquipment({navigation}) {
             setTableRows(generateTableRows(equipmentQuery))
         }
     }
+
+    // force equipment table to reload when modal closed
+    useEffect(() => {
+        if (!modalVisible && shouldReload) {
+            setShouldReload(false);
+        }
+    }, [modalVisible, shouldReload])
+    const handleModalClose = () => {
+        setModalVisible(false);
+        setShouldReload(true)
+    };
+
 
     return (
         <ScrollView style={styles.outer}>
@@ -49,7 +62,7 @@ function ManageEquipment({navigation}) {
                     onPress={() => setModalVisible(true)}>
                     <Text style={styles.text}>Add Equipment</Text>
                 </TouchableOpacity>
-                <Modal isVisible={modalVisible}>
+                <Modal isVisible={modalVisible} onHide={handleModalClose}>
                     <Modal.Container>
                     <Modal.Header title="Add Equipment" />
                     <Modal.Body>
@@ -64,6 +77,7 @@ function ManageEquipment({navigation}) {
                             <Text style={styles.subheader}>Name</Text>
                             <TextInput
                                 style={styles.input}
+                                value={eqName}
                                 placeholder="e.g. dumbbell"
                                 keyboardType="default"
                                 onChangeText={(val) => setEqName(val)}
