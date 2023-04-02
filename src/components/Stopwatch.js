@@ -4,7 +4,7 @@ import styles from "../styles/styles";
 
 const Stopwatch = () => {
     const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(false);
+    const [running, setRunning] = useState(true);
     useEffect(() => {
       let interval;
       if (running) {
