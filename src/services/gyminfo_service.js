@@ -20,6 +20,12 @@ class gymInfoService {
         let gymInfoDoc = doc(firestoredb, 'gym metadata', gymID);
         await setDoc(gymInfoDoc, gymInfoData);
 
+        // update manager doc with gymID
+        await updateDoc(doc(firestoredb, "managers", currentLoginEmail),
+            {
+                gymID: gymName,
+            });
+
         global.gymID = gymName
     }
 
@@ -52,7 +58,7 @@ class gymInfoService {
 
     getGymMemberCount = async () => {
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
-        return gymDataSnap.data()['users'].length
+        return gymDataSnap.data()['users']?.length || 0
     }
 
     // helper method to get gym document for a user
