@@ -57,7 +57,7 @@ class gymInfoService {
     }
 
     getGymMemberCount = async () => {
-        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), global.gymID))
         return gymDataSnap.data()['users']?.length || 0
     }
 
@@ -69,7 +69,6 @@ class gymInfoService {
         let currentUserData = currentUserDataSnap.data()
 
         if(currentUserData !== undefined && currentUserData['gymID'] !== undefined) {
-            console.log('user doc already has gym!')
             global.gymID = currentUserData['gymID']
             return currentUserData['gymID']
         } else {
