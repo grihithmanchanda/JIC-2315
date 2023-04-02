@@ -6,7 +6,7 @@ import styles from '../styles/styles';
 import { ScrollView } from 'react-native-gesture-handler';
 
 function RegisterUser({route, navigation}) {
-    const [email, setEmail] = useState(route?.params['email'] ?? '')
+    const [email, setEmail] = useState(route?.params['email'].toLowerCase() ?? '')
     const [password, setPassword] = useState(route?.params['password'] ?? '')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [accountType, setAccountType] = useState('User')
@@ -32,7 +32,7 @@ function RegisterUser({route, navigation}) {
                 <TextInput //Username/Email field
                     placeholder="Email"
                     value={email}
-                    onChangeText={text => setEmail(text)}
+                    onChangeText={text => setEmail(text.toLowerCase())}
                     style={styles.input}
                 />
                 <Text style={styles.subheader}>Password:</Text>

@@ -7,23 +7,24 @@ const usersRef = collection(firestoredb, 'users');
 
 class LoginService {
     //Method to register new user in firebase
-    registerNewUser = async (email, password, accountType) => {
-        return await createUserWithEmailAndPassword(auth, email, password)
+    registerNewUser = async (email, password, accountType="User") => {
+        const filteredEmail = email.toLowerCase()
+        return await createUserWithEmailAndPassword(auth, filteredEmail, password)
             .then(async (userCredential) => {
                 if (accountType === "User") {
                     let userData = {
-                        'username': email,
+                        'username': filteredEmail,
                     }
     
-                    let userDoc = doc(firestoredb, 'users', email);
+                    let userDoc = doc(firestoredb, 'users', filteredEmail);
                     await setDoc(userDoc, userData);
                 }
                 else {
                     let managerData = {
-                        'username': email,
+                        'username': filteredEmail,
                         'gymID': null
                     }
-                    let managerDoc = doc(firestoredb, 'managers', email);
+                    let managerDoc = doc(firestoredb, 'managers', filteredEmail);
                     await setDoc(managerDoc, managerData);
                 }
                 // hacky global variable to make this info available everywhere. Probably want to change this.
@@ -34,7 +35,8 @@ class LoginService {
 
     //Method to log in as an existing user
     loginUser = async (email, password, accountType) => {
-        return await signInWithEmailAndPassword(auth, email, password)
+        const filteredEmail = email.toLowerCase()
+        return await signInWithEmailAndPassword(auth, filteredEmail, password)
             .then(async (userCredential) => {
                 let user = userCredential.user;
                 let docRef = doc(usersRef, user.email)
@@ -43,13 +45,14 @@ class LoginService {
                 }
 
                 let docSnap = await getDoc(docRef)
+                let docData = docSnap.data()
                 
-                if (!docSnap.exists){
+                if (docData === undefined){
                     throw new Error('Error: Incorrect account type!')
                 } else {
                     // hacky global variable to make this info available everywhere. Probably want to change this.
                     global.currentLoginEmail = user.email
-                    global.gymID = docSnap.data()['gymID']
+                    global.gymID = docData['gymID']
                     return user;
                 }
             })

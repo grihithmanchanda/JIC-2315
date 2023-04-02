@@ -2,6 +2,7 @@ import {Pressable, Text, TextInput, View, ScrollView} from 'react-native';
 import React, {useState} from "react";
 import LoginService from '../services/login_service';
 import styles from '../styles/styles';
+import gyminfo_service from "../services/gyminfo_service";
 
 function Login({navigation}) {
     const [email, setEmail] = useState('')
@@ -18,8 +19,20 @@ function Login({navigation}) {
     //Method to handle user login button press
     const handleLogin = (accountType) => {
         LoginService.loginUser(email, password, accountType)
-            .then(()=> {
-                navigation.navigate(accountType === 'User' ? 'UserHome' : 'ManagerHome');
+            .then(async ()=> {
+                if (accountType === 'User') {
+                    let gym = await gyminfo_service.getGymOfUser()
+
+                    if (gym === undefined) { // user never selected their gym
+                        alert('Please complete the registration process!')
+                        navigation.navigate('GymSearch')
+                    } else {
+                        navigation.navigate('UserHome', {"gymName": gym})
+                    }
+
+                } else {
+                    navigation.navigate('ManagerHome')
+                }
             })
             .catch(error => alert(error.message))
     }
