@@ -22,7 +22,6 @@ function Login({navigation}) {
             .then(async ()=> {
                 if (accountType === 'User') {
                     let gym = await gyminfo_service.getGymOfUser()
-                    console.log('got gym:', gym)
 
                     if (gym === undefined) { // user never selected their gym
                         alert('Please complete the registration process!')
