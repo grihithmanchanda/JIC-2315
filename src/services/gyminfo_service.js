@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDocs, setDoc, updateDoc, deleteField, arrayUnion } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore"
 
 const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
@@ -35,7 +35,7 @@ class gymInfoService {
             users: arrayUnion(userDoc)
         })
 
-        await updateDoc(doc(firestoredb, "managers", email),
+        await updateDoc(userDoc,
             {
                 gymID: gymName,
             });
@@ -53,6 +53,32 @@ class gymInfoService {
     getGymMemberCount = async () => {
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
         return gymDataSnap.data()['users'].length
+    }
+
+    // helper method to get gym document for a user
+    getGymOfUser = async() => {
+
+        // get data for all gyms
+        const gymMetadataCollection = await this.getAllGymInfo();
+
+        // loop through each gym until we find one with a matching user entry
+        for (const gymDoc of gymMetadataCollection.docs) {
+            if (gymDoc.data()['users'] !== undefined) {
+                let userDocsArr = await gymDoc.data()['users']
+                // loop through gym's user array
+                for (const userDoc of userDocsArr) {
+                    let userDataSnap = await getDoc(userDoc);
+                    let userData = await userDataSnap.data()
+                    // if a username matches current user's, we found their gym
+                    if (userData !== undefined && userData['username'] === currentLoginEmail) {
+                        global.gymID = gymDoc.data().Name
+                        return gymDoc.ref;
+                    }
+                }
+            }
+        }
+        // couldn't find a matching gym; return undefined
+        return undefined
     }
 }
 
