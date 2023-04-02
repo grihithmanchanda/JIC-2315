@@ -40,6 +40,11 @@ class gymInfoService {
         await updateDoc(gymDoc, {
             users: arrayUnion(userDoc)
         })
+
+        await updateDoc(userDoc,
+            {
+                gymID: gymName,
+            });
     };
 
     getAllGymNames = async () => {
@@ -52,8 +57,46 @@ class gymInfoService {
     }
 
     getGymMemberCount = async () => {
-        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), global.gymID))
         return gymDataSnap.data()['users']?.length || 0
+    }
+
+    // helper method to get gym document for a user
+    getGymOfUser = async() => {
+
+        let userDoc = doc(firestoredb, 'users', currentLoginEmail)
+        let currentUserDataSnap = await getDoc(userDoc)
+        let currentUserData = currentUserDataSnap.data()
+
+        if(currentUserData !== undefined && currentUserData['gymID'] !== undefined) {
+            global.gymID = currentUserData['gymID']
+            return currentUserData['gymID']
+        } else {
+            console.log('user doc doesn\'t have gym')
+
+            // get data for all gyms
+            const gymMetadataCollection = await this.getAllGymInfo();
+
+            // loop through each gym until we find one with a matching user entry
+            for (const gymDoc of gymMetadataCollection.docs) {
+                if (gymDoc.data()['users'] !== undefined) {
+                    let userDocsArr = await gymDoc.data()['users']
+                    // loop through gym's user array
+                    for (const userDoc of userDocsArr) {
+                        let userDataSnap = await getDoc(userDoc);
+                        let userData = await userDataSnap.data()
+                        // if a username matches current user's, we found their gym
+                        if (userData !== undefined && userData['username'] === currentLoginEmail) {
+                            global.gymID = gymDoc.data().Name
+                            return gymDoc.data().Name;
+                        }
+                    }
+                }
+            }
+            // couldn't find a matching gym; return undefined
+            return undefined
+        }
+
     }
 }
 

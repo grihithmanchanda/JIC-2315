@@ -45,13 +45,14 @@ class LoginService {
                 }
 
                 let docSnap = await getDoc(docRef)
+                let docData = docSnap.data()
                 
-                if (!docSnap.exists){
+                if (docData === undefined){
                     throw new Error('Error: Incorrect account type!')
                 } else {
                     // hacky global variable to make this info available everywhere. Probably want to change this.
                     global.currentLoginEmail = user.email
-                    global.gymID = docSnap.data()['gymID']
+                    global.gymID = docData['gymID']
                     return user;
                 }
             })

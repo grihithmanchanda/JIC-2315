@@ -3,20 +3,13 @@ import { collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, arrayUn
 
 const equipmentCollectionRef = collection(firestoredb, "equipment");
 
-let gymID = '';
-
 class EquipmentService {
 
 
     getAllEquipment = async (loginEmail=currentLoginEmail) => {
 
-        // ensure gymID is set
-        if (gymID === '') {
-            await this.getGymID()
-        }
-
         // retrieve all equipment present at this gym
-        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
+        let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), global.gymID))
         // let equipmentRefs = gymDataSnap.data()['equipment']
         let equipmentRefs = [];
         if (gymDataSnap.exists()) {
@@ -39,27 +32,9 @@ class EquipmentService {
         return equipmentRefs
     };
 
-    getGymID = async(loginEmail=currentLoginEmail) => {
-        // retrieve associated gym from manager account
-        let managerDataSnap = await getDoc(doc(collection(firestoredb, 'managers'), loginEmail))
-        gymID = managerDataSnap.data()['gymID']
-        return gymID
-    }
-
     getEquipment = async(eqName, loginEmail=currentLoginEmail) => {
 
-        // ensure gymID is set
-        if (gymID === '') {
-            await this.getGymID()
-        }
-
-        // let eqRef = doc(collection(doc(collection(firestoredb, 'gym metadata'), gymID), 'equipment'), eqName)
-        // let gymCollection = collection(firestoredb, 'gym metadata')
-        // let gymRef = doc(gymCollection, gymID)
-        // let eqColRef = collection(gymRef, 'equipment')
-        // let eqRef = doc(eqColRef, eqName)
-
-        let eqRef = doc(firestoredb, 'gym metadata', gymID, 'equipment', eqName)
+        let eqRef = doc(firestoredb, 'gym metadata', global.gymID, 'equipment', eqName)
         let eqSnap = await getDoc(eqRef)
         let eqData = {'id':eqSnap.id, 'data':eqSnap.data(), 'ref': eqSnap.ref}
 
@@ -105,24 +80,24 @@ class EquipmentService {
             'muscle groups': equipmentMuscleGroups
         }
 
-        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + global.gymID + '/equipment', equipmentName)
         setDoc(equipmentDoc, equipmentData);
 
         // Adds the reference to the equipment under the gym metadata
-        const gymdata = doc(collection(firestoredb, 'gym metadata'), gymID)
-                await updateDoc(gymdata, {
+        const gymdata = doc(collection(firestoredb, 'gym metadata'), global.gymID)
+        await updateDoc(gymdata, {
             equipment: arrayUnion(equipmentDoc)
         })
     };
 
     deleteEquipment = async (equipmentName) => {
         // Deletes the equipment from equipment collection under gym metadata
-        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + global.gymID + '/equipment', equipmentName)
         deleteDoc(equipmentDoc);
         
         // Removes the reference to the equipment
-            const gymdata = doc(collection(firestoredb, 'gym metadata'), gymID)
-                await updateDoc(gymdata, {
+        const gymdata = doc(collection(firestoredb, 'gym metadata'), global.gymID)
+        await updateDoc(gymdata, {
             equipment: arrayRemove(equipmentDoc)
         })
     };
@@ -133,7 +108,7 @@ class EquipmentService {
             'count': equipmentCount,
             'muscle groups': equipmentMuscleGroups
         }
-        let equipmentDoc = doc(firestoredb, 'gym metadata/' + gymID + '/equipment', equipmentName)
+        let equipmentDoc = doc(firestoredb, 'gym metadata/' + global.gymID + '/equipment', equipmentName)
         return updateDoc(equipmentDoc, equipmentData);
     };
 
