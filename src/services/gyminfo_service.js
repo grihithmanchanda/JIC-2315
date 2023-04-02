@@ -58,27 +58,40 @@ class gymInfoService {
     // helper method to get gym document for a user
     getGymOfUser = async() => {
 
-        // get data for all gyms
-        const gymMetadataCollection = await this.getAllGymInfo();
+        let userDoc = doc(firestoredb, 'users', currentLoginEmail)
+        let currentUserDataSnap = await getDoc(userDoc)
+        let currentUserData = currentUserDataSnap.data()
 
-        // loop through each gym until we find one with a matching user entry
-        for (const gymDoc of gymMetadataCollection.docs) {
-            if (gymDoc.data()['users'] !== undefined) {
-                let userDocsArr = await gymDoc.data()['users']
-                // loop through gym's user array
-                for (const userDoc of userDocsArr) {
-                    let userDataSnap = await getDoc(userDoc);
-                    let userData = await userDataSnap.data()
-                    // if a username matches current user's, we found their gym
-                    if (userData !== undefined && userData['username'] === currentLoginEmail) {
-                        global.gymID = gymDoc.data().Name
-                        return gymDoc.ref;
+        if(currentUserData !== undefined && currentUserData['gymID'] !== undefined) {
+            console.log('user doc already has gym!')
+            global.gymID = currentUserData['gymID']
+            return currentUserData['gymID']
+        } else {
+            console.log('user doc doesn\'t have gym')
+
+            // get data for all gyms
+            const gymMetadataCollection = await this.getAllGymInfo();
+
+            // loop through each gym until we find one with a matching user entry
+            for (const gymDoc of gymMetadataCollection.docs) {
+                if (gymDoc.data()['users'] !== undefined) {
+                    let userDocsArr = await gymDoc.data()['users']
+                    // loop through gym's user array
+                    for (const userDoc of userDocsArr) {
+                        let userDataSnap = await getDoc(userDoc);
+                        let userData = await userDataSnap.data()
+                        // if a username matches current user's, we found their gym
+                        if (userData !== undefined && userData['username'] === currentLoginEmail) {
+                            global.gymID = gymDoc.data().Name
+                            return gymDoc.data().Name;
+                        }
                     }
                 }
             }
+            // couldn't find a matching gym; return undefined
+            return undefined
         }
-        // couldn't find a matching gym; return undefined
-        return undefined
+
     }
 }
 
