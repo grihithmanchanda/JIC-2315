@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, getDocs, setDoc, updateDoc, deleteField, arrayUnion } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore"
 
 const gymInfoCollectionRef = collection(firestoredb, "gym metadata");
 
@@ -20,6 +20,12 @@ class gymInfoService {
         let gymInfoDoc = doc(firestoredb, 'gym metadata', gymID);
         await setDoc(gymInfoDoc, gymInfoData);
 
+        // update manager doc with gymID
+        await updateDoc(doc(firestoredb, "managers", currentLoginEmail),
+            {
+                gymID: gymName,
+            });
+
         global.gymID = gymName
     }
 
@@ -34,11 +40,6 @@ class gymInfoService {
         await updateDoc(gymDoc, {
             users: arrayUnion(userDoc)
         })
-
-        await updateDoc(doc(firestoredb, "managers", email),
-            {
-                gymID: gymName,
-            });
     };
 
     getAllGymNames = async () => {
@@ -52,7 +53,7 @@ class gymInfoService {
 
     getGymMemberCount = async () => {
         let gymDataSnap = await getDoc(doc(collection(firestoredb, 'gym metadata'), gymID))
-        return gymDataSnap.data()['users'].length
+        return gymDataSnap.data()['users']?.length || 0
     }
 }
 
