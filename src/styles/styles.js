@@ -19,6 +19,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 15,
     },
+    middlenumber: {
+        fontSize: 40,
+        textAlign: 'center',
+        paddingTop: 15,
+        width: 0
+    },
     subheader: {
         fontSize: 30,
         textAlign: 'center',
@@ -68,6 +74,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 4,
         marginTop: 20,
+    },
+    pmbutton: {
+        height: 50,
+        backgroundColor: '#051739',
+        width: 50,
+        borderWidth: 1,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginTop: 15,
+        marginLeft: 20,
+        marginRight: 20
     },
     button3: {
         height: 70,
@@ -128,6 +145,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         width: '100%'
+    },
+    plusminus: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+        marginBottom: 20
     },
     stopwatchContainer: {
         flexDirection: 'row',
