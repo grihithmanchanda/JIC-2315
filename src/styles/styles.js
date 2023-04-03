@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     middlenumber: {
-        fontSize: 40,
+        fontSize: 30,
         textAlign: 'center',
-        paddingTop: 15,
-        width: 0
+        paddingTop: 20,
+        width: 50
     },
     subheader: {
         fontSize: 30,
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     pmbutton: {
-        height: 50,
+        height: 45,
         backgroundColor: '#051739',
-        width: 50,
+        width: 45,
         borderWidth: 1,
         justifyContent: 'center',
         borderRadius: 4,
