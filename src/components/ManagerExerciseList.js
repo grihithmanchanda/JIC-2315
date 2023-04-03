@@ -12,7 +12,7 @@ function ManagerExerciseList({navigation, getWorkouts}) {
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
     const [selectedExercises, setSelectedExercises] = useState([]);
     const [difficultyFilter, setDifficultyFilter] = useState('')
-    const tableHead = ['Name', 'Assoc. Equipment', 'Difficulty', 'Comments'];
+    const tableHead = ['Name', 'Assoc. Equipment', 'Difficulty', 'Comments', 'Health Safety'];
 
     // when selectedExercises changes, send data to superclass
     useEffect(() => {
@@ -54,7 +54,7 @@ function ManagerExerciseList({navigation, getWorkouts}) {
             return difficultyFilter ? exercise['difficulty'] === difficultyFilter : true
         })
         // map to table rows
-        const filteredExerciseRows = filteredExerciseData.map((exercise) => [exercise['exercise name'], exercise['equipment name'], exercise['difficulty'], exercise['comments']])
+        const filteredExerciseRows = filteredExerciseData.map((exercise) => [exercise['exercise name'], exercise['equipment name'], exercise['difficulty'], exercise['comments'], exercise['health safety']])
         return filteredExerciseRows
     }
 
