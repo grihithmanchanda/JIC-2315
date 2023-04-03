@@ -4,11 +4,13 @@ import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
 import {Picker} from '@react-native-picker/picker';
+import workout_service from "../services/workout_service";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function WOTDInfo({navigation}) {
-    const [difficultyFilter, setDifficultyFilter] = useState('')
+    const [difficultyFilter, setDifficultyFilter] = useState('advanced')
+    const [wodData, setWODData] = useState(["one", "two", "three", "four"])
 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -16,7 +18,10 @@ function WOTDInfo({navigation}) {
     const day = String(currentDate.getDate()).padStart(2, '0');
     const date = `${month}-${day}-${year}`;
 
-    const data = ["one", "two", "three", "four"];
+    useEffect(async () => {
+        const wodDataSnap = await workout_service.getWOD();
+        setWODData(wodDataSnap[difficultyFilter])
+    }, [difficultyFilter]);
 
     return (
         <ScrollView style={styles.outer}>
@@ -34,7 +39,7 @@ function WOTDInfo({navigation}) {
                  <Text style={styles.pickerText}></Text>
                  <View style={styles.pickerInnerView}>
                      <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
-                         <Picker.Item label="Beginner" value="beginner"/>
+                         <Picker.Item label="novice" value="novice"/>
                          <Picker.Item label="Intermediate" value="intermediate"/>
                          <Picker.Item label="Advanced" value="advanced"/>
                      </Picker>
@@ -42,8 +47,8 @@ function WOTDInfo({navigation}) {
              </View>
                 <Text style={styles.subheader}>Exercises:</Text>
                 {   
-                    data.map((val) => (
-                        <Text style={styles.subsubheader}>{val}</Text>
+                    wodData.map((exercise) => (
+                        <Text style={styles.subsubheader}>{exercise}</Text>
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>

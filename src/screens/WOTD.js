@@ -14,7 +14,7 @@ function WOTD({route, navigation}) {
     const [workouts, setWorkouts] = useState([]);
 
     let handleWorkoutSubmission= async() => {
-        await workout_service.addWorkout(workouts, gymID, workoutDifficulty)
+        await workout_service.addWorkout(workouts, global.gymID, workoutDifficulty)
         navigation.navigate('ManagerHome');
     }
 
