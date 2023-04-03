@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {Pressable, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import styles from "../styles/styles";
 
-const Stopwatch = () => {
+function Stopwatch({running}) {
     const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(true);
     useEffect(() => {
       let interval;
       if (running) {
@@ -25,4 +24,4 @@ const Stopwatch = () => {
     );
 };
 
-export default Stopwatch
+export default Stopwatch;
