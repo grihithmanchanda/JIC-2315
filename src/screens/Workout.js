@@ -3,10 +3,9 @@ import {Pressable, ScrollView, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
-import Stopwatch from "../components/Stopwatch";
+import Stopwatch, { modifyTimer } from "../components/Stopwatch";
 
 function Workout({route, navigation}) {
-    console.log(route.params);
     if (!route?.params["exercises"]["names"].length) {
         navigation.navigate("UserHome");
     }
@@ -18,9 +17,16 @@ function Workout({route, navigation}) {
     
     let [repsDone, setRepsDone] = useState(0);
 
+    let [running, setRunning] = useState(true);
+
     let button_text = "Next";
     if (exercises_left.length == 1) {
         button_text = "Finish";
+    }
+
+    let pause_text = "Pause";
+    if (!running) {
+        pause_text = "Resume";
     }
 
     const handleNext = () => {
@@ -32,6 +38,10 @@ function Workout({route, navigation}) {
         };
         setRepsDone(0);
         navigation.navigate('Workout', {"exercises": data})
+    };
+
+    const handlePause = () => {
+        setRunning(!running);
     };
 
     return (
@@ -46,7 +56,7 @@ function Workout({route, navigation}) {
                 <Text style={styles.header}>
                     Workout Time:
                 </Text>
-                <Stopwatch/>
+                <Stopwatch running={running}/>
                 <Text style={styles.header}>
                     Exercise:
                 </Text>
@@ -75,6 +85,12 @@ function Workout({route, navigation}) {
                 </View>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleNext}>
                     <Text style={styles.text}>{button_text}</Text>
+                </Pressable>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handlePause}>
+                    <Text style={styles.text}>{pause_text}</Text>
+                </Pressable>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => navigation.navigate("UserHome")}>
+                    <Text style={styles.text}>Quit</Text>
                 </Pressable>
             </View>
         </ScrollView>
