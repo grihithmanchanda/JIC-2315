@@ -56,14 +56,14 @@ function Workout({route, navigation}) {
                 <Text style={styles.header}>
                     Rep Goal:
                 </Text>
-                <Text style={styles.header}>
+                <Text style={styles.subheader}>
                     {curr_reps}
                 </Text>
                 <Text style={styles.header}>
                     Reps Done:
                 </Text>
                 <View style={styles.plusminus}>
-                <Pressable style={styles.pmbutton} textStyle={styles.text} onPress={() => {setRepsDone(repsDone - 1)}}>
+                <Pressable style={styles.pmbutton} textStyle={styles.text} onPress={() => {repsDone ? setRepsDone(repsDone - 1) : {}}}>
                     <Text style={styles.text}>-</Text>
                 </Pressable>
                 <Text style={styles.middlenumber}>
