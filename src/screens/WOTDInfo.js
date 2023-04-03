@@ -16,7 +16,8 @@ function WOTDInfo({navigation}) {
     const day = String(currentDate.getDate()).padStart(2, '0');
     const date = `${month}-${day}-${year}`;
 
-    const data = ["one", "two", "three", "four"];
+    const data = {"names": ["one", "two", "three", "four"],
+                  "reps": [5, 7, 3, 15]};
 
     return (
         <ScrollView style={styles.outer}>
@@ -42,13 +43,13 @@ function WOTDInfo({navigation}) {
              </View>
                 <Text style={styles.subheader}>Exercises:</Text>
                 {   
-                    data.map((val) => (
+                    data["names"].map((val) => (
                         <Text style={styles.subsubheader}>{val}</Text>
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
                 <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": data})}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>
