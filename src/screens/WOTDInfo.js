@@ -11,6 +11,7 @@ import workout_service from "../services/workout_service";
 function WOTDInfo({navigation}) {
     const [difficultyFilter, setDifficultyFilter] = useState(2)
     const [wodData, setWODData] = useState(["one", "two", "three", "four"])
+    const [safetyText, setSafetyText] = useState('Be safe!')
 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -28,6 +29,7 @@ function WOTDInfo({navigation}) {
             alert(`There is no workout for difficulty level ${difficultyFilter}.`)
         } else {
             setWODData(wodDataSnap)
+            setSafetyText(wodDataSnap.map((exercise) => exercise.exerciseComment).join(', '))
         }
     }
 
@@ -60,9 +62,8 @@ function WOTDInfo({navigation}) {
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
-                <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": {"names": ["one", "two", "three", "four"],
-                  "reps": [0, 0, 0, 0]}, 'wod': wodData})}}>
+                <Text style={styles.subsubheader}>{safetyText}</Text>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {'wod': wodData})}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>
