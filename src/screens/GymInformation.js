@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Button } from "react-native-elements";
+import { getAuth, signOut } from "firebase/auth";
 import styles from "../styles/styles";
 import gyminfo_service from "../services/gyminfo_service";
 
