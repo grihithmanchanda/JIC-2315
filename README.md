@@ -9,6 +9,23 @@
 
 # Release Notes / Changelog
 
+## v0.4.0
+Workout features for gym-goers!
+### Features
+ - Gym managers can add health safety warnings to exercises to alert users of any potential risks
+ - Users can start workouts and access the workout screen
+ - Workout screen starts a timer that can be paused/resumed when performing exercises
+ - Workout screen includes a tracker that users can use for counting the number of reps
+ - Workouts can be paused and quit
+ - Users can view previous workouts from the workout history screen
+### Bug Fixes
+ - Frontend for WOTD screens has been implemented
+### Known Issues
+ - Lack of security rules for Firebase access (anyone can read/write)
+ - Comments and health safety warning text being cutoff if text is too long
+ 
+---
+
 ## v0.3.0
 Added more gym-specific functionality!
 ### Features
