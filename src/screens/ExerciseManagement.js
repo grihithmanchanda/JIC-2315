@@ -10,9 +10,10 @@ function ExerciseManagement({ route, navigation }) {
   const [numReps, setNumReps] = useState(0)
   const [amtWeight, setAmtWeight] = useState(0)
   const [exerciseComment, setExerciseComment] = useState('')
+  const [healthSafety, setHealthSafety] = useState('')
 
   const handleExerciseCreation = async () => {
-    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment).then((exerciseData) => {
+    await workout_service.addExercise(eqName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment, healthSafety).then((exerciseData) => {
       navigation.navigate('EditEquipment', {
         'equipment': eqName
       });
@@ -60,6 +61,12 @@ function ExerciseManagement({ route, navigation }) {
           placeholder="Comments"
           style={styles.input}
           onChangeText={text => setExerciseComment(text)}
+        />
+        <Text style={styles.subheader}>Health Safety:</Text>
+        <TextInput //Health safety warning
+          placeholder="Health Safety Warning"
+          style={styles.input}
+          onChangeText={text => setHealthSafety(text)}
         />
         <Pressable //Add button
           style={styles.button}

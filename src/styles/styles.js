@@ -19,6 +19,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 15,
     },
+    middlenumber: {
+        fontSize: 30,
+        textAlign: 'center',
+        paddingTop: 20,
+        width: 50
+    },
     subheader: {
         fontSize: 30,
         textAlign: 'center',
@@ -69,6 +75,28 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginTop: 20,
     },
+    pmbutton: {
+        height: 45,
+        backgroundColor: '#051739',
+        width: 45,
+        borderWidth: 1,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginTop: 15,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    button3: {
+        height: 70,
+        backgroundColor: '#051739',
+        width: '25%',
+        borderWidth: 1,
+        paddingVertical: 15,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginLeft: 10,
+        marginRight: 10
+    },
     text: {
         color: '#ebeeff',
         textAlign: 'center',
@@ -87,6 +115,7 @@ const styles = StyleSheet.create({
     outer: {
         flex: 1,
         backgroundColor: '#ebeeff',
+        width: "100%"
     },
     checkboxWrapper: {
         flexDirection: 'row',
@@ -113,6 +142,17 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     loginButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%'
+    },
+    plusminus: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+        marginBottom: 20
+    },
+    stopwatchContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         width: '100%'
@@ -154,13 +194,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6f8fa'
     },
     row: {
-        height: 28,
+        height: 40,
         backgroundColor: '#ebeeff',
         borderWidth: 0.5,
         borderRadius: 4
     },
     rowSel: {
-        height: 28,
+        height: 40,
         backgroundColor: '#293571',
         borderWidth: 0.5,
         borderRadius: 4

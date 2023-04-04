@@ -63,7 +63,9 @@ class EquipmentService {
                 let exerciseObj = {
                     'exercise name': exerciseDoc.id,
                     'equipment name': equipmentDoc.id,
-                    'difficulty': exerciseData['difficulty']
+                    'difficulty': exerciseData['difficulty'],
+                    'comments': exerciseData['exerciseComment'],
+                    'health safety': exerciseData['healthSafety']
                 }
                 exercises.push(exerciseObj)
             });

@@ -7,14 +7,15 @@ const difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'};
 
 class WorkoutService {
 
-    addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment) => {
+    addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment, healthSafety) => {
         let difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'}
         let difficultyLevelText = difficultyMapping[difficultyLevel];
         let exerciseData = {
             'difficulty': difficultyLevelText,
             'numReps': numReps,
             'amtWeight': amtWeight,
-            'exerciseComment': exerciseComment
+            'exerciseComment': exerciseComment,
+            'healthSafety': healthSafety
         }
 
         let equipmentData = await equipment_service.getEquipment(equipmentName)
