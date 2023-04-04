@@ -9,7 +9,7 @@ import workout_service from "../services/workout_service";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function WOTDInfo({navigation}) {
-    const [difficultyFilter, setDifficultyFilter] = useState('advanced')
+    const [difficultyFilter, setDifficultyFilter] = useState(2)
     const [wodData, setWODData] = useState(["one", "two", "three", "four"])
 
     const currentDate = new Date();
@@ -18,12 +18,17 @@ function WOTDInfo({navigation}) {
     const day = String(currentDate.getDate()).padStart(2, '0');
     const date = `${month}-${day}-${year}`;
 
-    // useEffect(async () => {
-    //     const wodDataSnap = await workout_service.getWOD();
-    //     setWODData(wodDataSnap[difficultyFilter])
-    // }, [difficultyFilter]);
+    useEffect(() => {
+        getFilteredWOD()
+    }, [difficultyFilter]);
+
+    const getFilteredWOD = async () => {
+        const wodDataSnap = await workout_service.getWOD(difficultyFilter);
+        setWODData(wodDataSnap)
+    }
+
     const data = {"names": ["one", "two", "three", "four"],
-                  "reps": [5, 7, 3, 15]};
+                  "reps": [0, 0, 0, 0]};
 
     return (
         <ScrollView style={styles.outer}>
@@ -41,9 +46,9 @@ function WOTDInfo({navigation}) {
                  <Text style={styles.pickerText}></Text>
                  <View style={styles.pickerInnerView}>
                      <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
-                         <Picker.Item label="novice" value="novice"/>
-                         <Picker.Item label="Intermediate" value="intermediate"/>
-                         <Picker.Item label="Advanced" value="advanced"/>
+                         <Picker.Item label="Novice" value={0}/>
+                         <Picker.Item label="Intermediate" value={1}/>
+                         <Picker.Item label="Advanced" value={2}/>
                      </Picker>
                  </View>
              </View>
@@ -52,7 +57,7 @@ function WOTDInfo({navigation}) {
                     // wodData.map((exercise) => (
                     //     <Text style={styles.subsubheader}>{exercise}</Text>
                     data["names"].map((val) => (
-                        <Text style={styles.subsubheader}>{val}</Text>
+                        <Text key={val} style={styles.subsubheader}>{val}</Text>
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
