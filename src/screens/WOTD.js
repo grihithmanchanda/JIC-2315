@@ -11,10 +11,10 @@ import styles from "../styles/styles";
 //   user num, equipment, and buttons for settings
 function WOTD({route, navigation}) {
     const [workoutDifficulty, setWorkoutDifficulty] = useState(route?.params['workoutDifficulty'] ?? 0)
-    const [workouts, setWorkouts] = useState([]);
+    const [exercises, setExercises] = useState([]);
 
     let handleWorkoutSubmission= async() => {
-        await workout_service.addWorkout(workouts, gymID, workoutDifficulty)
+        await workout_service.addWorkout(exercises, global.gymID, workoutDifficulty)
         navigation.navigate('ManagerHome');
     }
 
@@ -29,7 +29,7 @@ function WOTD({route, navigation}) {
             <View style={styles.container}>
                 <Text style={styles.header}>Create Workout of the Day</Text>
                 <Text style={styles.subheader}>Select 4 exercises</Text>
-                <ManagerExerciseList style={styles.managerExerciseList} getWorkouts={setWorkouts}/>
+                <ManagerExerciseList style={styles.managerExerciseList} getExercises={setExercises}/>
                 <Pressable style={styles.button} textStyle={styles.text}>
                     <Text style={styles.text} onPress={handleWorkoutSubmission}>Use These Exercises</Text>
                 </Pressable>

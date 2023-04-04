@@ -7,7 +7,7 @@ import styles from "../styles/styles";
 
 
 // renders equipment list for home pages
-function ManagerExerciseList({navigation, getWorkouts}) {
+function ManagerExerciseList({navigation, getExercises}) {
     const [exerciseData, setExerciseData] = useState([])
     const [tableRows, setTableRows] = useState([['a', 'b', 'c']]);
     const [selectedExercises, setSelectedExercises] = useState([]);
@@ -16,7 +16,11 @@ function ManagerExerciseList({navigation, getWorkouts}) {
 
     // when selectedExercises changes, send data to superclass
     useEffect(() => {
-        getWorkouts(selectedExercises);
+        // get the document references of each exercise
+        let selectedExercisesRefs = exerciseData
+            .filter((exercise) =>  selectedExercises.includes(exercise['exercise name']))
+            .map((exercise) => exercise.exerciseRef)
+        getExercises(selectedExercisesRefs);
     }, [selectedExercises])
 
     // when exerciseData is updated, generate updated table
@@ -41,7 +45,7 @@ function ManagerExerciseList({navigation, getWorkouts}) {
     function handleExerciseSelect(row) {
         var newExercises = selectedExercises;
         if (selectedExercises.includes(row)) {
-            newExercises = selectedExercises.filter(i => i != row);
+            newExercises = selectedExercises.filter(i => i !== row);
         } else if (selectedExercises.length < 4) {
             newExercises = [...selectedExercises, row];
         }

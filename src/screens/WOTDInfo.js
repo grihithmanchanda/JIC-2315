@@ -4,11 +4,14 @@ import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
 import {Picker} from '@react-native-picker/picker';
+import workout_service from "../services/workout_service";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function WOTDInfo({navigation}) {
-    const [difficultyFilter, setDifficultyFilter] = useState('')
+    const [difficultyFilter, setDifficultyFilter] = useState(2)
+    const [wodData, setWODData] = useState(["one", "two", "three", "four"])
+    const [safetyText, setSafetyText] = useState('Be safe!')
 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -16,8 +19,19 @@ function WOTDInfo({navigation}) {
     const day = String(currentDate.getDate()).padStart(2, '0');
     const date = `${month}-${day}-${year}`;
 
-    const data = {"names": ["one", "two", "three", "four"],
-                  "reps": [5, 7, 3, 15]};
+    useEffect(() => {
+        getFilteredWOD()
+    }, [difficultyFilter]);
+
+    const getFilteredWOD = async () => {
+        const wodDataSnap = await workout_service.getWOD(difficultyFilter);
+        if (wodDataSnap === undefined) {
+            alert(`There is no workout for difficulty level ${difficultyFilter}.`)
+        } else {
+            setWODData(wodDataSnap)
+            setSafetyText(wodDataSnap.map((exercise) => exercise.exerciseComment).join(', '))
+        }
+    }
 
     return (
         <ScrollView style={styles.outer}>
@@ -35,21 +49,21 @@ function WOTDInfo({navigation}) {
                  <Text style={styles.pickerText}></Text>
                  <View style={styles.pickerInnerView}>
                      <Picker style={styles.picker} itemStyle={styles.pickerItem} selectedValue={difficultyFilter} onValueChange={(difficulty) => setDifficultyFilter(difficulty)}>
-                         <Picker.Item label="Beginner" value="beginner"/>
-                         <Picker.Item label="Intermediate" value="intermediate"/>
-                         <Picker.Item label="Advanced" value="advanced"/>
+                         <Picker.Item label="Novice" value={0}/>
+                         <Picker.Item label="Intermediate" value={1}/>
+                         <Picker.Item label="Advanced" value={2}/>
                      </Picker>
                  </View>
              </View>
                 <Text style={styles.subheader}>Exercises:</Text>
-                {   
-                    data["names"].map((val) => (
-                        <Text style={styles.subsubheader}>{val}</Text>
+                {
+                    wodData.map((exercise) => (
+                        <Text key={exercise.name} style={styles.subsubheader}>{exercise.name}</Text>
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
-                <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": data})}}>
+                <Text style={styles.subsubheader}>{safetyText}</Text>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {'wod': wodData})}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>

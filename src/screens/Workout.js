@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Pressable, ScrollView, Text, View} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
@@ -6,38 +6,30 @@ import styles from "../styles/styles";
 import Stopwatch, { modifyTimer } from "../components/Stopwatch";
 
 function Workout({route, navigation}) {
-    if (!route?.params["exercises"]["names"].length) {
-        navigation.navigate("UserHome");
-    }
-    let curr_exercise = route?.params["exercises"]["names"][0];
-    let exercises_left = route?.params["exercises"]["names"];
     
-    let curr_reps = route?.params["exercises"]["reps"][0];
-    let reps_left = route?.params["exercises"]["reps"];
-    
+    let [wodData, setWODData] = useState(route?.params['wod'] ?? null)
+    let [curExerciseIndex, setCurExerciseIndex] = useState(0);
+    let [curExercise, setCurExercise] = useState(route?.params["wod"][0] ?? null)
+    let [running, setRunning] = useState(true);
     let [repsDone, setRepsDone] = useState(0);
 
-    let [running, setRunning] = useState(true);
-
     let button_text = "Next";
-    if (exercises_left.length == 1) {
-        button_text = "Finish";
-    }
 
-    let pause_text = "Pause";
-    if (!running) {
-        pause_text = "Resume";
-    }
+    useEffect(() => {
+        if (curExerciseIndex >= wodData.length) {
+            // user pressed finish button
+            navigation.navigate('UserHome')
+        } else if (curExerciseIndex === wodData.length) {
+            // currently on last exercise; change button text
+            button_text = "Finish";
+        } else {
+            // update current exercise to next exercise
+            setCurExercise(route?.params["wod"][curExerciseIndex] ?? null)
+        }
+    }, [curExerciseIndex]);
 
     const handleNext = () => {
-        exercises_left.splice(0, 1);
-        reps_left.splice(0, 1);
-        let data = {
-            "names": exercises_left,
-            "reps": reps_left
-        };
-        setRepsDone(0);
-        navigation.navigate('Workout', {"exercises": data})
+        setCurExerciseIndex(curExerciseIndex + 1)
     };
 
     const handlePause = () => {
@@ -61,13 +53,13 @@ function Workout({route, navigation}) {
                     Exercise:
                 </Text>
                 <Text style={styles.subheader}>
-                    {curr_exercise}
+                    {curExercise.name}
                 </Text>
                 <Text style={styles.header}>
                     Rep Goal:
                 </Text>
                 <Text style={styles.subheader}>
-                    {curr_reps}
+                    {curExercise.numReps}
                 </Text>
                 <Text style={styles.header}>
                     Reps Done:
@@ -84,10 +76,10 @@ function Workout({route, navigation}) {
                 </Pressable>
                 </View>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handleNext}>
-                    <Text style={styles.text}>{button_text}</Text>
+                    <Text style={styles.text}>{curExerciseIndex + 1 < wodData.length ? 'Next' : 'Finish'}</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handlePause}>
-                    <Text style={styles.text}>{pause_text}</Text>
+                    <Text style={styles.text}>{running ? 'Pause' : 'Resume'}</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => navigation.navigate("UserHome")}>
                     <Text style={styles.text}>Quit</Text>

@@ -65,7 +65,8 @@ class EquipmentService {
                     'equipment name': equipmentDoc.id,
                     'difficulty': exerciseData['difficulty'],
                     'comments': exerciseData['exerciseComment'],
-                    'health safety': exerciseData['healthSafety']
+                    'health safety': exerciseData['healthSafety'],
+                    'exerciseRef': exerciseDoc.ref
                 }
                 exercises.push(exerciseObj)
             });
