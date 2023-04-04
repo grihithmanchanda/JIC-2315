@@ -28,7 +28,7 @@ class WorkoutService {
         return exerciseData
     };
 
-    addWorkout = async (workoutList, gymID, workoutDifficulty) => {
+    addWorkout = async (exerciseList, gymID, workoutDifficulty) => {
         let gymDoc = doc(firestoredb, 'gym metadata', gymID)
         let workoutsCollectionRef = collection(gymDoc, 'workouts')
 
@@ -39,7 +39,7 @@ class WorkoutService {
         let wotdDocRef = doc(workoutsCollectionRef, date)
 
         let wotdData = {
-            [difficultyLevelText]: workoutList
+            [difficultyLevelText]: exerciseList
         }
 
         let wotdDoc = await setDoc(wotdDocRef, wotdData, { merge: true })
@@ -70,8 +70,22 @@ class WorkoutService {
         let wodDoc = await getDoc(wodDocRef)
         let wodData = wodDoc.data()
 
+        let wodFiltered = wodData[difficultyLevelText]
+
+        if (wodFiltered === undefined) {
+            return undefined;
+        }
+
+        let exercises = []
+        for (const exerciseRef of wodFiltered) {
+            let exerciseDataSnap = await getDoc(exerciseRef)
+            let exerciseData = exerciseDataSnap.data()
+            exerciseData['name'] = exerciseDataSnap.id
+            exercises.push(exerciseData)
+        }
+
         // format: {"difficulty1": ['exercise1', 'exercise2', ...], "difficulty2": [...], ...}
-        return wodData
+        return exercises
 
     }
 }
