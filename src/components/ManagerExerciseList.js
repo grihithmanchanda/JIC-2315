@@ -16,7 +16,11 @@ function ManagerExerciseList({navigation, getExercises}) {
 
     // when selectedExercises changes, send data to superclass
     useEffect(() => {
-        getExercises(selectedExercises);
+        // get the document references of each exercise
+        let selectedExercisesRefs = exerciseData
+            .filter((exercise) =>  selectedExercises.includes(exercise['exercise name']))
+            .map((exercise) => exercise.exerciseRef)
+        getExercises(selectedExercisesRefs);
     }, [selectedExercises])
 
     // when exerciseData is updated, generate updated table

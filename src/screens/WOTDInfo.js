@@ -24,11 +24,12 @@ function WOTDInfo({navigation}) {
 
     const getFilteredWOD = async () => {
         const wodDataSnap = await workout_service.getWOD(difficultyFilter);
-        setWODData(wodDataSnap)
+        if (wodDataSnap === undefined) {
+            alert('There is no workout for this difficulty level.')
+        } else {
+            setWODData(wodDataSnap)
+        }
     }
-
-    const data = {"names": ["one", "two", "three", "four"],
-                  "reps": [0, 0, 0, 0]};
 
     return (
         <ScrollView style={styles.outer}>
@@ -53,16 +54,14 @@ function WOTDInfo({navigation}) {
                  </View>
              </View>
                 <Text style={styles.subheader}>Exercises:</Text>
-                {   
-                    // wodData.map((exercise) => (
-                    //     <Text style={styles.subsubheader}>{exercise}</Text>
-                    data["names"].map((val) => (
-                        <Text key={val} style={styles.subsubheader}>{val}</Text>
+                {
+                    wodData.map((exercise) => (
+                        <Text key={exercise.name} style={styles.subsubheader}>{exercise.name}</Text>
                     ))
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
                 <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": data})}}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": wodData})}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>
