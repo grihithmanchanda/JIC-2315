@@ -25,7 +25,7 @@ function WOTDInfo({navigation}) {
     const getFilteredWOD = async () => {
         const wodDataSnap = await workout_service.getWOD(difficultyFilter);
         if (wodDataSnap === undefined) {
-            alert('There is no workout for this difficulty level.')
+            alert(`There is no workout for difficulty level ${difficultyFilter}.`)
         } else {
             setWODData(wodDataSnap)
         }
@@ -61,7 +61,8 @@ function WOTDInfo({navigation}) {
                 }
                 <Text style={styles.subheader}>Additional Information:</Text>
                 <Text style={styles.subsubheader}>Be safe!</Text>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": wodData})}}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('Workout', {"exercises": {"names": ["one", "two", "three", "four"],
+                  "reps": [0, 0, 0, 0]}, 'wod': wodData})}}>
                     <Text style={styles.text}>Begin Workout</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {navigation.navigate('UserHome')}}>
