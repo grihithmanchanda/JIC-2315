@@ -4,6 +4,7 @@ import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
 import Stopwatch, { modifyTimer } from "../components/Stopwatch";
+import workout_service from "../services/workout_service";
 
 function Workout({route, navigation}) {
     
@@ -35,6 +36,11 @@ function Workout({route, navigation}) {
     const handlePause = () => {
         setRunning(!running);
     };
+
+    const handleQuit = () => {
+        workout_service.storeWorkoutInUserDoc(wodData);
+        navigation.navigate("UserHome")
+    }
 
     return (
         <ScrollView style={styles.outer}>
@@ -81,7 +87,7 @@ function Workout({route, navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handlePause}>
                     <Text style={styles.text}>{running ? 'Pause' : 'Resume'}</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => navigation.navigate("UserHome")}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleQuit}>
                     <Text style={styles.text}>Quit</Text>
                 </Pressable>
             </View>
