@@ -32,7 +32,9 @@ function UserHome({navigation}) {
                 }}>
                     <Text style={styles.text}>Start Workout</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {
+                    navigation.navigate('UserSettings')
+                }}>
                     <Text style={styles.text}>User Settings</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleGymInformation()}>
