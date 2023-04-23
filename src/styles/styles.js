@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10,
     },
+    lightText: {
+        color: '#92939E',
+        fontSize: 18,
+        textAlign: 'center',
+        paddingTop: 5,
+    },
     equipmentContainer: {
         fontSize: 40,
         textAlign: 'center',

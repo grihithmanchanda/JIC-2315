@@ -29,7 +29,8 @@ function UserSettings({navigation}) {
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
-                <Text style={styles.subheader}>View Streak?</Text>
+                <Text style={styles.subheader}>Toggle Community Streak</Text>
+                <Text style={styles.lightText}>View your gym's average workout streak?</Text>
                 <Switch
                     trackColor={{false: '#767577', true: '#c2ccff'}}
                     thumbColor={streak ? '#293571' : '#f4f3f4'}
@@ -39,6 +40,7 @@ function UserSettings({navigation}) {
                     style={styles.switch}
                 />
                 <Text style={styles.subheader}>Send Notifications?</Text>
+                <Text style={styles.lightText}>Reminders, motivational prompts, & more!</Text>
                 <Switch
                     trackColor={{false: '#767577', true: '#c2ccff'}}
                     thumbColor={notifs ? '#293571' : '#f4f3f4'}
