@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 10,
     },
+    lightText: {
+        color: '#92939E',
+        fontSize: 18,
+        textAlign: 'center',
+        paddingTop: 5,
+    },
     equipmentContainer: {
         fontSize: 40,
         textAlign: 'center',
@@ -67,6 +73,17 @@ const styles = StyleSheet.create({
     button: {
         height: 70,
         backgroundColor: '#051739',
+        width: '90%',
+        borderWidth: 1,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginTop: 20,
+    },
+    deleteButton: {
+        height: 70,
+        backgroundColor: '#990000',
         width: '90%',
         borderWidth: 1,
         paddingVertical: 15,
@@ -99,6 +116,11 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#ebeeff',
+        textAlign: 'center',
+        fontSize: 30,
+    },
+    deleteText: {
+        color: '#ffffff',
         textAlign: 'center',
         fontSize: 30,
     },
@@ -282,6 +304,10 @@ const styles = StyleSheet.create({
         color:'#000000',
         width:'50%',
         textAlign: 'center'
+    },
+    switch: {
+        marginTop: 5,
+        marginBottom: 10
     }
 });
 
