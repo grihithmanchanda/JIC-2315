@@ -15,6 +15,7 @@ function UserSettings({navigation}) {
 
     const handleSettings = async () => {
         await login_service.addUserSettings(streak, notifs);
+        await login_service.getUserSettings()
         navigation.navigate('UserHome')
     }
 

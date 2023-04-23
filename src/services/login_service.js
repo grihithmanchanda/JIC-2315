@@ -69,6 +69,13 @@ class LoginService {
                 userSettings: settingsData,
             });
     }
+
+    // retrieve set user settings from firebase
+    getUserSettings = async () => {
+        let userDocRef = doc(firestoredb, 'users', global.currentLoginEmail)
+        let userDoc = await getDoc(userDocRef)
+        return userDoc.data()['userSettings']
+    }
 }
 
 export default new LoginService();
