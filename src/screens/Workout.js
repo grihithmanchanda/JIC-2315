@@ -38,7 +38,7 @@ function Workout({route, navigation}) {
     };
 
     const handleQuit = () => {
-        workout_service.storeWorkoutInUserDoc(wodData);
+        workout_service.storeWorkoutInUserDoc(wodData, global.lastWorkoutDuration);
         navigation.navigate("UserHome")
     }
 

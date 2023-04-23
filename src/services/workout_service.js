@@ -88,13 +88,19 @@ class WorkoutService {
 
     }
 
-    storeWorkoutInUserDoc = async (workout) => {
+    // stores workout information into user doc
+    storeWorkoutInUserDoc = async (workout, duration) => {
         let curDate = this.getDateString();
 
         let workoutData = {
             'completion date': curDate,
             'workout': workout,
+            // converts milliseconds to HH:MM:SS for firebase
+            'duration': new Date(duration).toISOString().slice(11, 19),
         }
+
+        console.log(workoutData)
+        
         let userPastWorkoutDoc = doc(firestoredb, 'users/' + global.currentLoginEmail + '/past-workouts', curDate)
 
         setDoc(userPastWorkoutDoc, workoutData)
