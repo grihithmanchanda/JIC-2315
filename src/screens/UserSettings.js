@@ -39,7 +39,7 @@ function UserSettings({navigation}) {
                     value={streak}
                     style={styles.switch}
                 />
-                <Text style={styles.subheader}>Send Notifications?</Text>
+                <Text style={styles.subheader}>Allow Notifications</Text>
                 <Text style={styles.lightText}>Reminders, motivational prompts, & more!</Text>
                 <Switch
                     trackColor={{false: '#767577', true: '#c2ccff'}}
