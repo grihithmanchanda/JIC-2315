@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
+import { Button } from "react-native-elements";
+import { getAuth, signOut } from "firebase/auth";
 import styles from "../styles/styles";
 import gyminfo_service from "../services/gyminfo_service";
 
@@ -39,6 +41,12 @@ function GymInformation({navigation}) {
 
     return (
         <ScrollView style={styles.outer}>
+            <Button //Logout button. TODO: format button style
+                    title="Logout"
+                    onPress={() => //call method to log out user
+                        logout({ navigation })
+                    }
+                />
             <View style={styles.container}>
                 <Text style={styles.header}>Gym Information</Text>
                 <Text style={styles.subheader}>Gym Name: {gymName}</Text>
@@ -52,6 +60,20 @@ function GymInformation({navigation}) {
             </View>
         </ScrollView>
     )
+}
+
+//Method to sign out of firebase, returns user to login screen
+function logout({navigation}) {
+    const auth = getAuth();
+    // Signs out user
+    signOut(auth)
+        .then(() => {
+            // console.log("LOGOUT"); //Debugging
+            navigation.navigate("Login");
+        })
+        .catch((error) => {
+            // console.log("ERROR");
+        });
 }
 
 export default GymInformation;
