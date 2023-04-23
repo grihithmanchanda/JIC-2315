@@ -7,10 +7,9 @@ import styles from "../styles/styles";
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
 function UserSettings({navigation}) {
-    const [email, setEmail] = useState('');
-    const [streak, setStreak] = useState(false);
+    const [streak, setStreak] = useState(false); // todo: use user's setting as initial state
     const toggleStreak = () => setStreak(previousState => !previousState);
-    const [notifs, setNotifs] = useState(false);
+    const [notifs, setNotifs] = useState(false); // todo: use user's setting as initial state
     const toggleNotifs = () => setNotifs(previousState => !previousState);
     return (
         <ScrollView style={styles.outer}>
@@ -22,13 +21,6 @@ function UserSettings({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>User Settings</Text>
-                <Text style={styles.subheader}>Change Email:</Text>
-                <TextInput //Username/Email field
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
                 <Text style={styles.subheader}>Toggle Community Streak</Text>
                 <Text style={styles.lightText}>View your gym's average workout streak?</Text>
                 <Switch
