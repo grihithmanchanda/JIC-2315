@@ -3,6 +3,7 @@ import {Pressable, ScrollView, Text, View, TextInput, Switch} from 'react-native
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
+import login_service from "../services/login_service";
 
 // Essentially entire manager home page, including welcome,
 //   user num, equipment, and buttons for settings
@@ -11,6 +12,12 @@ function UserSettings({navigation}) {
     const toggleStreak = () => setStreak(previousState => !previousState);
     const [notifs, setNotifs] = useState(false); // todo: use user's setting as initial state
     const toggleNotifs = () => setNotifs(previousState => !previousState);
+
+    const handleSettings = async () => {
+        await login_service.addUserSettings(streak, notifs);
+        navigation.navigate('UserHome')
+    }
+
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -44,9 +51,7 @@ function UserSettings({navigation}) {
                 <Pressable style={styles.deleteButton} textStyle={styles.deleteText}>
                     <Text style={styles.text}>Delete Account</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={() => {
-                    navigation.navigate('UserHome')
-                }}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={handleSettings}>
                     <Text style={styles.text}>Confirm Changes</Text>
                 </Pressable>
             </View>

@@ -1,5 +1,5 @@
 import { firestoredb } from "../../firebase-config"
-import { collection, doc, setDoc, getDoc } from "firebase/firestore"
+import { collection, doc, setDoc, getDoc, updateDoc } from "firebase/firestore"
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 const auth = getAuth();
@@ -56,6 +56,18 @@ class LoginService {
                     return user;
                 }
             })
+    }
+
+    // method to write user settings to firebase
+    addUserSettings = async (streaks, notifs) => {
+        let settingsData = {
+            'streaks': streaks,
+            'notifications': notifs
+        };
+        await updateDoc(doc(firestoredb, "users", global.currentLoginEmail),
+            {
+                userSettings: settingsData,
+            });
     }
 }
 
