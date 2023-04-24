@@ -74,7 +74,11 @@ class LoginService {
     getUserSettings = async () => {
         let userDocRef = doc(firestoredb, 'users', global.currentLoginEmail)
         let userDoc = await getDoc(userDocRef)
-        return userDoc.data()['userSettings']
+        if (!Object.keys(userDoc.data()).includes('userSettings')) {
+            return null
+        } else {
+            return userDoc.data()['userSettings']
+        }
     }
 }
 

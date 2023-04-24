@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Pressable, ScrollView, Text, View, TextInput, Switch} from 'react-native';
 import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
@@ -15,9 +15,21 @@ function UserSettings({navigation}) {
 
     const handleSettings = async () => {
         await login_service.addUserSettings(streak, notifs);
-        await login_service.getUserSettings()
         navigation.navigate('UserHome')
     }
+
+    const getSettings = async () => {
+        let settings = await login_service.getUserSettings()
+        if (settings !== null) {
+            setNotifs(settings['notifications'])
+            setStreak(settings['streaks'])
+        }
+    }
+
+    // get user's settings upon startup
+    useEffect(() => {
+        getSettings()
+    }, []);
 
     return (
         <ScrollView style={styles.outer}>
