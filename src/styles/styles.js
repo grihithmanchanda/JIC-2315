@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 15
     },
+    subhalfsubheader: {
+        fontSize: 25,
+        textAlign: 'center',
+    },
     subsubheader: {
         fontSize: 20,
         textAlign: 'center',
