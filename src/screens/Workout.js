@@ -4,9 +4,10 @@ import {Button} from "react-native-elements";
 import {getAuth, signOut} from "firebase/auth";
 import styles from "../styles/styles";
 import Stopwatch, { modifyTimer } from "../components/Stopwatch";
+import workout_service from "../services/workout_service";
 
 function Workout({route, navigation}) {
-    
+
     let [wodData, setWODData] = useState(route?.params['wod'] ?? null)
     let [curExerciseIndex, setCurExerciseIndex] = useState(0);
     let [curExercise, setCurExercise] = useState(route?.params["wod"][0] ?? null)
@@ -18,13 +19,14 @@ function Workout({route, navigation}) {
     useEffect(() => {
         if (curExerciseIndex >= wodData.length) {
             // user pressed finish button
-            navigation.navigate('UserHome')
+            handleWorkoutFinish()
         } else if (curExerciseIndex === wodData.length) {
             // currently on last exercise; change button text
             button_text = "Finish";
         } else {
             // update current exercise to next exercise
             setCurExercise(route?.params["wod"][curExerciseIndex] ?? null)
+            setRepsDone(0)
         }
     }, [curExerciseIndex]);
 
@@ -35,6 +37,11 @@ function Workout({route, navigation}) {
     const handlePause = () => {
         setRunning(!running);
     };
+
+    const handleWorkoutFinish = async () => {
+        await workout_service.storeWorkoutInUserDoc(wodData, global.lastWorkoutDuration);
+        navigation.navigate("UserHome")
+    }
 
     return (
         <ScrollView style={styles.outer}>

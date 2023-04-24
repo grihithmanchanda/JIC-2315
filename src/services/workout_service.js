@@ -8,7 +8,6 @@ const difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'};
 class WorkoutService {
 
     addExercise = async (equipmentName, exerciseName, difficultyLevel, numReps, amtWeight, exerciseComment, healthSafety) => {
-        let difficultyMapping = {0: 'novice', 1:'intermediate', 2:'advanced'}
         let difficultyLevelText = difficultyMapping[difficultyLevel];
         let exerciseData = {
             'difficulty': difficultyLevelText,
@@ -87,6 +86,24 @@ class WorkoutService {
         // format: {"difficulty1": ['exercise1', 'exercise2', ...], "difficulty2": [...], ...}
         return exercises
 
+    }
+
+    // stores workout information into user doc
+    storeWorkoutInUserDoc = async (workout, duration) => {
+        let curDate = this.getDateString();
+
+        let workoutData = {
+            'completion date': curDate,
+            'workout': workout,
+            // converts milliseconds to HH:MM:SS for firebase
+            'duration': new Date(duration).toISOString().slice(11, 19),
+        }
+
+        let userPastWorkoutDoc = doc(firestoredb, 'users', global.currentLoginEmail, 'past-workouts', curDate)
+
+        await setDoc(userPastWorkoutDoc, workoutData)
+
+        return workoutData
     }
 }
 

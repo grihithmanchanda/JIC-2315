@@ -8,12 +8,21 @@ function Stopwatch({running}) {
       let interval;
       if (running) {
         interval = setInterval(() => {
-          setTime((prevTime) => prevTime + 1000);
+          setTime((prevTime) => {
+            let newTime = prevTime + 1000;
+            global.lastWorkoutDuration = newTime;
+            return newTime
+          });
         }, 1000);
       } else if (!running) {
         clearInterval(interval);
       }
-      return () => clearInterval(interval);
+      return () => {
+        // global.lastWorkoutDuration = time;
+        // console.log(time)
+        //console.log(global.lastWorkoutDuration)
+        clearInterval(interval)
+      };
     }, [running]);
     return (
       <View style={styles.outer}>
