@@ -43,7 +43,6 @@ function UserHome({navigation}) {
             />
             <View style={styles.container}>
                 <Text style={styles.header}>Welcome,{"\n"}User</Text>
-                <Text style={styles.subheader}>5 Day Streak!</Text>
                 <Text style={styles.subheader}>Workout of the Day:</Text>
                 <Text style={styles.subhalfsubheader}>(Advanced)</Text>
                 {
