@@ -59,7 +59,7 @@ function UserHome({navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {
                     navigation.navigate('ViewEquipment')
                 }}>
-                    <Text style={styles.text}>View Available Equipment</Text>
+                    <Text style={styles.text}>View Equipment</Text>
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => {
                     navigation.navigate('UserSettings')
