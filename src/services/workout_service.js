@@ -99,11 +99,11 @@ class WorkoutService {
             'duration': new Date(duration).toISOString().slice(11, 19),
         }
 
-        console.log(workoutData)
-        
-        let userPastWorkoutDoc = doc(firestoredb, 'users/' + global.currentLoginEmail + '/past-workouts', curDate)
+        let userPastWorkoutDoc = doc(firestoredb, 'users', global.currentLoginEmail, 'past-workouts', curDate)
 
-        setDoc(userPastWorkoutDoc, workoutData)
+        await setDoc(userPastWorkoutDoc, workoutData)
+
+        return workoutData
     }
 }
 

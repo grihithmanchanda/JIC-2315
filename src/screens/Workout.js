@@ -7,7 +7,7 @@ import Stopwatch, { modifyTimer } from "../components/Stopwatch";
 import workout_service from "../services/workout_service";
 
 function Workout({route, navigation}) {
-    
+
     let [wodData, setWODData] = useState(route?.params['wod'] ?? null)
     let [curExerciseIndex, setCurExerciseIndex] = useState(0);
     let [curExercise, setCurExercise] = useState(route?.params["wod"][0] ?? null)
@@ -19,13 +19,14 @@ function Workout({route, navigation}) {
     useEffect(() => {
         if (curExerciseIndex >= wodData.length) {
             // user pressed finish button
-            navigation.navigate('UserHome')
+            handleWorkoutFinish()
         } else if (curExerciseIndex === wodData.length) {
             // currently on last exercise; change button text
             button_text = "Finish";
         } else {
             // update current exercise to next exercise
             setCurExercise(route?.params["wod"][curExerciseIndex] ?? null)
+            setRepsDone(0)
         }
     }, [curExerciseIndex]);
 
@@ -37,8 +38,8 @@ function Workout({route, navigation}) {
         setRunning(!running);
     };
 
-    const handleQuit = () => {
-        workout_service.storeWorkoutInUserDoc(wodData, global.lastWorkoutDuration);
+    const handleWorkoutFinish = async () => {
+        await workout_service.storeWorkoutInUserDoc(wodData, global.lastWorkoutDuration);
         navigation.navigate("UserHome")
     }
 
@@ -87,7 +88,7 @@ function Workout({route, navigation}) {
                 <Pressable style={styles.button} textStyle={styles.text} onPress={handlePause}>
                     <Text style={styles.text}>{running ? 'Pause' : 'Resume'}</Text>
                 </Pressable>
-                <Pressable style={styles.button} textStyle={styles.text} onPress={handleQuit}>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => navigation.navigate("UserHome")}>
                     <Text style={styles.text}>Quit</Text>
                 </Pressable>
             </View>
