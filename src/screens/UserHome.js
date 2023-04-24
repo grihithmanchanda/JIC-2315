@@ -13,6 +13,10 @@ function UserHome({navigation}) {
         navigation.navigate('GymInformation');
     };
 
+    const handleHistory = () => {
+        navigation.navigate('WorkoutHistory');
+    };
+
     return (
         <ScrollView style={styles.outer}>
             <Button //Logout button. TODO: format button style
@@ -37,6 +41,9 @@ function UserHome({navigation}) {
                 </Pressable>
                 <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleGymInformation()}>
                     <Text style={styles.text}>Gym Information</Text>
+                </Pressable>
+                <Pressable style={styles.button} textStyle={styles.text} onPress={() => handleHistory()}>
+                    <Text style={styles.text}>Workout History</Text>
                 </Pressable>
             </View>
         </ScrollView>
