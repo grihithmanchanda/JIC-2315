@@ -7,6 +7,19 @@
 
 ---
 
+# Installation Instructions
+
+1. Download & set up Node.js version `16.18.1`. We recommend using the [node version manager](https://github.com/nvm-sh/nvm) (at your own discretion). For Windows, our team recommends using [nvm for Windows](https://github.com/coreybutler/nvm-windows), also at your discretion.
+2. Download the yarn package manager: `npm install -g yarn`
+3. Download expo using the yarn package manager: `yarn global add expo-cli`
+4. Clone this git repository
+5. Navigate to the root directory of this repository (i.e. if the repository is named "jdb2315_coding_demo" and located at "C:\Users\linguini\Documents\jdb2315_coding_demo", open a command prompt and `cd` to "C:\Users\linguini\Documents\jdb2315_coding_demo")
+6. Install the required packages: `yarn install`
+7. Start the expo project: `npx expo start`
+
+
+---
+
 # Release Notes / Changelog
 
 ## v0.4.0
