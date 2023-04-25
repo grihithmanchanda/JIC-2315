@@ -12,7 +12,8 @@
 ## v0.5.0
 Streaks and past workout information for gym-goers!
 ### Features
- - Users now open the app to see their gym's Workout of the Day.
+ - Users now open the app to see their gym's Workout of the Day immediately.
+ - Adds user settings for notifications
 ### Known Issues
  - Lack of security rules for Firebase access (anyone can read/write)
  - Comments and health safety warning text being cutoff if text is too long
