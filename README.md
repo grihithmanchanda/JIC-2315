@@ -12,8 +12,6 @@
 ## v0.5.0
 Streaks and past workout information for gym-goers!
 ### Features
- - Users can now select to opt in for streaks and notifications, further personalizing their app experience.
- - Users can now view workout history from workouts that they have completed in the past.
  - Users now open the app to see their gym's Workout of the Day.
 ### Known Issues
  - Lack of security rules for Firebase access (anyone can read/write)
