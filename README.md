@@ -16,7 +16,7 @@ You will need NodeJS (and the Yarn package manager) to use this app. Additionall
 4. Clone this git repository
 5. Navigate to the root directory of this repository (i.e. if the repository is named "jdb2315_coding_demo" and located at "C:\Users\linguini\Documents\jdb2315_coding_demo", open a command prompt and `cd` to "C:\Users\linguini\Documents\jdb2315_coding_demo")
 6. Install the required packages: `yarn install`
-7. Set up a [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart) project and download the firebase config file. Update [the firebase config](firebase-config.js) with your api key, project id, etc.
+7. Set up a [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart) project and download the firebase config file. Update [the firebase config](firebase-config.js) with your api key, project id, etc. These are obtained from creating the project, then navigating to the "Project Overview" page, then selecting the respective platform (ios, android, web) that fits your needs.
 8. Start the expo project: `npx expo start`
 
 
