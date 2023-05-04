@@ -10,14 +10,13 @@
 # Installation Instructions
 You will need NodeJS (and the Yarn package manager) to use this app. Additionally, you will need a Firebase account.
 
-1. Download & set up Node.js version `16.18.1`. We recommend using the [node version manager](https://github.com/nvm-sh/nvm) (at your own discretion). For Windows, our team recommends using [nvm for Windows](https://github.com/coreybutler/nvm-windows), also at your discretion.
+1. Download & set up Node.js version `16.18.1` on your system. We recommend using the [node version manager](https://github.com/nvm-sh/nvm) (at your own discretion). For Windows, our team recommends using [nvm for Windows](https://github.com/coreybutler/nvm-windows), also at your discretion.
 2. Download the yarn package manager: `npm install -g yarn`
 3. Download expo using the yarn package manager: `yarn global add expo-cli`
-4. Clone this git repository
-5. Navigate to the root directory of this repository (i.e. if the repository is named "jdb2315_coding_demo" and located at "C:\Users\linguini\Documents\jdb2315_coding_demo", open a command prompt and `cd` to "C:\Users\linguini\Documents\jdb2315_coding_demo")
-6. Install the required packages: `yarn install`
-7. Set up a [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart) project and download the firebase config file. Update [the firebase config](firebase-config.js) with your api key, project id, etc.
-8. Start the expo project: `npx expo start`
+4. Clone this git repository to your system
+5. Navigate to the root directory of this repository in terminal and install the required packages with `yarn install`
+6. Set up a [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart) project and download the firebase config file. To do this, navigate to the "Project Settings" page and copy the `firebaseConfig` object to the [firebase config](firebase-config.js) file with your api key, project id, etc.
+7. Start the expo project from a terminal: `npx expo start`
 
 
 ---
